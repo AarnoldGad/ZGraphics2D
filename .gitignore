@@ -1,0 +1,33 @@
+# Folders
+
+/.git/
+
+# Projects
+
+/*/.kdev4/
+/.vs/
+
+# Binaries
+
+/lib/
+/bin/
+
+# Files
+
+*.gch
+*.log
+*.exe
+
+# Build Generators
+
+/*/Makefile
+*.mk
+*.make
+premake5
+Makefile
+
+# Projects
+
+*.kdev4
+*.sln
+*.vcxproj*

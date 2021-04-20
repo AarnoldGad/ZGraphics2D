@@ -1,0 +1,4 @@
+[submodule "ZEngine"]
+	path = ZEngine
+	url = https://github.com/AarnoldGad/ZEngine.git
+	branch = dev
