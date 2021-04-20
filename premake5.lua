@@ -1,7 +1,8 @@
-workspace "ZucchiniGraphics2D"
+workspace "ZucchiniGraphics"
    architecture "x86_64"
    configurations { "Debug", "Release" }
 
+   
 project "ZGraphics2D"
    kind "SharedLib"
    language "C++"
@@ -15,7 +16,7 @@ project "ZGraphics2D"
    filter {}
 
    targetdir("%{prj.location}/lib")
-   objdir("%{prj.location}/bin/%{cfg.buildcfg}/out")
+   objdir("%{prj.location}/bin/%{cfg.buildcfg}")
 
    files {
       "src/**.cpp",
@@ -28,8 +29,8 @@ project "ZGraphics2D"
       "ZEngine/include"
    }
    
-   links {
-      "zengine"
+   libdirs {
+      "lib"
    }
 
    filter "system:windows"
@@ -61,9 +62,15 @@ project "ZGraphics2D"
       }
 
    filter "configurations:Debug"
+      links {
+         "zengine-d"
+      }
       runtime "Debug"
       symbols "On"
 
    filter "configurations:Release"
+      links {
+         "zengine"
+      }
       runtime "Release"
       optimize "On"
