@@ -16,11 +16,13 @@ project "ZGraphics2D"
    files {
       "src/**.cpp",
       "include/**.hpp",
-      "include/**.inl"
+      "include/**.inl",
+      "deps/src/**.c",
    }
 
    includedirs {
-      "include"
+      "include",
+      "deps/include"
    }
 
    filter "system:windows"
