@@ -26,19 +26,18 @@
 #ifndef ZG_GRAPHICSENGINE_HPP
 #define ZG_GRAPHICSENGINE_HPP
 
-#include <zengine/zemacros.hpp> // TODO Break self containement ?
+#include "zgraphics2D/zgmacros.hpp"
 
-#include <zengine/Core/Engine.hpp>
-#include <zengine/Time/Time.hpp>
-
-namespace ze
+namespace zg
 {
-   class GraphicsEngine : public Engine
+   class ZE_API GraphicsEngine : public ze::Engine
    {
    public:
+      static ze::Logger& UseGraphicsLogger() noexcept;
+
       void initialise() override;
 
-      void tick(Time deltaTime) override;
+      void tick(ze::Time deltaTime) override;
 
       void terminate() override;
 
@@ -46,12 +45,17 @@ namespace ze
       ~GraphicsEngine();
 
    private:
+      static void HandleGLFWError(int code, char const* description);
+
+      static ze::DebugFileWriter s_gfxWriter;
+      static ze::Logger s_gfxLogger;
 
       bool m_isInitialised;
+
+      GLFWwindow* m_window;
    };
-
-
-   void HandleGLFWError(int code, char const* description);
 }
+
+#include "GraphicsEngine.inl"
 
 #endif // ZG_GRAPHICSENGINE_HPP

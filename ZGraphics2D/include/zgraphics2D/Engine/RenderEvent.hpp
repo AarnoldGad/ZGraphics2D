@@ -26,13 +26,11 @@
 #ifndef ZG_RENDEREVENT_HPP
 #define ZG_RENDEREVENT_HPP
 
-#include <zengine/zemacros.hpp>
+#include "zgraphics2D/zgmacros.hpp"
 
-#include <zengine/Event/Event.hpp>
-
-namespace ze
+namespace zg
 {
-   class RenderEvent : public Event
+   class ZE_API RenderEvent : public ze::Event
    {
    public:
       std::string toString() const override;

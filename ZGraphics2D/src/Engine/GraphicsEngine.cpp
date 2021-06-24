@@ -1,14 +1,16 @@
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
 
 #include "zgraphics2D/Engine/RenderEvent.hpp"
+#include "zgraphics2D/Input/Input.hpp"
 
-#include <zengine/Core/Core.hpp>
+#define GRAPHICSWRITER_FILENAME "zgraphics.log"
+#define GRAPHICSLOGGER_NAME "ZGraphics"
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-namespace ze
+namespace zg
 {
+   ze::DebugFileWriter GraphicsEngine::s_gfxWriter(GRAPHICSWRITER_FILENAME);
+   ze::Logger GraphicsEngine::s_gfxLogger(GRAPHICSLOGGER_NAME);
+
    GraphicsEngine::GraphicsEngine()
       : m_isInitialised(false) {}
 
@@ -20,38 +22,45 @@ namespace ze
          return;
       }
 
-      ZE_LOG_DEBUG("------ * Initialising GLFW");
-      ZE_LOG_DEBUG("------     * GLFW Compiled against %d.%d.%d", GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
+      s_gfxLogger.setWriter(&s_gfxWriter);
+
+      GFX_LOG_INFO("------ * Initialising GLFW");
+      GFX_LOG_INFO("------     * GLFW Compiled against %d.%d.%d", GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
       int major, minor, rev;
       glfwGetVersion(&major, &minor, &rev);
-      ZE_LOG_DEBUG("------     * GLFW Linked against %d.%d.%d", major, minor, rev);
+      GFX_LOG_INFO("------     * GLFW Linked against %d.%d.%d", major, minor, rev);
 
-      glfwSetErrorCallback(&HandleGLFWError);
+      glfwSetErrorCallback(&GraphicsEngine::HandleGLFWError);
 
       if (!glfwInit())
-         exit(-1);
+         exit(-1); // TODO Error handling
 
       // Open Window
+      m_window = glfwCreateWindow(800, 600, "titre", nullptr, nullptr);
+      Input::Initialise(m_window);
+      // TODO Error handling
+      glfwMakeContextCurrent(m_window);
 
-      ZE_LOG_DEBUG("------ * Initialising OpenGL");
+      GFX_LOG_INFO("------ * Initialising OpenGL");
 
       if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
       {
-
+         // TODO Error handling
          exit(-1);
       }
 
       m_isInitialised = true;
    }
 
-   void GraphicsEngine::tick(Time deltaTime)
+   void GraphicsEngine::tick(ze::Time deltaTime)
    {
       RenderEvent event;
-      Core::GetApplication().useEventBusTo().fireEvent(event);
+      ze::Core::GetApplication().useEventBusTo().fireEvent(event);
    }
 
    void GraphicsEngine::terminate()
    {
+      GFX_LOG_INFO("------ * Terminating GLFW");
       glfwTerminate();
    }
 
@@ -62,6 +71,6 @@ namespace ze
 
    void HandleGLFWError(int code, char const* description)
    {
-      ZE_LOG_ERROR("A GLFW Error occured : (%d) %s", code, description);
+      GFX_LOG_ERROR("A GLFW Error occured : (%d) %s", code, description);
    }
 }

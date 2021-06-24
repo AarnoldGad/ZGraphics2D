@@ -7,7 +7,6 @@ project "ZGraphics2D"
    
    filter "configurations:Debug"
       targetsuffix "-d"
-
    filter {}
 
    targetdir("%{prj.location}/lib")
@@ -17,16 +16,31 @@ project "ZGraphics2D"
       "src/**.cpp",
       "include/**.hpp",
       "include/**.inl",
-      "deps/src/**.c",
+      "deps/src/**.c"
    }
 
    includedirs {
       "include",
       "deps/include"
    }
+   
+   links {
+      "glfw3dll.lib"
+   }
 
    filter "system:windows"
+      architecture "x86"
       systemversion "latest"
+      
+   filter { "system:windows", "architecture:x86" }
+      libdirs {
+         "deps/lib/Win32"
+      }
+
+   filter { "system:windows", "architecture:x86_64" }
+      libdirs {
+         "deps/lib/Win64"
+      }
 
    filter "system:linux"
       includedirs {

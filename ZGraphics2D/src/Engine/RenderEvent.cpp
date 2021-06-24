@@ -1,6 +1,6 @@
-#include "zgraphics2D/Engine/RenderEvent.hpp"
+#include "zgraphics2D/Event/RenderEvent.hpp"
 
-namespace ze
+namespace zg
 {
    RenderEvent::RenderEvent()
    {}
