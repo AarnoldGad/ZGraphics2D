@@ -16,12 +16,15 @@ project "ZGraphics2D"
       "src/**.cpp",
       "include/**.hpp",
       "include/**.inl",
-      "deps/src/**.c"
+      "deps/glad/src/glad.c",
+      "deps/glm/glm/detail/glm.cpp"
    }
 
    includedirs {
       "include",
-      "deps/include"
+      "deps/glad/include",
+      "deps/glfw/include",
+      "deps/glm"
    }
    
    links {
@@ -34,12 +37,12 @@ project "ZGraphics2D"
       
    filter { "system:windows", "architecture:x86" }
       libdirs {
-         "deps/lib/Win32"
+         "deps/glfw/lib/Win32"
       }
 
    filter { "system:windows", "architecture:x86_64" }
       libdirs {
-         "deps/lib/Win64"
+         "deps/glfw/lib/Win64"
       }
 
    filter "system:linux"
@@ -49,7 +52,8 @@ project "ZGraphics2D"
       }
       libdirs {
          "/usr/lib",
-         "/usr/local/lib"
+         "/usr/local/lib",
+         "deps/glfw/lib/Unix"
       }
       links {
          "dl",
