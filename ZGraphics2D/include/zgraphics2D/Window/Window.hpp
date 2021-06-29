@@ -28,19 +28,23 @@
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/WindowSettings.hpp"
+
 namespace zg
 {
    class ZE_API Window
    {
    public:
-      std::string getName() const noexcept;
-      std::tuple<size_t, size_t> getSize() const noexcept; // TODO Vectors
+      void create(std::string const& title, int width, int height, WindowSettings settings = {});
+
+      std::string getTitle() const noexcept;
+      glm::ivec2 getSize() const noexcept;
       //? getIcon() const noexcept;
-      std::tuple<size_t, size_t> getPosition() const noexcept; // TODO Vectors
+      glm::ivec2 getPosition() const noexcept;
       float getOpacity() const noexcept;
       bool isVisible() const noexcept;
       bool shouldClose() const noexcept;
-      //? getClearColor() const noexcept;
+      glm::vec4 getClearColor() const noexcept;
       uint32_t getClearMask() const noexcept;
 
       void clear();
@@ -50,18 +54,21 @@ namespace zg
       void hide();
       void close();
 
-      void setName(std::string const& name);
-      void setSize(size_t width, size_t height); // TODO Vectors
-      //void setIcon(?);
-      void setPosition(size_t x, size_t y); // TODO Vectors
+      void setTitle(std::string const& title);
+      void setSize(int width, int height);
+      void setSize(glm::ivec2 size);
+      //void setIcon(?); // TODO Images
+      void setPosition(int x, int y);
+      void setPosition(glm::ivec2 pos);
       void setOpacity(float opacity);
       void setVisible(bool visible);
-      //void setClearColor(?); // TODO Vectors
+      void setClearColor(glm::vec4 color);
       void setClearMask(uint32_t mask);
 
       GLFWwindow* getHandle() const noexcept;
 
-      Window(std::string const& name, size_t width, size_t height);
+      Window(std::string const& title, int width, int height, WindowSettings settings = {});
+      Window();
       ~Window();
 
    private:
@@ -75,10 +82,18 @@ namespace zg
       static void FramebufferResised(GLFWwindow* window, int width, int height);
       static void Scaled(GLFWwindow* window, float xscale, float yscale);
 
-      std::string m_name;
-      uint32_t m_clearMask;
+      template<typename EventType, typename... Args>
+      static void PushWindowEvent(GLFWwindow* window, Args&&... args);
+
+      void configureWindow(WindowSettings settings);
+      void makeWindow(std::string const& title, int width, int height);
+      void installWindow();
 
       GLFWwindow* m_handle;
+
+      std::string m_title;
+      uint32_t m_clearMask;
+      glm::vec4 m_clearColor;
    };
 }
 
