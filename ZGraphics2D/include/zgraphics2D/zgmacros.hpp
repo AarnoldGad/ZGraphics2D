@@ -18,5 +18,6 @@
 #include <glad/glad.h>
 #define GLFW_DLL
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 #endif // ZG_MACROS_HPP
