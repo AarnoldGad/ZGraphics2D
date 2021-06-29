@@ -28,12 +28,18 @@
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/Window.hpp"
+#include "zgraphics2D/Input/Keyboard.hpp"
+
 namespace zg
 {
    class ZE_API GraphicsEngine : public ze::Engine
    {
    public:
       static ze::Logger& UseGraphicsLogger() noexcept;
+
+      Window& getMainWindow() noexcept;
+      Keyboard& getKeyboard() noexcept;
 
       void initialise() override;
 
@@ -52,7 +58,8 @@ namespace zg
 
       bool m_isInitialised;
 
-      GLFWwindow* m_window;
+      Window m_window;
+      Keyboard m_keyboard;
    };
 }
 

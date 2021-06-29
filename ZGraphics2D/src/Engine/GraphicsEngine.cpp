@@ -1,7 +1,8 @@
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
 
 #include "zgraphics2D/Engine/RenderEvent.hpp"
-#include "zgraphics2D/Input/Input.hpp"
+
+#include <zengine/Memory/New.hpp>
 
 #define GRAPHICSWRITER_FILENAME "zgraphics.log"
 #define GRAPHICSLOGGER_NAME "ZGraphics"
@@ -22,6 +23,7 @@ namespace zg
          return;
       }
 
+      // Init logger
       s_gfxLogger.setWriter(&s_gfxWriter);
 
       GFX_LOG_INFO("------ * Initialising GLFW");
@@ -30,22 +32,24 @@ namespace zg
       glfwGetVersion(&major, &minor, &rev);
       GFX_LOG_INFO("------     * GLFW Linked against %d.%d.%d", major, minor, rev);
 
+      // Init GLFW
       glfwSetErrorCallback(&GraphicsEngine::HandleGLFWError);
 
       if (!glfwInit())
          exit(-1); // TODO Error handling
 
       // Open Window
-      m_window = glfwCreateWindow(800, 600, "titre", nullptr, nullptr);
-      Input::Initialise(m_window);
-      // TODO Error handling
-      glfwMakeContextCurrent(m_window);
+      WindowSettings settings;
+      m_window.create("Episode One", 800, 600, settings);
+      m_keyboard.setWindow(m_window);
 
-      GFX_LOG_INFO("------ * Initialising OpenGL");
+      // Init OpenGL
+      GFX_LOG_INFO("------ * Loading OpenGL");
 
       if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
       {
          // TODO Error handling
+         GFX_LOG_CRITICAL("------ * Fail to load OpenGL");
          exit(-1);
       }
 
@@ -54,14 +58,20 @@ namespace zg
 
    void GraphicsEngine::tick(ze::Time deltaTime)
    {
+      m_window.clear();
+
       RenderEvent event;
       ze::Core::GetApplication().useEventBusTo().fireEvent(event);
+
+      m_window.draw();
+
+      glfwPollEvents();
    }
 
    void GraphicsEngine::terminate()
    {
       GFX_LOG_INFO("------ * Terminating GLFW");
-      glfwTerminate();
+      glfwTerminate(); // TODO Program exit hook (same for memory manager)
    }
 
    GraphicsEngine::~GraphicsEngine()
@@ -69,7 +79,7 @@ namespace zg
 
    }
 
-   void HandleGLFWError(int code, char const* description)
+   void GraphicsEngine::HandleGLFWError(int code, char const* description)
    {
       GFX_LOG_ERROR("A GLFW Error occured : (%d) %s", code, description);
    }
