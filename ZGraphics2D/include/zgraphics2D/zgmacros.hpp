@@ -6,7 +6,7 @@
 #define ZG_VERSION_MAJOR 0
 #define ZG_VERSION_MINOR 21
 #define ZG_VERSION_PATCH 6
-#define ZG_VERSION_REV 20
+#define ZG_VERSION_REV 29
 
 #define GFX_LOG_INFO(...)     ::zg::GraphicsEngine::UseGraphicsLogger().logLine(::ze::Level::Info    , __VA_ARGS__)
 #define GFX_LOG_DEBUG(...)    ::zg::GraphicsEngine::UseGraphicsLogger().logLine(::ze::Level::Debug   , __VA_ARGS__)
