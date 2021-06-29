@@ -1,3 +1,6 @@
 [submodule "ZucchiniEngine"]
 	path = ZucchiniEngine
 	url = https://github.com/AarnoldGad/ZucchiniEngine.git
+[submodule "ZGraphics2D/deps\\glm"]
+	path = ZGraphics2D/deps\\glm
+	url = https://github.com/g-truc/glm.git
