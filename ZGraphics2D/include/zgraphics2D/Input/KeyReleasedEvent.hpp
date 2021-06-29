@@ -1,6 +1,6 @@
 /**
- * KeyEvent.hpp
- * 21 Jun 2021
+ * KeyReleasedEvent.hpp
+ * 29 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,43 +23,22 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_KEYEVENT_HPP
-#define ZG_KEYEVENT_HPP
+#ifndef ZG_KEYRELEASEDEVENT_HPP
+#define ZG_KEYRELEASEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Window/Window.hpp"
-#include "zgraphics2D/Input/Keyboard.hpp"
+#include "zgraphics2D/Input/KeyEvent.hpp"
 
 namespace zg
 {
-   class ZE_API KeyEvent : public ze::Event
+   class ZE_API KeyReleasedEvent : public KeyEvent
    {
    public:
-      enum class Action
-      {
-         Released = GLFW_RELEASE,
-         Pressed = GLFW_PRESS,
-         Repeated = GLFW_REPEAT
-      };
+      KeyReleasedEvent(Window& window, Keyboard::Key key, int scancode, uint32_t modifiers);
 
-      explicit KeyEvent(Window& window, Keyboard::Key key, int scancode, Action action, uint32_t modifiers);
-
-      Window& getWindow();
-      Keyboard::Key getKey() const noexcept;
-      int getScancode() const noexcept;
-      Action getAction() const noexcept;
-      uint32_t getModifiers() const noexcept;
-
-   protected:
-      Window& m_window;
-      Keyboard::Key m_key;
-      int m_scancode;
-      Action m_action;
-      uint32_t m_modifiers;
+      std::string toString() const override;
    };
 }
 
-#include "KeyEvent.inl"
-
-#endif // ZG_KEYEVENT_HPP
+#endif // ZG_KEYRELEASEDEVENT_HPP

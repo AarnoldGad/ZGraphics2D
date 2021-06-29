@@ -28,12 +28,14 @@
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/Window.hpp"
+
 namespace zg
 {
    class ZE_API Keyboard
    {
    public:
-      enum class Key : uint32_t
+      enum class Key : int
       {
          Unknown = GLFW_KEY_UNKNOWN,
          Space = GLFW_KEY_SPACE,
@@ -84,8 +86,8 @@ namespace zg
          BackSlash = GLFW_KEY_BACKSLASH,
          RightBracket = GLFW_KEY_RIGHT_BRACKET,
          GraveAccent = GLFW_KEY_GRAVE_ACCENT,
-         //World1 = GLFW_KEY_WORLD_1,
-         //World2 = GLFW_KEY_WORLD_2,
+         World1 = GLFW_KEY_WORLD_1,
+         World2 = GLFW_KEY_WORLD_2,
          Escape = GLFW_KEY_ESCAPE,
          Enter = GLFW_KEY_ENTER,
          Tab = GLFW_KEY_TAB,
@@ -101,7 +103,7 @@ namespace zg
          Home = GLFW_KEY_HOME,
          End = GLFW_KEY_END,
          CapsLock = GLFW_KEY_CAPS_LOCK,
-         //ScrollLock = GLFW_KEY_SCROLL_LOCK,
+         ScrollLock = GLFW_KEY_SCROLL_LOCK,
          NumLock = GLFW_KEY_NUM_LOCK,
          PrintScreen = GLFW_KEY_PRINT_SCREEN,
          Pause = GLFW_KEY_PAUSE,
@@ -158,12 +160,38 @@ namespace zg
          Menu = GLFW_KEY_MENU
       };
 
-      static bool IsKeyPressed(Key key) noexcept;
+      enum class Modifiers : uint32_t
+      {
+         Shift = GLFW_MOD_SHIFT,
+         Ctrl = GLFW_MOD_CONTROL,
+         Alt = GLFW_MOD_ALT,
+         Super = GLFW_MOD_SUPER,
+         CapsLock = GLFW_MOD_CAPS_LOCK,
+         NumLock = GLFW_MOD_NUM_LOCK
+      };
 
       static std::string GetKeyName(Key key) noexcept;
       static int GetKeyScancode(Key key) noexcept;
-      static uint32_t GetModifiers() noexcept;
+
+      bool isKeyPressed(Key key) noexcept;
+      uint32_t getModifiers() noexcept;
+
+      void setWindow(Window& window);
+
+      explicit Keyboard(Window& window);
+      Keyboard();
+
+   private:
+      static void KeyInput(GLFWwindow* window, int key, int scancode, int type, int modifiers) noexcept;
+      static void TextInput(GLFWwindow* window, uint32_t codepoint) noexcept;
+
+      template<typename EventType>
+      static void PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers);
+
+      Window* m_window;
    };
 }
+
+#include "Keyboard.inl"
 
 #endif // ZG_KEYBOARD_HPP
