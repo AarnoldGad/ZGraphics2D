@@ -1,5 +1,5 @@
 /**
- * KeyRepeatedEvent.hpp
+ * FrameBufferSettings.hpp
  * 30 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
@@ -23,22 +23,28 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_KEYREPEATEDEVENT_HPP
-#define ZG_KEYREPEATEDEVENT_HPP
+#ifndef ZG_FRAMEBUFFERSETTINGS_HPP
+#define ZG_FRAMEBUFFERSETTINGS_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/KeyEvent.hpp"
-
 namespace zg
 {
-   class ZE_API KeyRepeatedEvent : public KeyEvent
+   struct FrameBufferSettings
    {
-   public:
-      KeyRepeatedEvent(Window* window, Keyboard::Key key, int scancode, uint32_t modifiers);
-
-      std::string toString() const override;
+      int redBits = 8;
+      int greenBits = 8;
+      int blueBits = 8;
+      int alphaBits = 8;
+      int depthBits = 24;
+      int stencilBits = 8;
+      int accumRedBits = 0;
+      int accumGreenBits = 0;
+      int accumBlueBits = 0;
+      int accumAlphaBits = 0;
+      bool srgbCapable = false;
+      bool transparent = false;
    };
 }
 
-#endif // ZG_KEYREPEATEDEVENT_HPP
+#endif // ZG_FRAMEBUFFERSETTINGS_HPP

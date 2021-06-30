@@ -1,4 +1,4 @@
-#include "zgraphics2D/Input/KeyPressedEvent.hpp"
+#include "zgraphics2D/Input/Event/KeyPressedEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
 

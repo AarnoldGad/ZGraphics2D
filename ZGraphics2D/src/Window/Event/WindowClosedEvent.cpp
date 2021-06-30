@@ -1,4 +1,4 @@
-#include "zgraphics2D/Window/WindowClosedEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowClosedEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
 

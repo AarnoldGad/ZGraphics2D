@@ -1,4 +1,4 @@
-#include "zgraphics2D/Window/WindowEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
 

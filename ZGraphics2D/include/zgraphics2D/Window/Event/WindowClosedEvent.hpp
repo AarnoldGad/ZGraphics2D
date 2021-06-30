@@ -1,6 +1,6 @@
 /**
- * WindowSettings.hpp
- * 28 Jun 2021
+ * Window.hpp
+ * 24 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,30 +23,22 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_WINDOWSETTINGS_HPP
-#define ZG_WINDOWSETTINGS_HPP
+#ifndef ZG_WINDOWCLOSEDEVENT_HPP
+#define ZG_WINDOWCLOSEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
+
 namespace zg
 {
-   struct WindowSettings
+   class ZE_API WindowClosedEvent : public WindowEvent
    {
-      uint32_t clearMask = GL_COLOR_BUFFER_BIT;
+   public:
+      WindowClosedEvent(Window& window);
 
-      bool resisable = false;
-      bool visible = true;
-      bool decorated = true;
-      bool focused = true;
-      bool floating = false;
-      bool maximised = false;
-      bool centerCursor = false;
-      bool focusOnShow = true;
-      bool scaleToMonitor = false;
-      int refreshRate = -1;
-      bool doubleBuffering = true;
-      bool autoIconify = true;
+      std::string toString() const;
    };
 }
 
-#endif // ZG_WINDOWSETTINGS_HPP
+#endif // ZG_WINDOWCLOSEDEVENT_HPP

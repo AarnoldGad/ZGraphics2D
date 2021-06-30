@@ -1,5 +1,5 @@
 /**
- * MouseButtonEvent.hpp
+ * GraphicsSettings.hpp
  * 30 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
@@ -23,39 +23,27 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSEBUTTONEVENT_HPP
-#define ZG_MOUSEBUTTONEVENT_HPP
+#ifndef ZG_GRAPHICSSETTINGS_HPP
+#define ZG_GRAPHICSSETTINGS_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/MouseEvent.hpp"
+#include "zgraphics2D/Window/ContextSettings.hpp"
+#include "zgraphics2D/Window/FrameBufferSettings.hpp"
+#include "zgraphics2D/Window/WindowSettings.hpp"
 
 namespace zg
 {
-   class ZE_API MouseButtonEvent : public MouseEvent
+   struct GraphicsSettings
    {
-   public:
-      enum class Action
-      {
-         Pressed = GLFW_PRESS,
-         Released = GLFW_RELEASE
-      };
+      std::string title = "ZEngine";
+      glm::ivec2 size = { 800, 600 };
+      glm::vec4 color = { 0.8f, 0.5f, 0.1f, 1.f };
 
-      Mouse::Button getButton() const noexcept;
-      Action getAction() const noexcept;
-      uint32_t getModifiers() const noexcept;
-
-      std::string toString() const override;
-
-      MouseButtonEvent(Window* window, glm::ivec2 pos, Mouse::Button button, Action action, uint32_t modifiers);
-
-   protected:
-      Mouse::Button m_button;
-      Action m_action;
-      uint32_t m_modifiers;
+      ContextSettings context = {};
+      FrameBufferSettings framebuffer = {};
+      WindowSettings window = {};
    };
 }
 
-#include "MouseButtonEvent.inl"
-
-#endif // ZG_MOUSEBUTTONEVENT_HPP
+#endif // ZG_GRAPHICSSETTINGS_HPP

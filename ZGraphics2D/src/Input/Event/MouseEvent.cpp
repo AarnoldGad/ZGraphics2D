@@ -1,4 +1,4 @@
-#include "zgraphics2D/Input/MouseEvent.hpp"
+#include "zgraphics2D/Input/Event/MouseEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
 

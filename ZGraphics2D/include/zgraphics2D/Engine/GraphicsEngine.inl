@@ -6,7 +6,7 @@ inline ze::Logger& zg::GraphicsEngine::UseGraphicsLogger() noexcept
    return s_gfxLogger;
 }
 
-inline zg::Window& zg::GraphicsEngine::getMainWindow() noexcept
+inline zg::Window& zg::GraphicsEngine::getWindow() noexcept
 {
    return m_window;
 }
@@ -14,6 +14,11 @@ inline zg::Window& zg::GraphicsEngine::getMainWindow() noexcept
 inline zg::Keyboard& zg::GraphicsEngine::getKeyboard() noexcept
 {
    return m_keyboard;
+}
+
+inline zg::Mouse& zg::GraphicsEngine::getMouse() noexcept
+{
+   return m_mouse;
 }
 
 #include <zengine/Memory/NewOff.hpp>

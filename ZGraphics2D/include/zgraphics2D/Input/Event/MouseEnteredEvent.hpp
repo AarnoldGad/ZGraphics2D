@@ -28,7 +28,7 @@
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/MouseEvent.hpp"
+#include "zgraphics2D/Input/Event/MouseEvent.hpp"
 
 namespace zg
 {

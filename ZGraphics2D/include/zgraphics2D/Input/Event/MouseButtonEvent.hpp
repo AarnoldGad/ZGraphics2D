@@ -1,5 +1,5 @@
 /**
- * MouseMovedEvent.hpp
+ * MouseButtonEvent.hpp
  * 30 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
@@ -23,22 +23,39 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSEMOVEDEVENT_HPP
-#define ZG_MOUSEMOVEDEVENT_HPP
+#ifndef ZG_MOUSEBUTTONEVENT_HPP
+#define ZG_MOUSEBUTTONEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/MouseEvent.hpp"
+#include "zgraphics2D/Input/Event/MouseEvent.hpp"
 
 namespace zg
 {
-   class ZE_API MouseMovedEvent : public MouseEvent
+   class ZE_API MouseButtonEvent : public MouseEvent
    {
    public:
-      MouseMovedEvent(Window* window, glm::ivec2 pos);
+      enum class Action
+      {
+         Pressed = GLFW_PRESS,
+         Released = GLFW_RELEASE
+      };
+
+      Mouse::Button getButton() const noexcept;
+      Action getAction() const noexcept;
+      uint32_t getModifiers() const noexcept;
 
       std::string toString() const override;
+
+      MouseButtonEvent(Window* window, glm::ivec2 pos, Mouse::Button button, Action action, uint32_t modifiers);
+
+   protected:
+      Mouse::Button m_button;
+      Action m_action;
+      uint32_t m_modifiers;
    };
 }
 
-#endif // ZG_MOUSEMOVEDEVENT_HPP
+#include "MouseButtonEvent.inl"
+
+#endif // ZG_MOUSEBUTTONEVENT_HPP

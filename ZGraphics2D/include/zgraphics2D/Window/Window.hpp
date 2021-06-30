@@ -28,6 +28,8 @@
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/ContextSettings.hpp"
+#include "zgraphics2D/Window/FrameBufferSettings.hpp"
 #include "zgraphics2D/Window/WindowSettings.hpp"
 
 namespace zg
@@ -35,7 +37,8 @@ namespace zg
    class ZE_API Window
    {
    public:
-      void create(std::string const& title, int width, int height, WindowSettings settings = {});
+      void create(std::string const& title, glm::ivec2 size, glm::vec4 color,
+                  WindowSettings window = {}, ContextSettings context = {}, FrameBufferSettings framebuffer = {});
 
       std::string getTitle() const noexcept;
       glm::ivec2 getSize() const noexcept;
@@ -44,7 +47,7 @@ namespace zg
       float getOpacity() const noexcept;
       bool isVisible() const noexcept;
       bool shouldClose() const noexcept;
-      glm::vec4 getClearColor() const noexcept;
+      glm::vec4 getColor() const noexcept;
       uint32_t getClearMask() const noexcept;
 
       void clear();
@@ -62,12 +65,13 @@ namespace zg
       void setPosition(glm::ivec2 pos);
       void setOpacity(float opacity);
       void setVisible(bool visible);
-      void setClearColor(glm::vec4 color);
-      void setClearMask(uint32_t mask);
+      void setColor(glm::vec4 color) noexcept;
+      void setClearMask(uint32_t mask) noexcept;
 
-      GLFWwindow* getHandle() const noexcept;
+      GLFWwindow* getHandle() noexcept;
 
-      Window(std::string const& title, int width, int height, WindowSettings settings = {});
+      Window(std::string const& title, glm::ivec2 size, glm::vec4 color,
+             WindowSettings window = {}, ContextSettings context = {}, FrameBufferSettings framebuffer = {});
       Window();
       ~Window();
 
@@ -85,15 +89,16 @@ namespace zg
       template<typename EventType, typename... Args>
       static void PushWindowEvent(GLFWwindow* window, Args&&... args);
 
-      void configureWindow(WindowSettings settings);
-      void makeWindow(std::string const& title, int width, int height);
+      void configureWindow(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer);
+      void makeWindow();
       void installWindow();
 
       GLFWwindow* m_handle;
 
       std::string m_title;
+      glm::ivec2 m_size;
+      glm::vec4 m_color;
       uint32_t m_clearMask;
-      glm::vec4 m_clearColor;
    };
 }
 

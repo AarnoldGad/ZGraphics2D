@@ -44,27 +44,27 @@ namespace zg
          X2 = GLFW_MOUSE_BUTTON_5,
          X3 = GLFW_MOUSE_BUTTON_6,
          X4 = GLFW_MOUSE_BUTTON_7,
-         X5 = GLFW_MOUSE_BUTTON_8,
+         X5 = GLFW_MOUSE_BUTTON_8
       };
 
-      static std::string GetButtonName(Button button);
+      static std::string GetButtonName(Button button) noexcept;
 
-      bool isButtonPressed(Button button) const;
-      glm::ivec2 getPosition() const;
-      Window* getWindow();
+      bool isButtonPressed(Button button) const noexcept;
+      glm::ivec2 getPosition() const noexcept;
+      Window* getWindow() noexcept;
 
-      void setPosition(glm::ivec2 pos);
-      void setWindow(Window* window);
+      void setPosition(glm::ivec2 pos) noexcept;
+      void setWindow(Window* window) noexcept;
 
       explicit Mouse(Window& window);
       Mouse();
 
    private:
-      static void CursorPositionInput(GLFWwindow* window, double x, double y) noexcept;
-      static void CursorEnterInput(GLFWwindow* window, int entered) noexcept;
-      static void MouseButtonInput(GLFWwindow* window, int button, int type, int mods) noexcept;
-      static void MouseWheelInput(GLFWwindow* window, double dx, double dy) noexcept;
-      static void DropInput(GLFWwindow* window, int count, char const* paths[]) noexcept;
+      static void CursorPositionInput(GLFWwindow* window, double x, double y);
+      static void CursorEnterInput(GLFWwindow* window, int entered);
+      static void MouseButtonInput(GLFWwindow* window, int button, int type, int mods);
+      static void MouseWheelInput(GLFWwindow* window, double dx, double dy);
+      static void DropInput(GLFWwindow* window, int count, char const* paths[]);
 
       template<typename EventType, typename... Args>
       static void PushMouseEvent(GLFWwindow* window, Args&&... args);

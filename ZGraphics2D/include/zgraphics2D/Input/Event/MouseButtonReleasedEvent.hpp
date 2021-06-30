@@ -1,5 +1,5 @@
 /**
- * MouseScrolledEvent.hpp
+ * MouseButtonReleasedEvent.hpp
  * 30 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
@@ -23,31 +23,22 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSESCROLLEDEVENT_HPP
-#define ZG_MOUSESCROLLEDEVENT_HPP
+#ifndef ZG_MOUSEBUTTONRELEASEDEVENT_HPP
+#define ZG_MOUSEBUTTONRELEASEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/MouseEvent.hpp"
+#include "zgraphics2D/Input/Event/MouseButtonEvent.hpp"
 
 namespace zg
 {
-   class ZE_API MouseScrolledEvent : public MouseEvent
+   class ZE_API MouseButtonReleasedEvent : public MouseButtonEvent
    {
    public:
-      double getHorizontalOffset() const noexcept;
-      double getVerticalOffset() const noexcept;
+      MouseButtonReleasedEvent(Window* window, glm::ivec2 pos, Mouse::Button button, uint32_t modifiers);
 
       std::string toString() const override;
-
-      MouseScrolledEvent(Window* window, glm::ivec2 pos, double xoffset, double yoffset);
-
-   private:
-      double m_xoffset;
-      double m_yoffset;
    };
 }
 
-#include "MouseScrolledEvent.inl"
-
-#endif // ZG_MOUSESCROLLEDEVENT_HPP
+#endif // ZG_MOUSEBUTTONRELEASEDEVENT_HPP

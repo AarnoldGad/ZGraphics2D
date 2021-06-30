@@ -1,4 +1,4 @@
-#include "zgraphics2D/Input/MouseScrolledEvent.hpp"
+#include "zgraphics2D/Input/Event/MouseScrolledEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
 

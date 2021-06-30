@@ -1,6 +1,6 @@
 /**
- * WindowSettings.hpp
- * 28 Jun 2021
+ * MouseDroppedEvent.hpp
+ * 30 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,30 +23,31 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_WINDOWSETTINGS_HPP
-#define ZG_WINDOWSETTINGS_HPP
+#ifndef ZG_MOUSEDROPPEDEVENT_HPP
+#define ZG_MOUSEDROPPEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Input/Event/MouseEvent.hpp"
+
 namespace zg
 {
-   struct WindowSettings
+   class ZE_API MouseDroppedEvent : public MouseEvent
    {
-      uint32_t clearMask = GL_COLOR_BUFFER_BIT;
+   public:
+      std::vector<std::filesystem::path> const& getPaths() const noexcept;
+      std::filesystem::path getPath(size_t index) const;
+      size_t getPathCount() const noexcept;
 
-      bool resisable = false;
-      bool visible = true;
-      bool decorated = true;
-      bool focused = true;
-      bool floating = false;
-      bool maximised = false;
-      bool centerCursor = false;
-      bool focusOnShow = true;
-      bool scaleToMonitor = false;
-      int refreshRate = -1;
-      bool doubleBuffering = true;
-      bool autoIconify = true;
+      std::string toString() const override;
+
+      explicit MouseDroppedEvent(Window* window, glm::ivec2 pos, size_t count, char const* paths[]);
+
+   private:
+      std::vector<std::filesystem::path> m_paths;
    };
 }
 
-#endif // ZG_WINDOWSETTINGS_HPP
+#include "MouseDroppedEvent.inl"
+
+#endif // ZG_MOUSEDROPPEDEVENT_HPP

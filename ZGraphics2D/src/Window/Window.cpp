@@ -1,30 +1,34 @@
 #include "zgraphics2D/Window/Window.hpp"
 
-#include "zgraphics2D/Window/WindowClosedEvent.hpp"
+#include "zgraphics2D/Engine/GraphicsEngine.hpp"
+#include "zgraphics2D/Window/Event/WindowClosedEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
 
 namespace zg
 {
    Window::Window()
-      : m_clearMask(GL_COLOR_BUFFER_BIT), m_clearColor(0.8f, 0.5f, 0.1f, 1.f), m_handle(nullptr) {}
+      : m_handle(nullptr) {}
 
-   Window::Window(std::string const& title, int width, int height, WindowSettings settings)
-      : m_handle(nullptr), m_title(title), m_clearMask(settings.clearMask), m_clearColor(settings.clearColor)
+   Window::Window(std::string const& title, glm::ivec2 size, glm::vec4 color,
+                  WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer)
+      : m_handle(nullptr), m_title(title), m_size(size), m_color(color), m_clearMask(window.clearMask)
    {
-      create(title, width, height, settings);
+      create(title, size, color, window, context, framebuffer);
    }
 
-   void Window::create(std::string const& title, int width, int height, WindowSettings settings)
+   void Window::create(std::string const& title, glm::ivec2 size, glm::vec4 color,
+                       WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer)
    {
       if (m_handle) return;
 
       m_title = title;
-      m_clearMask = settings.clearMask;
-      m_clearColor = settings.clearColor;
+      m_size = size;
+      m_color = color;
+      m_clearMask = window.clearMask;
 
-      configureWindow(settings);
-      makeWindow(title, width, height);
+      configureWindow(window, context, framebuffer);
+      makeWindow();
       installWindow();
 
       glfwSetWindowUserPointer(m_handle, static_cast<void*>(this));
@@ -35,7 +39,7 @@ namespace zg
       if (glfwGetCurrentContext() != getHandle())
          glfwMakeContextCurrent(m_handle);
 
-      glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
+      glClearColor(m_color.r, m_color.g, m_color.b, m_color.a);
       glClear(m_clearMask);
    }
 
@@ -67,6 +71,8 @@ namespace zg
 
    void Window::setSize(int width, int height)
    {
+      m_size.x = width;
+      m_size.y = height;
       glfwSetWindowSize(m_handle, width, height);
    }
 
@@ -95,74 +101,76 @@ namespace zg
       visible ? show() : hide();
    }
 
-   void Window::setClearColor(glm::vec4 color)
+   void Window::setColor(glm::vec4 color) noexcept
    {
-      m_clearColor = color;
+      m_color = color;
    }
 
-   void Window::setClearMask(uint32_t mask)
+   void Window::setClearMask(uint32_t mask) noexcept
    {
       m_clearMask = mask;
    }
 
-   void Window::configureWindow(WindowSettings settings)
+   void Window::configureWindow(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer)
    {
-      glfwWindowHint(GLFW_RESIZABLE, settings.resisable ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_VISIBLE, settings.visible ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_DECORATED, settings.decorated ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_FOCUSED, settings.focused ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_AUTO_ICONIFY, settings.autoIconify ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_FLOATING, settings.floating ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_MAXIMIZED, settings.maximised ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_CENTER_CURSOR, settings.centerCursor ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, settings.transparent ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_FOCUS_ON_SHOW, settings.focusOnShow ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_SCALE_TO_MONITOR, settings.scaleToMonitor ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_SRGB_CAPABLE, settings.srgbCapable ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_SRGB_CAPABLE, settings.srgbCapable ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_STEREO, settings.stereo ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_DOUBLEBUFFER, settings.doubleBuffering ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, settings.forwardCompatibility ? GLFW_TRUE : GLFW_FALSE);
-      glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, settings.debugContext ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_RESIZABLE, window.resisable ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_VISIBLE, window.visible ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_DECORATED, window.decorated ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_FOCUSED, window.focused ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_AUTO_ICONIFY, window.autoIconify ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_FLOATING, window.floating ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_MAXIMIZED, window.maximised ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_CENTER_CURSOR, window.centerCursor ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_FOCUS_ON_SHOW, window.focusOnShow ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_SCALE_TO_MONITOR, window.scaleToMonitor ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_DOUBLEBUFFER, window.doubleBuffering ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_REFRESH_RATE, window.refreshRate >= 0 ? window.refreshRate : GLFW_DONT_CARE);
       //glfwWindowHint(GLFW_CONTEXT_NO_ERROR,        settings.noError ? GLFW_TRUE : GLFW_FALSE);
 
-      glfwWindowHint(GLFW_RED_BITS, settings.redBits >= 0 ? settings.redBits : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_GREEN_BITS, settings.greenBits >= 0 ? settings.greenBits : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_BLUE_BITS, settings.blueBits >= 0 ? settings.blueBits : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_ALPHA_BITS, settings.alphaBits >= 0 ? settings.alphaBits : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_DEPTH_BITS, settings.depthBits >= 0 ? settings.depthBits : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_STENCIL_BITS, settings.stencilBits >= 0 ? settings.stencilBits : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_ACCUM_RED_BITS, settings.accumRedBits >= 0 ? settings.accumRedBits : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_ACCUM_GREEN_BITS, settings.accumGreenBits >= 0 ? settings.accumGreenBits : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_ACCUM_BLUE_BITS, settings.accumBlueBits >= 0 ? settings.accumBlueBits : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_ACCUM_ALPHA_BITS, settings.accumAlphaBits >= 0 ? settings.accumAlphaBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_RED_BITS, framebuffer.redBits >= 0 ? framebuffer.redBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_GREEN_BITS, framebuffer.greenBits >= 0 ? framebuffer.greenBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_BLUE_BITS, framebuffer.blueBits >= 0 ? framebuffer.blueBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_ALPHA_BITS, framebuffer.alphaBits >= 0 ? framebuffer.alphaBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_DEPTH_BITS, framebuffer.depthBits >= 0 ? framebuffer.depthBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_STENCIL_BITS, framebuffer.stencilBits >= 0 ? framebuffer.stencilBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_ACCUM_RED_BITS, framebuffer.accumRedBits >= 0 ? framebuffer.accumRedBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_ACCUM_GREEN_BITS, framebuffer.accumGreenBits >= 0 ? framebuffer.accumGreenBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_ACCUM_BLUE_BITS, framebuffer.accumBlueBits >= 0 ? framebuffer.accumBlueBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_ACCUM_ALPHA_BITS, framebuffer.accumAlphaBits >= 0 ? framebuffer.accumAlphaBits : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_SRGB_CAPABLE, framebuffer.srgbCapable ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, framebuffer.transparent ? GLFW_TRUE : GLFW_FALSE);
+
       //glfwWindowHint(GLFW_AUX_BUFFERS, 0);
-      glfwWindowHint(GLFW_SAMPLES, settings.samples >= 0 ? settings.samples : GLFW_DONT_CARE);
-      glfwWindowHint(GLFW_REFRESH_RATE, settings.refreshRate >= 0 ? settings.refreshRate : GLFW_DONT_CARE);
 
-      glfwWindowHint(GLFW_CLIENT_API, static_cast<int>(settings.api));
-      glfwWindowHint(GLFW_CONTEXT_CREATION_API, static_cast<int>(settings.context));
-      glfwWindowHint(GLFW_OPENGL_PROFILE, static_cast<int>(settings.openglProfile));
-      glfwWindowHint(GLFW_CONTEXT_ROBUSTNESS, static_cast<int>(settings.robustness));
-      glfwWindowHint(GLFW_CONTEXT_RELEASE_BEHAVIOR, static_cast<int>(settings.releaseBehavior));
+      glfwWindowHint(GLFW_CLIENT_API, static_cast<int>(context.client));
+      glfwWindowHint(GLFW_CONTEXT_CREATION_API, static_cast<int>(context.api));
+      glfwWindowHint(GLFW_OPENGL_PROFILE, static_cast<int>(context.openglProfile));
+      glfwWindowHint(GLFW_CONTEXT_ROBUSTNESS, static_cast<int>(context.robustness));
+      glfwWindowHint(GLFW_CONTEXT_RELEASE_BEHAVIOR, static_cast<int>(context.releaseBehavior));
+      glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, context.versionMajor);
+      glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, context.versionMinor);
+      glfwWindowHint(GLFW_SAMPLES, context.samples >= 0 ? context.samples : GLFW_DONT_CARE);
+      glfwWindowHint(GLFW_STEREO, context.stereo ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, context.forwardCompatibility ? GLFW_TRUE : GLFW_FALSE);
+      glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, context.debugContext ? GLFW_TRUE : GLFW_FALSE);
 
-      glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, settings.versionMajor);
-      glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, settings.versionMinor);
+      //glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, settings.cocoa.retinaFrameBuffer ? GLFW_TRUE : GLFW_FALSE);
+      //glfwWindowHint(GLFW_COCOA_GRAPHICS_SWITCHING, settings.cocoa.graphicsSwitching ? GLFW_TRUE : GLFW_FALSE);
+      //glfwWindowHintString(GLFW_COCOA_FRAME_NAME,   settings.cocoa.frameName.c_str());
 
-      //glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, settings.cocoa_retinaFrameBuffer ? GLFW_TRUE : GLFW_FALSE);
-      //glfwWindowHint(GLFW_COCOA_GRAPHICS_SWITCHING, settings.cocoa_graphicsSwitching ? GLFW_TRUE : GLFW_FALSE);
-      //glfwWindowHintString(GLFW_COCOA_FRAME_NAME,   settings.cocoa_frameName.c_str());
-
-      //glfwWindowHintString(GLFW_X11_CLASS_NAME,    settings.x11_className.c_str());
-      //glfwWindowHintString(GLFW_X11_INSTANCE_NAME, settings.x11_instanceName.c_str());
+      //glfwWindowHintString(GLFW_X11_CLASS_NAME,    settings.x11.className.c_str());
+      //glfwWindowHintString(GLFW_X11_INSTANCE_NAME, settings.x11.instanceName.c_str());
    }
 
-   void Window::makeWindow(std::string const& title, int width, int height)
+   void Window::makeWindow()
    {
       // TODO Monitor and position
-      m_handle = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+      m_handle = glfwCreateWindow(m_size.x, m_size.y, m_title.c_str(), nullptr, nullptr);
       if (!m_handle)
+      {
+         GFX_LOG_CRITICAL("Fail to create window !");
          exit(-1); // TODO Error handling
+      }
 
       glfwMakeContextCurrent(m_handle);
    }

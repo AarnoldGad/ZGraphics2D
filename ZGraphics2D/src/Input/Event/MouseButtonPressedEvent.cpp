@@ -1,4 +1,4 @@
-#include "zgraphics2D/Input/MouseButtonPressedEvent.hpp"
+#include "zgraphics2D/Input/Event/MouseButtonPressedEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
 

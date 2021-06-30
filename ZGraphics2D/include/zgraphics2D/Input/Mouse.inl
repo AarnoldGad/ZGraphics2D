@@ -1,6 +1,6 @@
 #include <zengine/Memory/New.hpp>
 
-inline std::string zg::Mouse::GetButtonName(Button button)
+inline std::string zg::Mouse::GetButtonName(Button button) noexcept
 {
    switch (button)
    {
@@ -25,14 +25,14 @@ inline std::string zg::Mouse::GetButtonName(Button button)
    }
 }
 
-inline bool zg::Mouse::isButtonPressed(Button button) const
+inline bool zg::Mouse::isButtonPressed(Button button) const noexcept
 {
    if (!m_window) return false;
 
    return static_cast<bool>(glfwGetMouseButton(m_window->getHandle(), static_cast<int>(button)));
 }
 
-inline glm::ivec2 zg::Mouse::getPosition() const
+inline glm::ivec2 zg::Mouse::getPosition() const noexcept
 {
    if (!m_window) return { 0,0 };
 
@@ -41,7 +41,7 @@ inline glm::ivec2 zg::Mouse::getPosition() const
    return { glm::floor(x), glm::floor(y) };
 }
 
-inline zg::Window* zg::Mouse::getWindow()
+inline zg::Window* zg::Mouse::getWindow() noexcept
 {
    return m_window;
 }

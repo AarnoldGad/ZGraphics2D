@@ -28,6 +28,7 @@
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Engine/GraphicsSettings.hpp"
 #include "zgraphics2D/Window/Window.hpp"
 #include "zgraphics2D/Input/Keyboard.hpp"
 #include "zgraphics2D/Input/Mouse.hpp"
@@ -39,7 +40,7 @@ namespace zg
    public:
       static ze::Logger& UseGraphicsLogger() noexcept;
 
-      Window& getMainWindow() noexcept;
+      Window& getWindow() noexcept;
       Keyboard& getKeyboard() noexcept;
       Mouse& getMouse() noexcept;
 
@@ -49,16 +50,24 @@ namespace zg
 
       void terminate() override;
 
-      GraphicsEngine();
+      explicit GraphicsEngine(GraphicsSettings settings = {});
       ~GraphicsEngine();
 
    private:
+      static void InitGLFW();
+      static void LoadOpenGL();
+      void openWindow();
+
       static void HandleGLFWError(int code, char const* description);
+
+      static bool s_isGLFWInitialised;
+      static bool s_isOpenGLLoaded;
 
       static ze::DebugFileWriter s_gfxWriter;
       static ze::Logger s_gfxLogger;
 
       bool m_isInitialised;
+      GraphicsSettings m_settings;
 
       Window m_window;
       Keyboard m_keyboard;

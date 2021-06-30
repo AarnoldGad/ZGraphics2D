@@ -34,9 +34,9 @@ inline bool zg::Window::shouldClose() const noexcept
    return static_cast<bool>(glfwWindowShouldClose(m_handle));
 }
 
-inline glm::vec4 zg::Window::getClearColor() const noexcept
+inline glm::vec4 zg::Window::getColor() const noexcept
 {
-   return m_clearColor;
+   return m_color;
 }
 
 inline uint32_t zg::Window::getClearMask() const noexcept
@@ -44,7 +44,7 @@ inline uint32_t zg::Window::getClearMask() const noexcept
    return m_clearMask;
 }
 
-inline GLFWwindow* zg::Window::getHandle() const noexcept
+inline GLFWwindow* zg::Window::getHandle() noexcept
 {
    return m_handle;
 }
