@@ -9,23 +9,14 @@
 
 namespace zg
 {
-   std::string Keyboard::GetKeyName(Key key) noexcept
-   {
-      char const* name = glfwGetKeyName(static_cast<int>(key), -1);
-      return name ? name : "";
-   }
-
-   Keyboard::Keyboard()
-      : m_window(nullptr) {}
-
-   Keyboard::Keyboard(Window& window)
-      : m_window(&window)
+   Keyboard::Keyboard(Window* window)
+      : m_window(window)
    {
       glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
       glfwSetCharCallback(m_window->getHandle(), &Keyboard::TextInput);
    }
 
-   void Keyboard::setWindow(Window* window)
+   void Keyboard::setWindow(Window* window) noexcept
    {
       if (m_window) // Reset last window if one
       {
@@ -60,7 +51,7 @@ namespace zg
       return mods;
    }
 
-   void Keyboard::KeyInput(GLFWwindow* window, int key, int scancode, int type, int modifiers) noexcept
+   void Keyboard::KeyInput(GLFWwindow* window, int key, int scancode, int type, int modifiers)
    {
       switch (type)
       {
@@ -76,7 +67,7 @@ namespace zg
       }
    }
 
-   void Keyboard::TextInput(GLFWwindow* window, uint32_t codepoint) noexcept
+   void Keyboard::TextInput(GLFWwindow* window, uint32_t codepoint)
    {
       // TODO
    }

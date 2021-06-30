@@ -1,5 +1,11 @@
 #include <zengine/Memory/New.hpp>
 
+inline std::string Keyboard::GetKeyName(Key key) noexcept
+{
+   char const* name = glfwGetKeyName(static_cast<int>(key), GetKeyScancode(Key));
+   return name ? name : "";
+}
+
 inline int zg::Keyboard::GetKeyScancode(Key key) noexcept
 {
    return glfwGetKeyScancode(static_cast<int>(key));
@@ -18,7 +24,7 @@ inline zg::Window* zg::Keyboard::getWindow() noexcept
 }
 
 template<typename EventType>
-inline void zg::Keyboard::PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers) noexcept
+inline void zg::Keyboard::PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers)
 {
    Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
    ::ze::Core::GetApplication().useEventBusTo().pushEvent<EventType>(windowPtr, static_cast<Key>(key), scancode, static_cast<uint32_t>(modifiers));

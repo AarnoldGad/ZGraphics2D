@@ -35,9 +35,9 @@ namespace zg
    class ZE_API MouseMovedEvent : public MouseEvent
    {
    public:
-      MouseMovedEvent(Window* window, glm::ivec2 pos);
-
       std::string toString() const override;
+
+      MouseMovedEvent(Window* window, glm::ivec2 pos);
    };
 }
 

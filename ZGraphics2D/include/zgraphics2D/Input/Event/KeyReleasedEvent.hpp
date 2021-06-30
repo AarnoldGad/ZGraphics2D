@@ -35,9 +35,9 @@ namespace zg
    class ZE_API KeyReleasedEvent : public KeyEvent
    {
    public:
-      KeyReleasedEvent(Window* window, Keyboard::Key key, int scancode, uint32_t modifiers);
-
       std::string toString() const override;
+
+      KeyReleasedEvent(Window* window, Keyboard::Key key, int scancode, uint32_t modifiers);
    };
 }
 

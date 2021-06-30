@@ -177,17 +177,16 @@ namespace zg
       uint32_t getModifiers() noexcept;
       Window* getWindow() noexcept;
 
-      void setWindow(Window* window);
+      void setWindow(Window* window) noexcept;
 
-      explicit Keyboard(Window& window);
-      Keyboard();
+      explicit Keyboard(Window* window = nullptr);
 
    private:
-      static void KeyInput(GLFWwindow* window, int key, int scancode, int type, int modifiers) noexcept;
-      static void TextInput(GLFWwindow* window, uint32_t codepoint) noexcept;
+      static void KeyInput(GLFWwindow* window, int key, int scancode, int type, int modifiers);
+      static void TextInput(GLFWwindow* window, uint32_t codepoint);
 
       template<typename EventType>
-      static void PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers) noexcept;
+      static void PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers);
 
       Window* m_window;
    };

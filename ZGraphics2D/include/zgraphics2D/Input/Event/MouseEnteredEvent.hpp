@@ -35,12 +35,12 @@ namespace zg
    class ZE_API MouseEnteredEvent : public MouseEvent
    {
    public:
-      MouseEnteredEvent(Window* window, glm::ivec2 pos, bool entered);
-
       bool hasEntered() const noexcept;
       bool hasLeaved() const noexcept;
 
       std::string toString() const override;
+
+      MouseEnteredEvent(Window* window, glm::ivec2 pos, bool entered);
 
    private:
       bool m_entered;

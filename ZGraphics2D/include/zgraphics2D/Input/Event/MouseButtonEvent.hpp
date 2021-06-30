@@ -45,8 +45,6 @@ namespace zg
       Action getAction() const noexcept;
       uint32_t getModifiers() const noexcept;
 
-      std::string toString() const override;
-
       MouseButtonEvent(Window* window, glm::ivec2 pos, Mouse::Button button, Action action, uint32_t modifiers);
 
    protected:

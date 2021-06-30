@@ -35,9 +35,9 @@ namespace zg
    class ZE_API MouseButtonReleasedEvent : public MouseButtonEvent
    {
    public:
-      MouseButtonReleasedEvent(Window* window, glm::ivec2 pos, Mouse::Button button, uint32_t modifiers);
-
       std::string toString() const override;
+
+      MouseButtonReleasedEvent(Window* window, glm::ivec2 pos, Mouse::Button button, uint32_t modifiers);
    };
 }
 

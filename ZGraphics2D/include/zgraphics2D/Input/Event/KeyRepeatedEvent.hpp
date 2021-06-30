@@ -35,9 +35,9 @@ namespace zg
    class ZE_API KeyRepeatedEvent : public KeyEvent
    {
    public:
-      KeyRepeatedEvent(Window* window, Keyboard::Key key, int scancode, uint32_t modifiers);
-
       std::string toString() const override;
+
+      KeyRepeatedEvent(Window* window, Keyboard::Key key, int scancode, uint32_t modifiers);
    };
 }
 
