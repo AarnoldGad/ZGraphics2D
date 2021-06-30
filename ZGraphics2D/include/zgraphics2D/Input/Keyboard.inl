@@ -12,11 +12,16 @@ inline bool zg::Keyboard::isKeyPressed(Key key) noexcept
    return static_cast<bool>(glfwGetKey(m_window->getHandle(), static_cast<int>(key)));
 }
 
+inline zg::Window* zg::Keyboard::getWindow() noexcept
+{
+   return m_window;
+}
+
 template<typename EventType>
-inline void zg::Keyboard::PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers)
+inline void zg::Keyboard::PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers) noexcept
 {
    Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
-   ::ze::Core::GetApplication().useEventBusTo().pushEvent<EventType>(*windowPtr, static_cast<Key>(key), scancode, static_cast<uint32_t>(modifiers));
+   ::ze::Core::GetApplication().useEventBusTo().pushEvent<EventType>(windowPtr, static_cast<Key>(key), scancode, static_cast<uint32_t>(modifiers));
 }
 
 #include <zengine/Memory/NewOff.hpp>

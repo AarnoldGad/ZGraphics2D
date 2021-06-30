@@ -175,8 +175,9 @@ namespace zg
 
       bool isKeyPressed(Key key) noexcept;
       uint32_t getModifiers() noexcept;
+      Window* getWindow() noexcept;
 
-      void setWindow(Window& window);
+      void setWindow(Window* window);
 
       explicit Keyboard(Window& window);
       Keyboard();
@@ -186,7 +187,7 @@ namespace zg
       static void TextInput(GLFWwindow* window, uint32_t codepoint) noexcept;
 
       template<typename EventType>
-      static void PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers);
+      static void PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers) noexcept;
 
       Window* m_window;
    };

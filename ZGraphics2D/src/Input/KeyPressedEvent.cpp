@@ -4,7 +4,7 @@
 
 namespace zg
 {
-   KeyPressedEvent::KeyPressedEvent(Window& window, Keyboard::Key key, int scancode, uint32_t modifiers)
+   KeyPressedEvent::KeyPressedEvent(Window* window, Keyboard::Key key, int scancode, uint32_t modifiers)
       : KeyEvent(window, key, scancode, Action::Pressed, modifiers) {}
 
    std::string KeyPressedEvent::toString() const

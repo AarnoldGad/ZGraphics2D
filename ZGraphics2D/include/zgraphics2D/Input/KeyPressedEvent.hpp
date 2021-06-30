@@ -1,6 +1,6 @@
 /**
  * KeyPressedEvent.hpp
- * 29 Jun 2021
+ * 30 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -35,8 +35,8 @@ namespace zg
    class ZE_API KeyPressedEvent : public KeyEvent
    {
    public:
-      KeyPressedEvent(Window& window, Keyboard::Key key, int scancode, uint32_t modifiers);
-      
+      KeyPressedEvent(Window* window, Keyboard::Key key, int scancode, uint32_t modifiers);
+
       std::string toString() const override;
    };
 }

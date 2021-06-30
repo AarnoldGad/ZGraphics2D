@@ -1,8 +1,8 @@
 #include "zgraphics2D/Input/Keyboard.hpp"
 
 #include "zgraphics2D/Window/Window.hpp"
-#include "zgraphics2D/Input/KeyReleasedEvent.hpp"
 #include "zgraphics2D/Input/KeyPressedEvent.hpp"
+#include "zgraphics2D/Input/KeyReleasedEvent.hpp"
 #include "zgraphics2D/Input/KeyRepeatedEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
@@ -19,18 +19,25 @@ namespace zg
       : m_window(nullptr) {}
 
    Keyboard::Keyboard(Window& window)
-      : m_window(&window) 
+      : m_window(&window)
    {
       glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
       glfwSetCharCallback(m_window->getHandle(), &Keyboard::TextInput);
    }
 
-   void Keyboard::setWindow(Window& window)
+   void Keyboard::setWindow(Window* window)
    {
-      m_window = &window;
-
-      glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
-      glfwSetCharCallback(m_window->getHandle(), &Keyboard::TextInput);
+      if (m_window) // Reset last window if one
+      {
+         glfwSetKeyCallback(m_window->getHandle(), nullptr);
+         glfwSetCharCallback(m_window->getHandle(), nullptr);
+      }
+      
+      if (m_window = window, m_window) // Set new window
+      {
+         glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
+         glfwSetCharCallback(m_window->getHandle(), &Keyboard::TextInput);
+      }
    }
 
    uint32_t Keyboard::getModifiers() noexcept

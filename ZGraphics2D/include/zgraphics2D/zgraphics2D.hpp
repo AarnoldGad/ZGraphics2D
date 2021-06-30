@@ -23,6 +23,12 @@
 #include <zgraphics2D/Input/KeyRepeatedEvent.hpp>
 
 #include <zgraphics2D/Input/MouseEvent.hpp>
+#include <zgraphics2D/Input/MouseMovedEvent.hpp>
+#include <zgraphics2D/Input/MouseEnteredEvent.hpp>
+#include <zgraphics2D/Input/MouseScrolledEvent.hpp>
+#include <zgraphics2D/Input/MouseButtonEvent.hpp>
+#include <zgraphics2D/Input/MouseButtonPressedEvent.hpp>
+#include <zgraphics2D/Input/MouseButtonReleasedEvent.hpp>
 
 #include <zgraphics2D/Window/WindowEvent.hpp>
 #include <zgraphics2D/Window/WindowClosedEvent.hpp>

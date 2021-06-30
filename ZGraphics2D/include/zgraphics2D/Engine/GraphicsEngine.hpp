@@ -30,6 +30,7 @@
 
 #include "zgraphics2D/Window/Window.hpp"
 #include "zgraphics2D/Input/Keyboard.hpp"
+#include "zgraphics2D/Input/Mouse.hpp"
 
 namespace zg
 {
@@ -40,6 +41,7 @@ namespace zg
 
       Window& getMainWindow() noexcept;
       Keyboard& getKeyboard() noexcept;
+      Mouse& getMouse() noexcept;
 
       void initialise() override;
 
@@ -60,6 +62,7 @@ namespace zg
 
       Window m_window;
       Keyboard m_keyboard;
+      Mouse m_mouse;
    };
 }
 

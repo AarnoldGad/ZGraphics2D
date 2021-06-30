@@ -1,5 +1,5 @@
 /**
- * KeyReleasedEvent.hpp
+ * MouseScrolledEvent.hpp
  * 30 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
@@ -23,22 +23,31 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_KEYRELEASEDEVENT_HPP
-#define ZG_KEYRELEASEDEVENT_HPP
+#ifndef ZG_MOUSESCROLLEDEVENT_HPP
+#define ZG_MOUSESCROLLEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/KeyEvent.hpp"
+#include "zgraphics2D/Input/MouseEvent.hpp"
 
 namespace zg
 {
-   class ZE_API KeyReleasedEvent : public KeyEvent
+   class ZE_API MouseScrolledEvent : public MouseEvent
    {
    public:
-      KeyReleasedEvent(Window* window, Keyboard::Key key, int scancode, uint32_t modifiers);
+      double getHorizontalOffset() const noexcept;
+      double getVerticalOffset() const noexcept;
 
       std::string toString() const override;
+
+      MouseScrolledEvent(Window* window, glm::ivec2 pos, double xoffset, double yoffset);
+
+   private:
+      double m_xoffset;
+      double m_yoffset;
    };
 }
 
-#endif // ZG_KEYRELEASEDEVENT
+#include "MouseScrolledEvent.inl"
+
+#endif // ZG_MOUSESCROLLEDEVENT_HPP

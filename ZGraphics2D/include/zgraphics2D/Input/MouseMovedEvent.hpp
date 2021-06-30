@@ -1,6 +1,6 @@
 /**
- * MouseEvent.hpp
- * 21 Jun 2021
+ * MouseMovedEvent.hpp
+ * 30 Jun 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,30 +23,22 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSEEVENT_HPP
-#define ZG_MOUSEEVENT_HPP
+#ifndef ZG_MOUSEMOVEDEVENT_HPP
+#define ZG_MOUSEMOVEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Window/Window.hpp"
-#include "zgraphics2D/Input/Mouse.hpp"
+#include "zgraphics2D/Input/MouseEvent.hpp"
 
 namespace zg
 {
-   class ZE_API MouseEvent : public ze::Event
+   class ZE_API MouseMovedEvent : public MouseEvent
    {
    public:
-      Window* getWindow() noexcept;
-      glm::ivec2 getPosition() const noexcept;
+      MouseMovedEvent(Window* window, glm::ivec2 pos);
 
-      MouseEvent(Window* window, glm::ivec2 pos);
-
-   protected:
-      Window* m_window;
-      glm::ivec2 m_pos;
+      std::string toString() const override;
    };
 }
 
-#include "MouseEvent.inl"
-
-#endif // ZG_MOUSEEVENT_HPP
+#endif // ZG_MOUSEMOVEDEVENT_HPP

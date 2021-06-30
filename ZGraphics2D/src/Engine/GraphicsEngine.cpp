@@ -41,7 +41,8 @@ namespace zg
       // Open Window
       WindowSettings settings;
       m_window.create("Episode One", 800, 600, settings);
-      m_keyboard.setWindow(m_window);
+      m_keyboard.setWindow(&m_window);
+      m_mouse.setWindow(&m_window);
 
       // Init OpenGL
       GFX_LOG_INFO("------ * Loading OpenGL");

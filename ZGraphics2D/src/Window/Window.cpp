@@ -178,14 +178,6 @@ namespace zg
       glfwSetWindowMaximizeCallback(m_handle, &Window::Maximised);
       glfwSetFramebufferSizeCallback(m_handle, &Window::FramebufferResised);
       glfwSetWindowContentScaleCallback(m_handle, &Window::Scaled);
-
-      //glfwSetCursorPosCallback(m_handle, &Window::CursorPositionInput);
-      //glfwSetCursorEnterCallback(m_handle, &Window::CursorEnterInput);
-
-      //glfwSetMouseButtonCallback(m_handle, &Window::MouseButtonInput);
-      //glfwSetScrollCallback(m_handle, &Window::MouseWheelInput);
-
-      //glfwSetDropCallback(m_handle, &Window::DropInput);
    }
 
    void Window::Moved(GLFWwindow* window, int x, int y)
@@ -232,31 +224,6 @@ namespace zg
    {
       // TODO
    }
-
-   /*void Window::CursorPositionInput(GLFWwindow* window, double x, double y) noexcept
-   {
-
-   }
-
-   void Window::CursorEnterInput(GLFWwindow* window, int entered) noexcept
-   {
-
-   }
-
-   void Window::MouseButtonInput(GLFWwindow* window, int button, int type, int mods) noexcept
-   {
-
-   }
-
-   void Window::MouseWheelInput(GLFWwindow* window, double dx, double dy) noexcept
-   {
-
-   }
-
-   void Window::DropInput(GLFWwindow* window, int count, char const* paths[]) noexcept
-   {
-
-   }*/
 
    Window::~Window()
    {

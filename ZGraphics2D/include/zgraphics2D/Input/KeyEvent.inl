@@ -1,6 +1,6 @@
 #include <zengine/Memory/New.hpp>
 
-inline zg::Window& zg::KeyEvent::getWindow()
+inline zg::Window* zg::KeyEvent::getWindow() noexcept
 {
    return m_window;
 }

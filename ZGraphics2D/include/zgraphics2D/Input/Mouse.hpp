@@ -28,12 +28,14 @@
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/Window.hpp"
+
 namespace zg
 {
    class ZE_API Mouse
    {
    public:
-      enum Button : uint32_t
+      enum class Button : int
       {
          Left = GLFW_MOUSE_BUTTON_LEFT,
          Right = GLFW_MOUSE_BUTTON_RIGHT,
@@ -44,7 +46,33 @@ namespace zg
          X4 = GLFW_MOUSE_BUTTON_7,
          X5 = GLFW_MOUSE_BUTTON_8,
       };
+
+      static std::string GetButtonName(Button button);
+
+      bool isButtonPressed(Button button) const;
+      glm::ivec2 getPosition() const;
+      Window* getWindow();
+
+      void setPosition(glm::ivec2 pos);
+      void setWindow(Window* window);
+
+      explicit Mouse(Window& window);
+      Mouse();
+
+   private:
+      static void CursorPositionInput(GLFWwindow* window, double x, double y) noexcept;
+      static void CursorEnterInput(GLFWwindow* window, int entered) noexcept;
+      static void MouseButtonInput(GLFWwindow* window, int button, int type, int mods) noexcept;
+      static void MouseWheelInput(GLFWwindow* window, double dx, double dy) noexcept;
+      static void DropInput(GLFWwindow* window, int count, char const* paths[]) noexcept;
+
+      template<typename EventType, typename... Args>
+      static void PushMouseEvent(GLFWwindow* window, Args&&... args);
+
+      Window* m_window;
    };
 }
+
+#include "Mouse.inl"
 
 #endif // ZG_MOUSE_HPP

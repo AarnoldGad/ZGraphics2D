@@ -43,16 +43,16 @@ namespace zg
          Repeated = GLFW_REPEAT
       };
 
-      explicit KeyEvent(Window& window, Keyboard::Key key, int scancode, Action action, uint32_t modifiers);
-
-      Window& getWindow();
+      Window* getWindow() noexcept;
       Keyboard::Key getKey() const noexcept;
       int getScancode() const noexcept;
       Action getAction() const noexcept;
       uint32_t getModifiers() const noexcept;
 
+      explicit KeyEvent(Window* window, Keyboard::Key key, int scancode, Action action, uint32_t modifiers);
+
    protected:
-      Window& m_window;
+      Window* m_window;
       Keyboard::Key m_key;
       int m_scancode;
       Action m_action;
