@@ -4,6 +4,6 @@
 
 namespace zg
 {
-   WindowEvent::WindowEvent(Window& window)
+   WindowEvent::WindowEvent(Window* window)
       : m_window(window) {}
 }

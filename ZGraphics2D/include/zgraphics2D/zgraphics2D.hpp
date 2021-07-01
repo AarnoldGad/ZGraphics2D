@@ -5,7 +5,6 @@
 
 // Core
 #include <zgraphics2D/Engine/GraphicsEngine.hpp>
-#include <zgraphics2D/Engine/RenderEvent.hpp>
 #include <zgraphics2D/Engine/GraphicsSettings.hpp>
 
 // Common
@@ -23,6 +22,8 @@
 #include <zgraphics2D/Input/Joystick.hpp>
 
 // Events
+#include <zgraphics2D/Engine/Event/RenderEvent.hpp>
+
 #include <zgraphics2D/Input/Event/KeyEvent.hpp>
 #include <zgraphics2D/Input/Event/KeyPressedEvent.hpp>
 #include <zgraphics2D/Input/Event/KeyReleasedEvent.hpp>
@@ -35,6 +36,7 @@
 #include <zgraphics2D/Input/Event/MouseButtonEvent.hpp>
 #include <zgraphics2D/Input/Event/MouseButtonPressedEvent.hpp>
 #include <zgraphics2D/Input/Event/MouseButtonReleasedEvent.hpp>
+#include <zgraphics2D/Input/Event/MouseDroppedEvent.hpp>
 
 #include <zgraphics2D/Window/Event/WindowEvent.hpp>
 #include <zgraphics2D/Window/Event/WindowClosedEvent.hpp>

@@ -35,12 +35,12 @@ namespace zg
    class ZE_API WindowEvent : public ze::Event
    {
    public:
-      explicit WindowEvent(Window& window);
+      explicit WindowEvent(Window* window);
 
-      Window& getWindow() noexcept;
+      Window* getWindow() noexcept;
 
    private:
-      Window& m_window;
+      Window* m_window;
    };
 }
 

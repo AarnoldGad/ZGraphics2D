@@ -4,7 +4,7 @@
 
 namespace zg
 {
-   WindowClosedEvent::WindowClosedEvent(Window& window)
+   WindowClosedEvent::WindowClosedEvent(Window* window)
       : WindowEvent(window) {}
 
    std::string WindowClosedEvent::toString() const

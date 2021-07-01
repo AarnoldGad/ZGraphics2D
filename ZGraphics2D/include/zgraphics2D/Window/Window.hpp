@@ -93,9 +93,6 @@ namespace zg
       template<typename EventType, typename... Args>
       static void PushWindowEvent(GLFWwindow* window, Args&&... args);
 
-      void makeWindow();
-      void installWindow();
-
       GLFWwindow* m_handle;
 
       std::string m_title;

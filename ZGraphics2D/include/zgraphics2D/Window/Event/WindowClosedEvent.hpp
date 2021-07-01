@@ -35,7 +35,7 @@ namespace zg
    class ZE_API WindowClosedEvent : public WindowEvent
    {
    public:
-      WindowClosedEvent(Window& window);
+      WindowClosedEvent(Window* window);
 
       std::string toString() const;
    };

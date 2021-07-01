@@ -53,7 +53,7 @@ template<typename EventType, typename... Args>
 inline void zg::Window::PushWindowEvent(GLFWwindow* window, Args&&... args)
 {
    Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
-   ::ze::Core::GetApplication().useEventBusTo().pushEvent<EventType>(*windowPtr, std::forward<Args>(args)...);
+   ::ze::Core::GetApplication().useEventBusTo().pushEvent<EventType>(windowPtr, std::forward<Args>(args)...);
 }
 
 #include "zengine/Memory/NewOff.hpp"
