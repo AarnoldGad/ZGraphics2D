@@ -31,6 +31,8 @@
 #include "zgraphics2D/Window/ContextSettings.hpp"
 #include "zgraphics2D/Window/FrameBufferSettings.hpp"
 #include "zgraphics2D/Window/WindowSettings.hpp"
+#include "zgraphics2D/Common/Colors.hpp"
+#include "zgraphics2D/Window/Window.hpp"
 
 namespace zg
 {
@@ -38,7 +40,9 @@ namespace zg
    {
       std::string title = "ZEngine";
       glm::ivec2 size = { 800, 600 };
-      glm::vec4 color = { 0.8f, 0.5f, 0.1f, 1.f };
+      glm::ivec2 pos = Window::PositionCentered;
+      glm::vec4 color = Colors::Beige;
+      uint32_t clearMask = GL_COLOR_BUFFER_BIT;
 
       ContextSettings context = {};
       FrameBufferSettings framebuffer = {};

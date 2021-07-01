@@ -1,8 +1,8 @@
 #include <zengine/Memory/New.hpp>
 
-inline std::string Keyboard::GetKeyName(Key key) noexcept
+inline std::string zg::Keyboard::GetKeyName(Key key) noexcept
 {
-   char const* name = glfwGetKeyName(static_cast<int>(key), GetKeyScancode(Key));
+   char const* name = glfwGetKeyName(static_cast<int>(key), GetKeyScancode(key));
    return name ? name : "";
 }
 

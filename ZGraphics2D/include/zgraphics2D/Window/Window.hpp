@@ -31,14 +31,18 @@
 #include "zgraphics2D/Window/ContextSettings.hpp"
 #include "zgraphics2D/Window/FrameBufferSettings.hpp"
 #include "zgraphics2D/Window/WindowSettings.hpp"
+#include "zgraphics2D/Common/Colors.hpp"
 
 namespace zg
 {
    class ZE_API Window
    {
    public:
-      void create(std::string const& title, glm::ivec2 size, glm::vec4 color,
-                  WindowSettings window = {}, ContextSettings context = {}, FrameBufferSettings framebuffer = {});
+      static glm::ivec2 constexpr PositionCentered = { 0xFF000000, 0xFF000000 };
+      static glm::ivec2 constexpr PositionUndefined = { 0xEE000000, 0xEE000000 };
+
+      void configure(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer);
+      void make(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined, glm::vec4 color = Colors::Beige, uint32_t clearMask = GL_COLOR_BUFFER_BIT);
 
       std::string getTitle() const noexcept;
       glm::ivec2 getSize() const noexcept;
@@ -70,7 +74,7 @@ namespace zg
 
       GLFWwindow* getHandle() noexcept;
 
-      Window(std::string const& title, glm::ivec2 size, glm::vec4 color,
+      Window(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined, glm::vec4 color = Colors::Beige, uint32_t clearMask = GL_COLOR_BUFFER_BIT,
              WindowSettings window = {}, ContextSettings context = {}, FrameBufferSettings framebuffer = {});
       Window();
       ~Window();
@@ -89,7 +93,6 @@ namespace zg
       template<typename EventType, typename... Args>
       static void PushWindowEvent(GLFWwindow* window, Args&&... args);
 
-      void configureWindow(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer);
       void makeWindow();
       void installWindow();
 

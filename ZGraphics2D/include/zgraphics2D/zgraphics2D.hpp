@@ -8,6 +8,9 @@
 #include <zgraphics2D/Engine/RenderEvent.hpp>
 #include <zgraphics2D/Engine/GraphicsSettings.hpp>
 
+// Common
+#include <zgraphics2D/Common/Colors.hpp>
+
 // Rendering
 #include <zgraphics2D/Window/Window.hpp>
 #include <zgraphics2D/Window/ContextSettings.hpp>

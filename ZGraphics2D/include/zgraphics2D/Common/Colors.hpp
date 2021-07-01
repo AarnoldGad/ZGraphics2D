@@ -1,6 +1,6 @@
 /**
- * MouseMovedEvent.hpp
- * 30 Jun 2021
+ * Colors.hpp
+ * 1 Jul 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,22 +23,33 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSEMOVEDEVENT_HPP
-#define ZG_MOUSEMOVEDEVENT_HPP
+#ifndef ZG_COLORS_HPP
+#define ZG_COLORS_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/Event/MouseEvent.hpp"
-
 namespace zg
 {
-   class ZE_API MouseMovedEvent : public MouseEvent
+   namespace Colors
    {
-   public:
-      std::string toString() const override;
+      glm::vec4 constexpr Red = { 1.f, 0.f, 0.f, 1.f };
+      glm::vec4 constexpr Green = { 0.f, 1.f, 0.f, 1.f };
+      glm::vec4 constexpr Blue = { 0.f, 0.f, 1.f, 1.f };
 
-      MouseMovedEvent(Window* window, glm::ivec2 pos);
-   };
+      glm::vec4 constexpr Magenta = { 1.f, 0.f, 1.f, 1.f };
+      glm::vec4 constexpr Cyan = { 0.f, 1.f, 1.f, 1.f };
+      glm::vec4 constexpr Yellow = { 1.f, 1.f, 0.f, 1.f };
+
+      glm::vec4 constexpr White = { 1.f, 1.f, 1.f, 1.f };
+      glm::vec4 constexpr Gray = { 0.5f, 0.5f, 0.5f, 1.f };
+      glm::vec4 constexpr Black = { 0.f, 0.f, 0.f, 1.f };
+
+      glm::vec4 constexpr Orange = { 1.f, 0.6f, 0.f, 1.f };
+      glm::vec4 constexpr Brown = { 0.95f, 0.55f, 0.1f, 1.f };
+      glm::vec4 constexpr Beige = { 0.98f, 0.98f, 0.88f, 1.f };
+      glm::vec4 constexpr Silver = { 0.75f, 0.75f, 0.75f, 1.f };
+      glm::vec4 constexpr Gold = { 1.f, 0.85f, 0.f, 1.f };
+   }
 }
 
-#endif // ZG_MOUSEMOVEDEVENT_HPP
+#endif // ZG_COLORS_HPP

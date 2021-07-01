@@ -69,13 +69,13 @@ namespace zg
 
       ClientAPI client = ClientAPI::OpenGL;
       ContextAPI api = ContextAPI::Native;
-      int versionMajor = 3;
-      int versionMinor = 3;
+      int versionMajor = 1;
+      int versionMinor = 0;
       Robustness robustness = Robustness::None;
       ReleaseBehavior releaseBehavior = ReleaseBehavior::Any;
       bool forwardCompatibility = false;
       bool debugContext = false;
-      Profile openglProfile = Profile::Core;
+      Profile openglProfile = Profile::Any;
 
       int samples = 0;
       bool stereo = false;

@@ -32,15 +32,13 @@ namespace zg
 {
    struct WindowSettings
    {
-      uint32_t clearMask = GL_COLOR_BUFFER_BIT;
-
-      bool resisable = false;
+      bool resisable = true;
       bool visible = true;
       bool decorated = true;
       bool focused = true;
       bool floating = false;
       bool maximised = false;
-      bool centerCursor = false;
+      bool centerCursor = true;
       bool focusOnShow = true;
       bool scaleToMonitor = false;
       int refreshRate = -1;

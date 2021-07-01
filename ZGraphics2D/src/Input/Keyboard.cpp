@@ -12,8 +12,11 @@ namespace zg
    Keyboard::Keyboard(Window* window)
       : m_window(window)
    {
-      glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
-      glfwSetCharCallback(m_window->getHandle(), &Keyboard::TextInput);
+      if (m_window)
+      {
+         glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
+         glfwSetCharCallback(m_window->getHandle(), &Keyboard::TextInput);
+      }
    }
 
    void Keyboard::setWindow(Window* window) noexcept
@@ -23,7 +26,7 @@ namespace zg
          glfwSetKeyCallback(m_window->getHandle(), nullptr);
          glfwSetCharCallback(m_window->getHandle(), nullptr);
       }
-      
+
       if (m_window = window, m_window) // Set new window
       {
          glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
