@@ -1,6 +1,6 @@
 /**
- * WindowEvent.hpp
- * 28 Jun 2021
+ * WindowRefreshedEvent.hpp
+ * 7 Jul 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,28 +23,22 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_WINDOWEVENT_HPP
-#define ZG_WINDOWEVENT_HPP
+#ifndef ZG_WINDOWREFRESHEDEVENT_HPP
+#define ZG_WINDOWREFRESHEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
+
 namespace zg
 {
-   class Window;
-
-   class ZE_API WindowEvent : public ze::Event
+   class WindowRefreshedEvent : public WindowEvent
    {
    public:
-      Window* getWindow() noexcept;
-      Window const* getWindow() const noexcept;
+      std::string toString() const override;
 
-      explicit WindowEvent(Window* window);
-
-   protected:
-      Window* m_window;
+      WindowRefreshedEvent(Window* window);
    };
 }
 
-#include "WindowEvent.inl"
-
-#endif // ZG_WINDOWEVENT_HPP
+#endif // ZG_WINDOWREFRESHEDEVENT_HPP

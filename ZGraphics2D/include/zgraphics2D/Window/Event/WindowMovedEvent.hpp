@@ -1,6 +1,6 @@
 /**
- * WindowEvent.hpp
- * 28 Jun 2021
+ * WindowMovedEvent.hpp
+ * 7 Jul 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,28 +23,31 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_WINDOWEVENT_HPP
-#define ZG_WINDOWEVENT_HPP
+#ifndef ZG_WINDOWMOVEDEVENT_HPP
+#define ZG_WINDOWMOVEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
+
 namespace zg
 {
-   class Window;
-
-   class ZE_API WindowEvent : public ze::Event
+   class WindowMovedEvent : public WindowEvent
    {
    public:
-      Window* getWindow() noexcept;
-      Window const* getWindow() const noexcept;
+      glm::ivec2 getPosition() const noexcept;
+      glm::ivec2 getOffset() const noexcept;
 
-      explicit WindowEvent(Window* window);
+      std::string toString() const override;
 
-   protected:
-      Window* m_window;
+      WindowMovedEvent(Window* window, glm::ivec2 newPos, glm::ivec2 oldPos);
+   
+   private:
+      glm::ivec2 const m_pos;
+      glm::ivec2 const m_offset;
    };
 }
 
-#include "WindowEvent.inl"
+#include "WindowMovedEvent.inl"
 
-#endif // ZG_WINDOWEVENT_HPP
+#endif // ZG_WINDOWMOVEDEVENT_HPP

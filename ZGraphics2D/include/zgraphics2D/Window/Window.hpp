@@ -32,6 +32,7 @@
 #include "zgraphics2D/Window/FrameBufferSettings.hpp"
 #include "zgraphics2D/Window/WindowSettings.hpp"
 #include "zgraphics2D/Common/Colors.hpp"
+#include "zgraphics2D/Window/Event/WindowResisedEvent.hpp"
 
 namespace zg
 {
@@ -97,6 +98,7 @@ namespace zg
 
       std::string m_title;
       glm::ivec2 m_size;
+      glm::ivec2 m_pos;
       glm::vec4 m_color;
       uint32_t m_clearMask;
    };

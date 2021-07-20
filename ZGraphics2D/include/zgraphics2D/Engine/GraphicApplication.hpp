@@ -1,6 +1,6 @@
 /**
- * WindowEvent.hpp
- * 28 Jun 2021
+ * GraphicApplication.hpp
+ * 1 Jul 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,28 +23,28 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_WINDOWEVENT_HPP
-#define ZG_WINDOWEVENT_HPP
+#ifndef ZG_GRAPHICAPPLICATION_HPP
+#define ZG_GRAPHICAPPLICATION_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Engine/GraphicsEngine.hpp"
+#include "zgraphics2D/Window/Event/WindowClosedEvent.hpp"
+
 namespace zg
 {
-   class Window;
-
-   class ZE_API WindowEvent : public ze::Event
+   class ZE_API GraphicApplication // TODO Reword with states
    {
    public:
-      Window* getWindow() noexcept;
-      Window const* getWindow() const noexcept;
+      virtual void close(WindowClosedEvent& event);
 
-      explicit WindowEvent(Window* window);
+      GraphicApplication(GraphicsEngine& engine);
 
    protected:
-      Window* m_window;
+      GraphicsEngine* m_engine;
+
+      ze::Subscriber<WindowClosedEvent> m_closeSubscriber;
    };
 }
 
-#include "WindowEvent.inl"
-
-#endif // ZG_WINDOWEVENT_HPP
+#endif // ZG_GRAPHICAPPLICATION_HPP

@@ -1,7 +1,11 @@
 #include "zgraphics2D/Window/Window.hpp"
 
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
+#include "zgraphics2D/Window/Event/WindowMovedEvent.hpp"
 #include "zgraphics2D/Window/Event/WindowClosedEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowResisedEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowRefreshedEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowFocusedEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
 
@@ -12,7 +16,7 @@ namespace zg
 
    Window::Window(std::string const& title, glm::ivec2 size, glm::ivec2 pos, glm::vec4 color, uint32_t clearMask,
                   WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer)
-      : m_handle(nullptr), m_title(title), m_size(size), m_color(color), m_clearMask(clearMask)
+      : m_handle(nullptr)
    {
       configure(window, context, framebuffer);
       make(title, size, pos, color, clearMask);
@@ -73,13 +77,8 @@ namespace zg
    {
       if (m_handle) return;
 
-      m_title = title;
-      m_size = size;
-      m_color = color;
-      m_clearMask = clearMask;
-
       // TODO Monitor
-      m_handle = glfwCreateWindow(m_size.x, m_size.y, m_title.c_str(), nullptr, nullptr);
+      m_handle = glfwCreateWindow(size.x, size.y, title.c_str(), nullptr, nullptr);
       if (!m_handle)
       {
          GFX_LOG_CRITICAL("Fail to create window !");
@@ -87,21 +86,6 @@ namespace zg
       }
 
       glfwMakeContextCurrent(m_handle);
-
-      if (pos == PositionCentered)
-      {
-         int x, y;
-         int w, h;
-         GLFWmonitor* monitor;
-         monitor = glfwGetPrimaryMonitor();
-         if (!monitor)
-            exit(-1); // TODO Error handling
-
-         glfwGetMonitorWorkarea(monitor, &x, &y, &w, &h);
-         setPosition(x + (w - m_size.x) / 2, y + (h - m_size.y) / 2);
-      }
-      else if (pos != PositionUndefined)
-         setPosition(pos);
 
       glfwSetWindowPosCallback(m_handle, &Window::Moved);
       glfwSetWindowSizeCallback(m_handle, &Window::Resised);
@@ -113,7 +97,14 @@ namespace zg
       glfwSetFramebufferSizeCallback(m_handle, &Window::FramebufferResised);
       glfwSetWindowContentScaleCallback(m_handle, &Window::Scaled);
 
+      setPosition(pos);
+
       glfwSetWindowUserPointer(m_handle, static_cast<void*>(this));
+
+      m_title = title;
+      m_size = size;
+      m_color = color;
+      m_clearMask = clearMask;
    }
 
    void Window::clear()
@@ -153,8 +144,7 @@ namespace zg
 
    void Window::setSize(int width, int height)
    {
-      m_size.x = width;
-      m_size.y = height;
+      m_size = { width, height };
       glfwSetWindowSize(m_handle, width, height);
    }
 
@@ -165,7 +155,23 @@ namespace zg
 
    void Window::setPosition(int x, int y)
    {
-      glfwSetWindowPos(m_handle, x, y);
+      if (x == PositionCentered.x || y == PositionCentered.y)
+      {
+         int x, y;
+         int w, h;
+         GLFWmonitor* monitor;
+         monitor = glfwGetPrimaryMonitor();
+         if (!monitor)
+            exit(-1); // TODO Error handling
+
+         glfwGetMonitorWorkarea(monitor, &x, &y, &w, &h);
+         setPosition(x == PositionCentered.x ? x + (w - m_size.x) / 2 : x,
+                     y == PositionCentered.y ? y + (h - m_size.y) / 2 : y);
+      }
+      else if (glm::ivec2(x, y) != PositionUndefined)
+         glfwSetWindowPos(m_handle, x, y);
+
+      m_pos = { x, y };
    }
 
    void Window::setPosition(glm::ivec2 pos)
@@ -195,12 +201,16 @@ namespace zg
 
    void Window::Moved(GLFWwindow* window, int x, int y)
    {
-      // TODO
+      Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+      ::ze::Core::GetApplication().useEventBusTo().pushEvent<WindowResisedEvent>(windowPtr, glm::ivec2(x, y), windowPtr->m_pos);
+      windowPtr->m_pos = { x, y };
    }
 
    void Window::Resised(GLFWwindow* window, int width, int height)
    {
-      // TODO
+      Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+      ::ze::Core::GetApplication().useEventBusTo().pushEvent<WindowResisedEvent>(windowPtr, glm::ivec2(width, height), windowPtr->m_size);
+      windowPtr->m_size = { width, height };
    }
 
    void Window::Closed(GLFWwindow* window)
@@ -210,12 +220,12 @@ namespace zg
 
    void Window::Refreshed(GLFWwindow* window)
    {
-      // TODO
+      PushWindowEvent<WindowRefreshedEvent>(window);
    }
 
    void Window::Focused(GLFWwindow* window, int focused)
    {
-      // TODO
+      PushWindowEvent<WindowFocusedEvent>(window, static_cast<bool>(focused));
    }
 
    void Window::Iconified(GLFWwindow* window, int iconified)

@@ -1,6 +1,6 @@
 /**
- * WindowEvent.hpp
- * 28 Jun 2021
+ * WindowResisedEvent.hpp
+ * 7 Jul 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,28 +23,28 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_WINDOWEVENT_HPP
-#define ZG_WINDOWEVENT_HPP
+#ifndef ZG_WINDOWRESISEDEVENT_HPP
+#define ZG_WINDOWRESISEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
+
 namespace zg
 {
-   class Window;
-
-   class ZE_API WindowEvent : public ze::Event
+   class WindowResisedEvent : public WindowEvent
    {
    public:
-      Window* getWindow() noexcept;
-      Window const* getWindow() const noexcept;
+      glm::ivec2 getSize() const noexcept;
 
-      explicit WindowEvent(Window* window);
+      std::string toString() const override;
 
-   protected:
-      Window* m_window;
+      WindowResisedEvent(Window* window, glm::ivec2 size);
+   private:
+      glm::ivec2 const m_size;
    };
 }
 
-#include "WindowEvent.inl"
+#include "WindowResisedEvent.inl"
 
-#endif // ZG_WINDOWEVENT_HPP
+#endif // ZG_WINDOWRESISEDEVENT_HPP
