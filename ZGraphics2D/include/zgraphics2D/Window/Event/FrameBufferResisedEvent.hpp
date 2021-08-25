@@ -1,9 +1,9 @@
 /**
- * GraphicApplication.hpp
- * 1 Jul 2021
- * Gaétan "The Aarnold" Jalin
+ * FrameBufferResisedEvent.hpp
+ * 23 Jul 2021
+ * GaÃ©tan "The Aarnold" Jalin
  *
- * Copyright (C) 2020-2021 Gaétan Jalin
+ * Copyright (C) 2020-2021 GaÃ©tan Jalin
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -23,28 +23,28 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_GRAPHICAPPLICATION_HPP
-#define ZG_GRAPHICAPPLICATION_HPP
+#ifndef ZG_FRAMEBUFFERRESISEDEVENT_HPP
+#define ZG_FRAMEBUFFERRESISEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Engine/GraphicsEngine.hpp"
-#include "zgraphics2D/Window/Event/WindowClosedEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
 
 namespace zg
 {
-   class ZE_API GraphicApplication // TODO Reword with states
+   class ZE_API FrameBufferResisedEvent : public WindowEvent
    {
    public:
-      virtual void close(WindowClosedEvent& event);
+      glm::ivec2 getSize() const noexcept;
 
-      GraphicApplication(GraphicsEngine& engine);
+      std::string toString() const override;
 
-   protected:
-      GraphicsEngine* m_engine;
-
-      ze::Subscriber<WindowClosedEvent> m_closeSubscriber;
+      FrameBufferResisedEvent(Window* window, int width, int height);
+   private:
+      glm::ivec2 m_size;
    };
 }
 
-#endif // ZG_GRAPHICAPPLICATION_HPP
+#include "FrameBufferResisedEvent.inl"
+
+#endif /* ZG_FRAMEBUFFERRESISEDEVENT_HPP */

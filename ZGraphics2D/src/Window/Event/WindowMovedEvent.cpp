@@ -3,7 +3,7 @@
 namespace zg
 {
    WindowMovedEvent::WindowMovedEvent(Window* window, glm::ivec2 newPos, glm::ivec2 oldPos)
-      : WindowEvent(window), m_pos(newPos), m_offset(glm::distance(newPos, oldPos)) {}
+      : WindowEvent(window), m_pos(newPos), m_offset(newPos - oldPos) {}
 
    std::string WindowMovedEvent::toString() const
    {

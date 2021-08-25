@@ -1,9 +1,9 @@
 /**
- * MouseScrolledEvent.hpp
- * 30 Jun 2021
- * Gaétan "The Aarnold" Jalin
+ * WindowScaledEvent.hpp
+ * 2021
+ * Ga√©tan "The Aarnold" Jalin
  *
- * Copyright (C) 2020-2021 Gaétan Jalin
+ * Copyright (C) 2020-2021 Ga√©tan Jalin
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -23,31 +23,29 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSESCROLLEDEVENT_HPP
-#define ZG_MOUSESCROLLEDEVENT_HPP
+#ifndef ZE_WINDOWSCALEDEVENT_HPP
+#define ZE_WINDOWSCALEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/Event/MouseEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
 
 namespace zg
 {
-   class ZE_API MouseScrolledEvent : public MouseEvent
+   class ZE_API WindowScaledEvent : public WindowEvent
    {
    public:
-      double getHorizontalOffset() const noexcept;
-      double getVerticalOffset() const noexcept;
+      glm::vec2 getScale() const noexcept;
 
       std::string toString() const override;
 
-      MouseScrolledEvent(Window* window, glm::ivec2 pos, double xoffset, double yoffset);
+      WindowScaledEvent(Window* window, float xscale, float yscale);
 
    private:
-      double m_xoffset;
-      double m_yoffset;
+      glm::vec2 m_scale;
    };
 }
 
-#include "MouseScrolledEvent.inl"
+#include "WindowScaledEvent.inl"
 
-#endif // ZG_MOUSESCROLLEDEVENT_HPP
+#endif /* ZE_WINDOWSCALEDEVENT_HPP */

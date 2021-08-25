@@ -1,9 +1,9 @@
 /**
  * WindowRefreshedEvent.hpp
  * 7 Jul 2021
- * Gaétan "The Aarnold" Jalin
+ * GaŽtan "The Aarnold" Jalin
  *
- * Copyright (C) 2020-2021 Gaétan Jalin
+ * Copyright (C) 2020-2021 GaŽtan Jalin
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class WindowRefreshedEvent : public WindowEvent
+   class ZE_API WindowRefreshedEvent : public WindowEvent
    {
    public:
       std::string toString() const override;

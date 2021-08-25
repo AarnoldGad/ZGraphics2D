@@ -2,11 +2,11 @@ workspace "ZucchiniGraphics"
    architecture "x86_64"
    configurations { "Debug", "Release" }
    
-   includedirs {
+   sysincludedirs {
       "ZucchiniEngine/ZEngine/include"
    }
    
-   libdirs {
+   syslibdirs {
       "ZucchiniEngine/ZEngine/lib"
    }
    

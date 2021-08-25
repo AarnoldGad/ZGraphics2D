@@ -46,7 +46,7 @@ namespace zg
          glfwSetDropCallback(m_window->getHandle(), nullptr);
       }
 
-      if (m_window = window, m_window) // Set new window
+      if (void(m_window = window), m_window) // Set new window
       {
          glfwSetCursorPosCallback(m_window->getHandle(), &Mouse::CursorPositionInput);
          glfwSetCursorEnterCallback(m_window->getHandle(), &Mouse::CursorEnterInput);
@@ -61,7 +61,7 @@ namespace zg
    void Mouse::CursorPositionInput(GLFWwindow* window, double x, double y)
    {
       Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
-      ze::Core::GetApplication().useEventBusTo().pushEvent<MouseMovedEvent>(windowPtr, glm::ivec2(glm::floor(x), glm::floor(y)));
+      ze::Core::UseEventBus().pushEvent<MouseMovedEvent>(windowPtr, glm::ivec2(glm::floor(x), glm::floor(y)));
    }
 
    void Mouse::CursorEnterInput(GLFWwindow* window, int entered)

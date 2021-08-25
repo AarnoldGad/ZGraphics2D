@@ -1,9 +1,9 @@
 /**
  * Window.hpp
  * 24 Jun 2021
- * Gaétan "The Aarnold" Jalin
+ * GaŽtan "The Aarnold" Jalin
  *
- * Copyright (C) 2020-2021 Gaétan Jalin
+ * Copyright (C) 2020-2021 GaŽtan Jalin
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -40,7 +40,7 @@ namespace zg
    {
    public:
       static glm::ivec2 constexpr PositionCentered = { 0xFF000000, 0xFF000000 };
-      static glm::ivec2 constexpr PositionUndefined = { 0xEE000000, 0xEE000000 };
+      static glm::ivec2 constexpr PositionUndefined = { 0xFE000000, 0xFE000000 };
 
       void configure(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer);
       void make(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined, glm::vec4 color = Colors::Beige, uint32_t clearMask = GL_COLOR_BUFFER_BIT);

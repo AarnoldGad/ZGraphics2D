@@ -21,23 +21,19 @@ project "ZGraphics2D"
    }
 
    includedirs {
-      "include",
+      "include"
+   }
+
+   sysincludedirs {
       "deps/glad/include",
       "deps/glfw/include",
       "deps/glm"
    }
-   
-   links {
-      "glfw3dll.lib"
-   }
 
    filter "system:windows"
-      architecture "x86"
       systemversion "latest"
-      
-   filter { "system:windows", "architecture:x86" }
-      libdirs {
-         "deps/glfw/lib/Win32"
+      links {
+         "glfw3dll.lib"
       }
 
    filter { "system:windows", "architecture:x86_64" }
@@ -46,11 +42,11 @@ project "ZGraphics2D"
       }
 
    filter "system:linux"
-      includedirs {
+      sysincludedirs {
          "/usr/include",
          "/usr/local/include"
       }
-      libdirs {
+      syslibdirs {
          "/usr/lib",
          "/usr/local/lib",
          "deps/glfw/lib/Unix"
@@ -58,6 +54,26 @@ project "ZGraphics2D"
       links {
          "dl",
          "pthread"
+      }
+
+   filter { "system:macosx" }
+      buildoptions {
+         "-Wall", "-Wextra", "-Wold-style-cast", "-Woverloaded-virtual", "-Wfloat-equal", "-Wwrite-strings",
+         "-Wpointer-arith", "-Wcast-qual", "-Wcast-align", "-Wconversion", "-Wshadow", "-Wredundant-decls",
+         "-Wdouble-promotion", "-Winit-self", "-Wswitch-default", "-Wswitch-enum", "-Wundef", "-Winline",
+         "-fPIC", "-m64", "-fexceptions", "-pedantic"
+      }
+      linkoptions {
+         "-fPIC", "-shared", "-lc", "-m64"
+      }
+      libdirs {
+         "deps/glfw/lib/macOS"
+      }
+      links {
+         "glfw3",
+         "Cocoa.framework",
+         "OpenGL.framework",
+         "IOKit.framework"
       }
 
    filter { "action:gmake*", "toolset:gcc" }

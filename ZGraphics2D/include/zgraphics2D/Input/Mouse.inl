@@ -55,7 +55,7 @@ void zg::Mouse::PushMouseEvent(GLFWwindow* window, Args&&... args)
    glfwGetCursorPos(window, &x, &y);
    glm::ivec2 pos = { glm::floor(x), glm::floor(y) };
 
-   ze::Core::GetApplication().useEventBusTo().pushEvent<EventType>(windowPtr, pos, std::forward<Args>(args)...);
+   ze::Core::UseEventBus().pushEvent<EventType>(windowPtr, pos, std::forward<Args>(args)...);
 }
 
 #include <zengine/Memory/NewOff.hpp>

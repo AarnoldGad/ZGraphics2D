@@ -6,6 +6,10 @@
 #include "zgraphics2D/Window/Event/WindowResisedEvent.hpp"
 #include "zgraphics2D/Window/Event/WindowRefreshedEvent.hpp"
 #include "zgraphics2D/Window/Event/WindowFocusedEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowIconifiedEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowMaximisedEvent.hpp"
+#include "zgraphics2D/Window/Event/FrameBufferResisedEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowScaledEvent.hpp"
 
 #include <zengine/Memory/New.hpp>
 
@@ -97,9 +101,9 @@ namespace zg
       glfwSetFramebufferSizeCallback(m_handle, &Window::FramebufferResised);
       glfwSetWindowContentScaleCallback(m_handle, &Window::Scaled);
 
-      setPosition(pos);
-
       glfwSetWindowUserPointer(m_handle, static_cast<void*>(this));
+
+      setPosition(pos);
 
       m_title = title;
       m_size = size;
@@ -157,16 +161,16 @@ namespace zg
    {
       if (x == PositionCentered.x || y == PositionCentered.y)
       {
-         int x, y;
-         int w, h;
+         int monx, mony;
+         int monw, monh;
          GLFWmonitor* monitor;
          monitor = glfwGetPrimaryMonitor();
          if (!monitor)
             exit(-1); // TODO Error handling
 
-         glfwGetMonitorWorkarea(monitor, &x, &y, &w, &h);
-         setPosition(x == PositionCentered.x ? x + (w - m_size.x) / 2 : x,
-                     y == PositionCentered.y ? y + (h - m_size.y) / 2 : y);
+         glfwGetMonitorWorkarea(monitor, &monx, &mony, &monw, &monh);
+         setPosition(x == PositionCentered.x ? monx + (monw - m_size.x) / 2 : x,
+                     y == PositionCentered.y ? mony + (monh - m_size.y) / 2 : y);
       }
       else if (glm::ivec2(x, y) != PositionUndefined)
          glfwSetWindowPos(m_handle, x, y);
@@ -202,14 +206,14 @@ namespace zg
    void Window::Moved(GLFWwindow* window, int x, int y)
    {
       Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
-      ::ze::Core::GetApplication().useEventBusTo().pushEvent<WindowResisedEvent>(windowPtr, glm::ivec2(x, y), windowPtr->m_pos);
+      ::ze::Core::UseEventBus().pushEvent<WindowMovedEvent>(windowPtr, glm::ivec2(x, y), windowPtr->m_pos);
       windowPtr->m_pos = { x, y };
    }
 
    void Window::Resised(GLFWwindow* window, int width, int height)
    {
       Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
-      ::ze::Core::GetApplication().useEventBusTo().pushEvent<WindowResisedEvent>(windowPtr, glm::ivec2(width, height), windowPtr->m_size);
+      ::ze::Core::UseEventBus().pushEvent<WindowResisedEvent>(windowPtr, glm::ivec2(width, height), windowPtr->m_size);
       windowPtr->m_size = { width, height };
    }
 
@@ -230,22 +234,22 @@ namespace zg
 
    void Window::Iconified(GLFWwindow* window, int iconified)
    {
-      // TODO
+      PushWindowEvent<WindowIconifiedEvent>(window, iconified);
    }
 
    void Window::Maximised(GLFWwindow* window, int maximised)
    {
-      // TODO
+      PushWindowEvent<WindowMaximisedEvent>(window, maximised);
    }
 
    void Window::FramebufferResised(GLFWwindow* window, int width, int height)
    {
-      // TODO
+      PushWindowEvent<FrameBufferResisedEvent>(window, width, height);
    }
 
    void Window::Scaled(GLFWwindow* window, float xscale, float yscale)
    {
-      // TODO
+      PushWindowEvent<WindowScaledEvent>(window, xscale, yscale);
    }
 
    Window::~Window()

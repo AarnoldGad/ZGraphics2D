@@ -1,9 +1,9 @@
 /**
  * WindowResisedEvent.hpp
  * 7 Jul 2021
- * Gaétan "The Aarnold" Jalin
+ * GaŽtan "The Aarnold" Jalin
  *
- * Copyright (C) 2020-2021 Gaétan Jalin
+ * Copyright (C) 2020-2021 GaŽtan Jalin
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -32,16 +32,18 @@
 
 namespace zg
 {
-   class WindowResisedEvent : public WindowEvent
+   class ZE_API WindowResisedEvent : public WindowEvent
    {
    public:
       glm::ivec2 getSize() const noexcept;
+      glm::ivec2 getOffset() const noexcept;
 
       std::string toString() const override;
 
-      WindowResisedEvent(Window* window, glm::ivec2 size);
+      WindowResisedEvent(Window* window, glm::ivec2 newSize, glm::ivec2 oldSize);
    private:
       glm::ivec2 const m_size;
+      glm::ivec2 const m_offset;
    };
 }
 

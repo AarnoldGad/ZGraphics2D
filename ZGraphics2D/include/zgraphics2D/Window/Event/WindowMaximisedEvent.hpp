@@ -1,9 +1,9 @@
 /**
- * RenderEvent.hpp
- * 22 May 2021
- * Gaétan "The Aarnold" Jalin
+ * WindowMaximisedEvent.hpp
+ * 2021
+ * GaÃ©tan "The Aarnold" Jalin
  *
- * Copyright (C) 2020-2021 Gaétan Jalin
+ * Copyright (C) 2020-2021 GaÃ©tan Jalin
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -23,23 +23,29 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_RENDEREVENT_HPP
-#define ZG_RENDEREVENT_HPP
+#ifndef ZG_WINDOWMAXIMISEDEVENT_HPP
+#define ZG_WINDOWMAXIMISEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
+
 namespace zg
 {
-   class ZE_API RenderEvent : public ze::Event
+   class ZE_API WindowMaximisedEvent : public WindowEvent
    {
    public:
+      bool isMaximised() const noexcept;
+
       std::string toString() const override;
 
-      RenderEvent(/* RenderMaster */);
+      WindowMaximisedEvent(Window* window, int maximised);
 
    private:
-      // TODO RenderMaster
+      bool m_maximised;
    };
 }
 
-#endif // ZG_RENDEREVENT_HPP
+#include "WindowMaximisedEvent.inl"
+
+#endif /* ZG_WINDOWMAXIMISEDEVENT_HPP */

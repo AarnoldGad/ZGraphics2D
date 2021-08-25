@@ -94,12 +94,13 @@ namespace zg
       m_mouse.setWindow(&m_window);
    }
 
-   void GraphicsEngine::tick(ze::Time deltaTime)
+   void GraphicsEngine::tick([[maybe_unused]] ze::Time deltaTime)
    {
       m_window.clear();
 
       RenderEvent event;
-      ze::Core::GetApplication().useEventBusTo().fireEvent(event);
+
+      // TODO Fire event
 
       m_window.draw();
 

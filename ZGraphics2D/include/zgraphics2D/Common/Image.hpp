@@ -1,9 +1,9 @@
 /**
- * MouseScrolledEvent.hpp
- * 30 Jun 2021
- * Gaétan "The Aarnold" Jalin
+ * Image.hpp
+ * 2021
+ * Ga√©tan "The Aarnold" Jalin
  *
- * Copyright (C) 2020-2021 Gaétan Jalin
+ * Copyright (C) 2020-2021 Ga√©tan Jalin
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -23,31 +23,51 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSESCROLLEDEVENT_HPP
-#define ZG_MOUSESCROLLEDEVENT_HPP
+#ifndef ZG_IMAGE_HPP
+#define ZG_IMAGE_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/Event/MouseEvent.hpp"
-
 namespace zg
 {
-   class ZE_API MouseScrolledEvent : public MouseEvent
+   class ZE_API Image
    {
    public:
-      double getHorizontalOffset() const noexcept;
-      double getVerticalOffset() const noexcept;
+      enum class Format
+      {
+         Unknown = 0,
+         RGBA,
+         RGB
+      };
 
-      std::string toString() const override;
+      uint8_t const* getData() const noexcept;
+      uint8_t getData(glm::uvec2 coord) const noexcept;
+      Format getFormat() const noexcept;
+      glm::uvec2 getSize() const noexcept;
 
-      MouseScrolledEvent(Window* window, glm::ivec2 pos, double xoffset, double yoffset);
+      explicit operator bool() const noexcept;
+
+      bool load(std::filesystem::path const& file);
+      bool isLoaded() const noexcept;
+      void unload() noexcept;
+
+      Image(std::filesystem::path const& file);
+
+      Image(Image const& other);
+      Image(Image&&);
+      Image& operator=(Image const&);
+      Image& operator=(Image&&);
+
+      Image();
+      ~Image();
 
    private:
-      double m_xoffset;
-      double m_yoffset;
+      uint8_t* m_data;
+      Format m_format;
+      glm::uvec2 m_size;
    };
 }
 
-#include "MouseScrolledEvent.inl"
+#include "Image.inl"
 
-#endif // ZG_MOUSESCROLLEDEVENT_HPP
+#endif /* ZG_IMAGE_HPP */

@@ -1,9 +1,9 @@
 /**
  * WindowMovedEvent.hpp
  * 7 Jul 2021
- * Gaétan "The Aarnold" Jalin
+ * GaŽtan "The Aarnold" Jalin
  *
- * Copyright (C) 2020-2021 Gaétan Jalin
+ * Copyright (C) 2020-2021 GaŽtan Jalin
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class WindowMovedEvent : public WindowEvent
+   class ZE_API WindowMovedEvent : public WindowEvent
    {
    public:
       glm::ivec2 getPosition() const noexcept;

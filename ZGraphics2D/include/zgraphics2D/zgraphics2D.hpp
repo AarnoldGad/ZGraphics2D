@@ -22,8 +22,6 @@
 #include <zgraphics2D/Input/Joystick.hpp>
 
 // Events
-#include <zgraphics2D/Engine/Event/RenderEvent.hpp>
-
 #include <zgraphics2D/Input/Event/KeyEvent.hpp>
 #include <zgraphics2D/Input/Event/KeyPressedEvent.hpp>
 #include <zgraphics2D/Input/Event/KeyReleasedEvent.hpp>
@@ -39,6 +37,14 @@
 #include <zgraphics2D/Input/Event/MouseDroppedEvent.hpp>
 
 #include <zgraphics2D/Window/Event/WindowEvent.hpp>
+#include <zgraphics2D/Window/Event/FrameBufferResisedEvent.hpp>
 #include <zgraphics2D/Window/Event/WindowClosedEvent.hpp>
+#include <zgraphics2D/Window/Event/WindowFocusedEvent.hpp>
+#include <zgraphics2D/Window/Event/WindowIconifiedEvent.hpp>
+#include <zgraphics2D/Window/Event/WindowMaximisedEvent.hpp>
+#include <zgraphics2D/Window/Event/WindowMovedEvent.hpp>
+#include <zgraphics2D/Window/Event/WindowRefreshedEvent.hpp>
+#include <zgraphics2D/Window/Event/WindowResisedEvent.hpp>
+#include <zgraphics2D/Window/Event/WindowScaledEvent.hpp>
 
 #endif // ZGRAPHCIS_HPP

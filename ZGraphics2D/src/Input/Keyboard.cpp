@@ -27,7 +27,7 @@ namespace zg
          glfwSetCharCallback(m_window->getHandle(), nullptr);
       }
 
-      if (m_window = window, m_window) // Set new window
+      if (void(m_window = window), m_window) // Set new window
       {
          glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
          glfwSetCharCallback(m_window->getHandle(), &Keyboard::TextInput);

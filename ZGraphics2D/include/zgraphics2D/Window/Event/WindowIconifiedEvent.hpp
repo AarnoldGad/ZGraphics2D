@@ -1,9 +1,9 @@
 /**
- * MouseScrolledEvent.hpp
- * 30 Jun 2021
- * Gaétan "The Aarnold" Jalin
+ * WindowIconifiedEvent.hpp
+ * 23 Jul 2021
+ * Ga√©tan "The Aarnold" Jalin
  *
- * Copyright (C) 2020-2021 Gaétan Jalin
+ * Copyright (C) 2020-2021 Ga√©tan Jalin
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -23,31 +23,29 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSESCROLLEDEVENT_HPP
-#define ZG_MOUSESCROLLEDEVENT_HPP
+#ifndef ZG_WINDOWICONIFIEDEVENT_HPP
+#define ZG_WINDOWICONIFIEDEVENT_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
-#include "zgraphics2D/Input/Event/MouseEvent.hpp"
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
 
 namespace zg
 {
-   class ZE_API MouseScrolledEvent : public MouseEvent
+   class ZE_API WindowIconifiedEvent : public WindowEvent
    {
    public:
-      double getHorizontalOffset() const noexcept;
-      double getVerticalOffset() const noexcept;
+      bool isIconified() const noexcept;
 
       std::string toString() const override;
 
-      MouseScrolledEvent(Window* window, glm::ivec2 pos, double xoffset, double yoffset);
+      WindowIconifiedEvent(Window* window, int iconified);
 
    private:
-      double m_xoffset;
-      double m_yoffset;
+      bool m_iconified;
    };
 }
 
-#include "MouseScrolledEvent.inl"
+#include "WindowIconifiedEvent.inl"
 
-#endif // ZG_MOUSESCROLLEDEVENT_HPP
+#endif /* ZG_WINDOWICONIFIEDEVENT_HPP */

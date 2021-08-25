@@ -2,7 +2,7 @@
 
 inline ze::Logger& zg::GraphicsEngine::UseGraphicsLogger() noexcept
 {
-   zassert(s_gfxLogger.getWriter() != nullptr, "Graphics logger not initialised"); // TODO Error handling
+   ZE_ASSERT(s_gfxLogger.getWriter() != nullptr, "Graphics logger not initialised"); // TODO Error handling
    return s_gfxLogger;
 }
 

@@ -8,11 +8,11 @@
 #define ZG_VERSION_PATCH 6
 #define ZG_VERSION_REV 30
 
-#define GFX_LOG_INFO(...)     ::zg::GraphicsEngine::UseGraphicsLogger().logLine(::ze::Level::Info    , __VA_ARGS__)
-#define GFX_LOG_DEBUG(...)    ::zg::GraphicsEngine::UseGraphicsLogger().logLine(::ze::Level::Debug   , __VA_ARGS__)
-#define GFX_LOG_WARN(...)     ::zg::GraphicsEngine::UseGraphicsLogger().logLine(::ze::Level::Warn    , __VA_ARGS__)
-#define GFX_LOG_ERROR(...)    ::zg::GraphicsEngine::UseGraphicsLogger().logLine(::ze::Level::Error   , __VA_ARGS__)
-#define GFX_LOG_CRITICAL(...) ::zg::GraphicsEngine::UseGraphicsLogger().logLine(::ze::Level::Critical, __VA_ARGS__)
+#define GFX_LOG_INFO(...)     ::zg::GraphicsEngine::UseGraphicsLogger().info().logLine(__VA_ARGS__)
+#define GFX_LOG_DEBUG(...)    ::zg::GraphicsEngine::UseGraphicsLogger().debug().logLine(__VA_ARGS__)
+#define GFX_LOG_WARN(...)     ::zg::GraphicsEngine::UseGraphicsLogger().warn().logLine(__VA_ARGS__)
+#define GFX_LOG_ERROR(...)    ::zg::GraphicsEngine::UseGraphicsLogger().error().logLine(__VA_ARGS__)
+#define GFX_LOG_CRITICAL(...) ::zg::GraphicsEngine::UseGraphicsLogger().critical().logLine(__VA_ARGS__)
 
 #include <zengine/zengine.hpp>
 #include <glad/glad.h>
