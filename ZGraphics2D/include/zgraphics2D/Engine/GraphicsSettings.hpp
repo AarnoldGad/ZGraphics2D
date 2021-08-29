@@ -40,7 +40,7 @@ namespace zg
    {
       std::string title = "ZEngine";
       glm::ivec2 size = { 800, 600 };
-      glm::ivec2 pos = Window::PositionCentered;
+      glm::ivec2 pos = Window::PositionUndefined;
       glm::vec4 color = Colors::Beige;
       uint32_t clearMask = GL_COLOR_BUFFER_BIT;
 

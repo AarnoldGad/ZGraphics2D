@@ -1,19 +1,19 @@
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
 
-#include "zgraphics2D/Engine/Event/RenderEvent.hpp"
-
 #include <zengine/Memory/New.hpp>
-
-#define GRAPHICSWRITER_FILENAME "zgraphics.log"
-#define GRAPHICSLOGGER_NAME "ZGraphics"
 
 namespace zg
 {
    bool GraphicsEngine::s_isGLFWInitialised = false;
    bool GraphicsEngine::s_isOpenGLLoaded = false;
 
-   ze::DebugFileWriter GraphicsEngine::s_gfxWriter(GRAPHICSWRITER_FILENAME);
-   ze::Logger GraphicsEngine::s_gfxLogger(GRAPHICSLOGGER_NAME);
+   ze::Logger& GraphicsEngine::UseGraphicsLogger() noexcept
+   {
+      static ze::DebugFileWriter writer("zgraphics.log");
+      static ze::Logger logger("ZGraphics", &writer);
+
+      return logger;
+   }
 
    GraphicsEngine::GraphicsEngine(GraphicsSettings settings)
       : m_isInitialised(false), m_settings(settings) {}
@@ -25,9 +25,6 @@ namespace zg
          ZE_LOG_ERROR("Graphics Engine already initialised !");
          return;
       }
-
-      // Init logger
-      s_gfxLogger.setWriter(&s_gfxWriter);
 
       InitGLFW();
       openWindow();
@@ -44,7 +41,7 @@ namespace zg
 
       glfwSetErrorCallback(&GraphicsEngine::HandleGLFWError);
 
-      GFX_LOG_INFO("------ * Initialising GLFW");
+      GFX_LOG_INFO("------ * Initialising GLFW...");
       GFX_LOG_DEBUG("------    * GLFW Compiled against %d.%d.%d", GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
       int major, minor, rev;
       glfwGetVersion(&major, &minor, &rev);
@@ -53,7 +50,7 @@ namespace zg
       if (!glfwInit())
       {
          GFX_LOG_CRITICAL("------ * Fail to initialise GLFW !");
-         exit(-1); // TODO Error handling
+         ze::RaiseCritical(-1, "Fail to initialise GLFW !");
       }
 
       GFX_LOG_INFO("------ * GLFW initialised in %d us.", loadTime.elapsed().asMicroseconds());
@@ -71,9 +68,8 @@ namespace zg
 
       if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
       {
-         // TODO Error handling
          GFX_LOG_CRITICAL("------ * Fail to load OpenGL");
-         exit(-1);
+         ze::RaiseCritical(-1, "Fail to load OpenGL !");
       }
 
       GFX_LOG_DEBUG("------    * OpenGL   %s", glGetString(GL_VERSION));
@@ -90,6 +86,7 @@ namespace zg
    {
       m_window.configure(m_settings.window, m_settings.context, m_settings.framebuffer);
       m_window.make(m_settings.title, m_settings.size, m_settings.pos, m_settings.color, m_settings.clearMask);
+      
       m_keyboard.setWindow(&m_window);
       m_mouse.setWindow(&m_window);
    }
@@ -98,9 +95,7 @@ namespace zg
    {
       m_window.clear();
 
-      RenderEvent event;
-
-      // TODO Fire event
+      renderingSignal.emit();
 
       m_window.draw();
 
@@ -110,7 +105,9 @@ namespace zg
    void GraphicsEngine::terminate()
    {
       GFX_LOG_INFO("------ * Terminating GLFW");
-      glfwTerminate(); // TODO Program exit hook (same for memory manager)
+      glfwTerminate();
+      
+      m_isInitialised = false;
    }
 
    GraphicsEngine::~GraphicsEngine()

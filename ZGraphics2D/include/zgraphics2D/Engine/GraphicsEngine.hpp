@@ -53,6 +53,8 @@ namespace zg
       explicit GraphicsEngine(GraphicsSettings settings = {});
       ~GraphicsEngine();
 
+      ze::Signal<void ()> renderingSignal;
+      
    private:
       static void InitGLFW();
       static void LoadOpenGL();
@@ -60,17 +62,14 @@ namespace zg
 
       static void HandleGLFWError(int code, char const* description);
 
+   private:
       static bool s_isGLFWInitialised;
       static bool s_isOpenGLLoaded;
-
-      static ze::DebugFileWriter s_gfxWriter;
-      static ze::Logger s_gfxLogger;
 
       bool m_isInitialised;
       GraphicsSettings m_settings;
 
       Window m_window;
-      //TODO Joystick
       Keyboard m_keyboard;
       Mouse m_mouse;
    };
