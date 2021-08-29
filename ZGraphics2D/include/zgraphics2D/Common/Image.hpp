@@ -33,25 +33,26 @@ namespace zg
    class ZE_API Image
    {
    public:
-      enum class Format
+      enum class Format : unsigned
       {
          Unknown = 0,
-         RGBA,
-         RGB
+         Grey, //<- 1 8-bit channel
+         GreyAlpha, //<- 2 8-bit channels
+         RGB, //<- 3 8-bit channels
+         RGBA //<- 4 8-bit channels
       };
 
       uint8_t const* getData() const noexcept;
-      uint8_t getData(glm::uvec2 coord) const noexcept;
       Format getFormat() const noexcept;
       glm::uvec2 getSize() const noexcept;
 
       explicit operator bool() const noexcept;
 
-      bool load(std::filesystem::path const& file);
+      bool load(std::filesystem::path const& file, Format desiredFormat = Format::Unknown);
       bool isLoaded() const noexcept;
       void unload() noexcept;
 
-      Image(std::filesystem::path const& file);
+      explicit Image(std::filesystem::path const& file, Format desiredFormat = Format::Unknown);
 
       Image(Image const& other);
       Image(Image&&);

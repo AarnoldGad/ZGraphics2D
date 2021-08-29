@@ -17,7 +17,8 @@ project "ZGraphics2D"
       "include/**.hpp",
       "include/**.inl",
       "deps/glad/src/glad.c",
-      "deps/glm/glm/detail/glm.cpp"
+      "deps/glm/glm/detail/glm.cpp",
+      "deps/stb/src/stb_image.c"
    }
 
    includedirs {
@@ -27,7 +28,8 @@ project "ZGraphics2D"
    sysincludedirs {
       "deps/glad/include",
       "deps/glfw/include",
-      "deps/glm"
+      "deps/glm",
+      "deps/stb/include"
    }
 
    filter "system:windows"

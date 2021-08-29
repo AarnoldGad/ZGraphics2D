@@ -19,5 +19,6 @@
 #define GLFW_DLL
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <stb_image/stb_image.h>
 
 #endif // ZG_MACROS_HPP

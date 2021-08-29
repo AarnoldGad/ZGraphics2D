@@ -28,10 +28,11 @@
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include "zgraphics2D/Common/Colors.hpp"
+#include "zgraphics2D/Common/Image.hpp"
 #include "zgraphics2D/Window/ContextSettings.hpp"
 #include "zgraphics2D/Window/FrameBufferSettings.hpp"
 #include "zgraphics2D/Window/WindowSettings.hpp"
-#include "zgraphics2D/Common/Colors.hpp"
 #include "zgraphics2D/Window/Event/WindowResisedEvent.hpp"
 
 namespace zg
@@ -47,7 +48,7 @@ namespace zg
 
       std::string getTitle() const noexcept;
       glm::ivec2 getSize() const noexcept;
-      //? getIcon() const noexcept;
+      Image const& getIcon() const noexcept;
       glm::ivec2 getPosition() const noexcept;
       float getOpacity() const noexcept;
       bool isVisible() const noexcept;
@@ -65,7 +66,7 @@ namespace zg
       void setTitle(std::string const& title);
       void setSize(int width, int height);
       void setSize(glm::ivec2 size);
-      //void setIcon(?); // TODO Images
+      void setIcon(Image const& icon);
       void setPosition(int x, int y);
       void setPosition(glm::ivec2 pos);
       void setOpacity(float opacity);

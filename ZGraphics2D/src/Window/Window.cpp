@@ -86,7 +86,7 @@ namespace zg
       if (!m_handle)
       {
          GFX_LOG_CRITICAL("Fail to create window !");
-         exit(-1); // TODO Error handling
+         ze::RaiseCritical(-1, "Fail to create window !");
       }
 
       glfwMakeContextCurrent(m_handle);
@@ -103,18 +103,17 @@ namespace zg
 
       glfwSetWindowUserPointer(m_handle, static_cast<void*>(this));
 
-      setPosition(pos);
-
       m_title = title;
       m_size = size;
       m_color = color;
       m_clearMask = clearMask;
+
+      setPosition(pos);
    }
 
    void Window::clear()
    {
-      if (glfwGetCurrentContext() != getHandle())
-         glfwMakeContextCurrent(m_handle);
+      glfwMakeContextCurrent(m_handle);
 
       glClearColor(m_color.r, m_color.g, m_color.b, m_color.a);
       glClear(m_clearMask);

@@ -9,6 +9,7 @@
 
 // Common
 #include <zgraphics2D/Common/Colors.hpp>
+#include <zgraphics2D/Common/Image.hpp>
 
 // Rendering
 #include <zgraphics2D/Window/Window.hpp>
