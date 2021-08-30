@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API MouseButtonReleasedEvent : public MouseButtonEvent
+   class ZG_API MouseButtonReleasedEvent : public MouseButtonEvent
    {
    public:
       std::string toString() const override;

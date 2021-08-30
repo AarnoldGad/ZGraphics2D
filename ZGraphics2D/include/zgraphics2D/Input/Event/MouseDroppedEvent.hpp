@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API MouseDroppedEvent : public MouseEvent
+   class ZG_API MouseDroppedEvent : public MouseEvent
    {
    public:
       std::vector<std::filesystem::path> const& getPaths() const noexcept;

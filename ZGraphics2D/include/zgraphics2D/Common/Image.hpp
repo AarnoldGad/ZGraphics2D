@@ -30,7 +30,7 @@
 
 namespace zg
 {
-   class ZE_API Image
+   class ZG_API Image
    {
    public:
       enum class Format : unsigned

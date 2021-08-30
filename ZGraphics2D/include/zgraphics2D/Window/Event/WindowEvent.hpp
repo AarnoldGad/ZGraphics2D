@@ -32,7 +32,7 @@ namespace zg
 {
    class Window;
 
-   class ZE_API WindowEvent : public ze::Event
+   class ZG_API WindowEvent : public ze::Event
    {
    public:
       Window* getWindow() noexcept;

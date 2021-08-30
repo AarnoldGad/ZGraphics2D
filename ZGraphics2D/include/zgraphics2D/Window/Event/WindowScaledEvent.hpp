@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API WindowScaledEvent : public WindowEvent
+   class ZG_API WindowScaledEvent : public WindowEvent
    {
    public:
       glm::vec2 getScale() const noexcept;

@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API MouseEnteredEvent : public MouseEvent
+   class ZG_API MouseEnteredEvent : public MouseEvent
    {
    public:
       bool hasEntered() const noexcept;

@@ -30,7 +30,7 @@
 
 namespace zg
 {
-   class ZE_API Joystick
+   class ZG_API Joystick
    {
    public:
       // TODO

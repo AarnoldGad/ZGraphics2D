@@ -33,7 +33,7 @@
 
 namespace zg
 {
-   class ZE_API MouseEvent : public ze::Event
+   class ZG_API MouseEvent : public ze::Event
    {
    public:
       Window* getWindow() noexcept;

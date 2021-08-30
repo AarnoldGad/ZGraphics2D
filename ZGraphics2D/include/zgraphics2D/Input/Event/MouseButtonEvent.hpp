@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API MouseButtonEvent : public MouseEvent
+   class ZG_API MouseButtonEvent : public MouseEvent
    {
    public:
       enum class Action

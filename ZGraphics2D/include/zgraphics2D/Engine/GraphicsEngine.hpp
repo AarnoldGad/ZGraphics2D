@@ -35,7 +35,7 @@
 
 namespace zg
 {
-   class ZE_API GraphicsEngine : public ze::Engine
+   class ZG_API GraphicsEngine : public ze::Engine
    {
    public:
       static ze::Logger& UseGraphicsLogger() noexcept;

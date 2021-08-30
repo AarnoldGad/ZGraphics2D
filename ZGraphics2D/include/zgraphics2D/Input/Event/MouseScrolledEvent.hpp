@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API MouseScrolledEvent : public MouseEvent
+   class ZG_API MouseScrolledEvent : public MouseEvent
    {
    public:
       double getHorizontalOffset() const noexcept;

@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API WindowResisedEvent : public WindowEvent
+   class ZG_API WindowResisedEvent : public WindowEvent
    {
    public:
       glm::ivec2 getSize() const noexcept;

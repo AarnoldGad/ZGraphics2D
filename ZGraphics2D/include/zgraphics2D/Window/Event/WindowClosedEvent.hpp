@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API WindowClosedEvent : public WindowEvent
+   class ZG_API WindowClosedEvent : public WindowEvent
    {
    public:
       WindowClosedEvent(Window* window);

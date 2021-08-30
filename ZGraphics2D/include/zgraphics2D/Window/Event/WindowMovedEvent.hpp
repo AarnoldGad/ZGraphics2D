@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API WindowMovedEvent : public WindowEvent
+   class ZG_API WindowMovedEvent : public WindowEvent
    {
    public:
       glm::ivec2 getPosition() const noexcept;

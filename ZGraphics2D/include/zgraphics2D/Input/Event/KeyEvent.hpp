@@ -33,7 +33,7 @@
 
 namespace zg
 {
-   class ZE_API KeyEvent : public ze::Event
+   class ZG_API KeyEvent : public ze::Event
    {
    public:
       enum class Action

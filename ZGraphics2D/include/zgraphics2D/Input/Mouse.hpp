@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API Mouse
+   class ZG_API Mouse
    {
    public:
       enum class Button : int

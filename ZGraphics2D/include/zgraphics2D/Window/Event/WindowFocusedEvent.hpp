@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API WindowFocusedEvent : public WindowEvent
+   class ZG_API WindowFocusedEvent : public WindowEvent
    {
    public:
       bool isFocused() const noexcept;

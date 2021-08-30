@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API WindowIconifiedEvent : public WindowEvent
+   class ZG_API WindowIconifiedEvent : public WindowEvent
    {
    public:
       bool isIconified() const noexcept;

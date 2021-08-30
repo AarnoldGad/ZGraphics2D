@@ -37,7 +37,7 @@
 
 namespace zg
 {
-   class ZE_API Window
+   class ZG_API Window
    {
    public:
       static glm::ivec2 constexpr PositionCentered = { 0xFF000000, 0xFF000000 };

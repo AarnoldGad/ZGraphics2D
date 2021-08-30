@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API WindowMaximisedEvent : public WindowEvent
+   class ZG_API WindowMaximisedEvent : public WindowEvent
    {
    public:
       bool isMaximised() const noexcept;

@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API KeyReleasedEvent : public KeyEvent
+   class ZG_API KeyReleasedEvent : public KeyEvent
    {
    public:
       std::string toString() const override;

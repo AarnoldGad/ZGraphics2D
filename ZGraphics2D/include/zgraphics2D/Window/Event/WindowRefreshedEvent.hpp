@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API WindowRefreshedEvent : public WindowEvent
+   class ZG_API WindowRefreshedEvent : public WindowEvent
    {
    public:
       std::string toString() const override;

@@ -32,7 +32,7 @@
 
 namespace zg
 {
-   class ZE_API Keyboard
+   class ZG_API Keyboard
    {
    public:
       enum class Key : int
