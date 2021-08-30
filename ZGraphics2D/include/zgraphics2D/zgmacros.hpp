@@ -2,6 +2,7 @@
 #define ZG_MACROS_HPP
 
 #include <zengine/zemacros.hpp>
+#include <zgraphics2D/zgplatform.hpp>
 
 #define ZG_VERSION_MAJOR 0
 #define ZG_VERSION_MINOR 21
@@ -16,7 +17,6 @@
 
 #include <zengine/zengine.hpp>
 #include <glad/glad.h>
-#define GLFW_DLL
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <stb_image/stb_image.h>

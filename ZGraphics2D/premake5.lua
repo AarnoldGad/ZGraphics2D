@@ -1,10 +1,9 @@
 project "ZGraphics2D"
-   kind "SharedLib"
    language "C++"
    cppdialect "C++17"
 
    targetname("zgraphics2D")
-   
+
    filter "configurations:Debug"
       targetsuffix "-d"
    filter {}
@@ -27,38 +26,37 @@ project "ZGraphics2D"
 
    sysincludedirs {
       "deps/glad/include",
-      "deps/glfw/include",
+      "deps/glfw/glfw/include",
       "deps/glm",
       "deps/stb/include"
    }
 
-   filter "system:windows"
-      systemversion "latest"
-      links {
-         "glfw3dll.lib"
-      }
+   links {
+      "glfw3"
+   }
 
-   filter { "system:windows", "architecture:x86_64" }
-      libdirs {
-         "deps/glfw/lib/Win64"
-      }
+   filter "system:windows"
+      kind "StaticLib"
+      systemversion "latest"
+      staticruntime "on"
 
    filter "system:linux"
+      kind "SharedLib"
       sysincludedirs {
          "/usr/include",
          "/usr/local/include"
       }
       syslibdirs {
          "/usr/lib",
-         "/usr/local/lib",
-         "deps/glfw/lib/Unix"
+         "/usr/local/lib"
       }
       links {
          "dl",
          "pthread"
       }
 
-   filter { "system:macosx" }
+   filter "system:macosx"
+      kind "SharedLib"
       buildoptions {
          "-Wall", "-Wextra", "-Wold-style-cast", "-Woverloaded-virtual", "-Wfloat-equal", "-Wwrite-strings",
          "-Wpointer-arith", "-Wcast-qual", "-Wcast-align", "-Wconversion", "-Wshadow", "-Wredundant-decls",
@@ -68,11 +66,7 @@ project "ZGraphics2D"
       linkoptions {
          "-fPIC", "-shared", "-lc", "-m64"
       }
-      libdirs {
-         "deps/glfw/lib/macOS"
-      }
       links {
-         "glfw3",
          "Cocoa.framework",
          "OpenGL.framework",
          "IOKit.framework"
