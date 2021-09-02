@@ -8,7 +8,7 @@ project "glfw3"
    files {
 		"glfw/include/GLFW/glfw3.h",
 		"glfw/include/GLFW/glfw3native.h",
-      "glfw/src/glfw_config.h",
+    		"glfw/src/glfw_config.h",
 		"glfw/src/context.c",
 		"glfw/src/init.c",
 		"glfw/src/input.c",
@@ -66,15 +66,15 @@ project "glfw3"
       pic "on"
       staticruntime "on"
       files {
-         "glfw/cocoa_init.m",
-         "glfw/cocoa_joystick.m",
-         "glfw/cocoa_monitor.m",
-         "glfw/cocoa_window.m",
-         "glfw/cocoa_time.c",
-         "glfw/posix_thread.c",
-         "glfw/nsgl_context.m",
-         "glfw/egl_context.c",
-         "glfw/osmesa_context.c"
+         "glfw/src/cocoa_init.m",
+         "glfw/src/cocoa_joystick.m",
+         "glfw/src/cocoa_monitor.m",
+         "glfw/src/cocoa_window.m",
+         "glfw/src/cocoa_time.c",
+         "glfw/src/posix_thread.c",
+         "glfw/src/nsgl_context.m",
+         "glfw/src/egl_context.c",
+         "glfw/src/osmesa_context.c"
       }
       defines {
          "_GLFW_COCOA"
