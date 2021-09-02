@@ -156,6 +156,16 @@ namespace zg
       setSize(size.x, size.y);
    }
 
+   void Window::setIcon(Image const& icon)
+   {
+      if (icon.getFormat() == Image::Format::RGBA && icon)
+      {
+         // TODO Remove const cast
+         GLFWimage const img{ icon.getSize().x, icon.getSize().y, const_cast<unsigned char*>(icon.getData()) };
+         glfwSetWindowIcon(m_handle, 1, &img);
+      }
+   }
+
    void Window::setPosition(int x, int y)
    {
       if (x == PositionCentered.x || y == PositionCentered.y)

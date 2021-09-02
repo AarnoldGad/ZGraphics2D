@@ -65,7 +65,7 @@ namespace zg
       stbi_set_flip_vertically_on_load(true);
 
       int width, height, numberOfChannels;
-      uint8_t* data = stbi_load(file.c_str(), &width, &height, &numberOfChannels, static_cast<int>(desiredFormat));
+      uint8_t* data = stbi_load(file.string().c_str(), &width, &height, &numberOfChannels, static_cast<int>(desiredFormat));
       if (!data)
          return LOG_TRACE("Fail to load image at ", file.string(), " : ", stbi_failure_reason()), false;
 
