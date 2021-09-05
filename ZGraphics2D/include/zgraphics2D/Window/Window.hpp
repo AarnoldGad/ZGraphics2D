@@ -48,6 +48,7 @@ namespace zg
 
       std::string getTitle() const noexcept;
       glm::ivec2 getSize() const noexcept;
+      glm::ivec2 getFramebufferSize() const noexcept;
       Image const& getIcon() const noexcept;
       glm::ivec2 getPosition() const noexcept;
       float getOpacity() const noexcept;

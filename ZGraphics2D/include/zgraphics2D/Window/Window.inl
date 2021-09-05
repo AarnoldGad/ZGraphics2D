@@ -7,9 +7,16 @@ inline std::string zg::Window::getTitle() const noexcept
 
 inline glm::ivec2 zg::Window::getSize() const noexcept
 {
-   int w, h;
-   glfwGetWindowSize(m_handle, &w, &h);
-   return { w, h };
+   int width, height;
+   glfwGetWindowSize(m_handle, &width, &height);
+   return { width, height };
+}
+
+inline glm::ivec2 zg::Window::getFramebufferSize() const noexcept
+{
+   int width, height;
+   glfwGetFramebufferSize(m_handle, &width, &height);
+   return { width, height };
 }
 
 inline glm::ivec2 zg::Window::getPosition() const noexcept

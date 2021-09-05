@@ -29,6 +29,9 @@ namespace zg
       InitGLFW();
       openWindow();
       LoadOpenGL();
+      
+      glm::ivec2 fbsize = m_window.getFramebufferSize();
+      glViewport(0, 0, fbsize.x, fbsize.y);
 
       m_isInitialised = true;
    }

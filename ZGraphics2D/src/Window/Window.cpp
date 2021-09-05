@@ -161,7 +161,7 @@ namespace zg
       if (icon.getFormat() == Image::Format::RGBA && icon)
       {
          // TODO Remove const cast
-         GLFWimage const img{ icon.getSize().x, icon.getSize().y, const_cast<unsigned char*>(icon.getData()) };
+         GLFWimage const img{ static_cast<int>(icon.getSize().x), static_cast<int>(icon.getSize().y), const_cast<unsigned char*>(icon.getData()) };
          glfwSetWindowIcon(m_handle, 1, &img);
       }
    }
