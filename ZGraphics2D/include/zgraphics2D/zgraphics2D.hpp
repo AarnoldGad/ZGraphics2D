@@ -17,6 +17,9 @@
 #include <zgraphics2D/Window/FrameBufferSettings.hpp>
 #include <zgraphics2D/Window/WindowSettings.hpp>
 
+// Renderer
+#include <zgraphics2D/Renderer/Shader.hpp>
+
 // Input
 #include <zgraphics2D/Input/Keyboard.hpp>
 #include <zgraphics2D/Input/Mouse.hpp>
