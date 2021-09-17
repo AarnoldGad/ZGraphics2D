@@ -21,6 +21,7 @@
 #include <zgraphics2D/Renderer/Resources/Shader.hpp>
 #include <zgraphics2D/Renderer/Resources/Texture.hpp>
 
+#include <zgraphics2D/Renderer/Buffers/VertexArray.hpp>
 #include <zgraphics2D/Renderer/Buffers/VertexBuffer.hpp>
 #include <zgraphics2D/Renderer/Buffers/IndexBuffer.hpp>
 
