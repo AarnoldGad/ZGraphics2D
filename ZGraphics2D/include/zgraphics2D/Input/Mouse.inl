@@ -25,25 +25,30 @@ inline std::string zg::Mouse::GetButtonName(Button button) noexcept
    }
 }
 
-inline bool zg::Mouse::isButtonPressed(Button button) const noexcept
+inline bool zg::Mouse::IsButtonPressed(Button button) noexcept
 {
-   if (!m_window) return false;
+   if (!s_window) return false;
 
-   return static_cast<bool>(glfwGetMouseButton(m_window->getHandle(), static_cast<int>(button)));
+   return static_cast<bool>(glfwGetMouseButton(s_window->getHandle(), static_cast<int>(button)));
 }
 
-inline glm::ivec2 zg::Mouse::getPosition() const noexcept
+inline glm::ivec2 zg::Mouse::GetPosition() noexcept
 {
-   if (!m_window) return { 0,0 };
+   if (!s_window) return { 0,0 };
 
    double x, y;
-   glfwGetCursorPos(m_window->getHandle(), &x, &y);
+   glfwGetCursorPos(s_window->getHandle(), &x, &y);
    return { glm::floor(x), glm::floor(y) };
 }
 
-inline zg::Window* zg::Mouse::getWindow() noexcept
+inline void zg::Mouse::SetActiveWindow(Window* window) noexcept
 {
-   return m_window;
+   s_window = window;
+}
+
+inline zg::Window* zg::Mouse::GetWindow() noexcept
+{
+   return s_window;
 }
 
 template<typename EventType, typename... Args>

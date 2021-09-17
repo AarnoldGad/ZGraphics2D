@@ -11,16 +11,21 @@ inline int zg::Keyboard::GetKeyScancode(Key key) noexcept
    return glfwGetKeyScancode(static_cast<int>(key));
 }
 
-inline bool zg::Keyboard::isKeyPressed(Key key) noexcept
+inline bool zg::Keyboard::IsKeyPressed(Key key) noexcept
 {
-   if (!m_window) return false;
+   if (!s_window) return false;
 
-   return static_cast<bool>(glfwGetKey(m_window->getHandle(), static_cast<int>(key)));
+   return static_cast<bool>(glfwGetKey(s_window->getHandle(), static_cast<int>(key)));
 }
 
-inline zg::Window* zg::Keyboard::getWindow() noexcept
+inline void zg::Keyboard::SetActiveWindow(Window* window) noexcept
 {
-   return m_window;
+   s_window = window;
+}
+
+inline zg::Window* zg::Keyboard::GetWindow() noexcept
+{
+   return s_window;
 }
 
 template<typename EventType>

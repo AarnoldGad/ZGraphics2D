@@ -90,8 +90,8 @@ namespace zg
       m_window.configure(m_settings.window, m_settings.context, m_settings.framebuffer);
       m_window.make(m_settings.title, m_settings.size, m_settings.pos, m_settings.color, m_settings.clearMask);
       
-      m_keyboard.setWindow(&m_window);
-      m_mouse.setWindow(&m_window);
+      Keyboard::ConnectWindow(&m_window);
+      Mouse::ConnectWindow(&m_window);
    }
 
    void GraphicsEngine::tick([[maybe_unused]] ze::Time deltaTime)
@@ -102,6 +102,8 @@ namespace zg
 
       m_window.draw();
 
+      Keyboard::SetActiveWindow(&m_window);
+      Mouse::SetActiveWindow(&m_window);
       glfwPollEvents();
    }
 

@@ -11,50 +11,40 @@
 
 namespace zg
 {
-   Mouse::Mouse()
-      : m_window(nullptr) {}
+   Window* Mouse::s_window = nullptr;
 
-   Mouse::Mouse(Window& window)
-      : m_window(&window)
+   void Mouse::SetPosition(glm::ivec2 pos) noexcept
    {
-      glfwSetCursorPosCallback(m_window->getHandle(), &Mouse::CursorPositionInput);
-      glfwSetCursorEnterCallback(m_window->getHandle(), &Mouse::CursorEnterInput);
+      if (!s_window) return;
 
-      glfwSetMouseButtonCallback(m_window->getHandle(), &Mouse::MouseButtonInput);
-      glfwSetScrollCallback(m_window->getHandle(), &Mouse::MouseWheelInput);
-
-      glfwSetDropCallback(m_window->getHandle(), &Mouse::DropInput);
+      glfwSetCursorPos(s_window->getHandle(), static_cast<double>(pos.x), static_cast<double>(pos.y));
    }
 
-   void Mouse::setPosition(glm::ivec2 pos) noexcept
+   void Mouse::ConnectWindow(Window* window) noexcept
    {
-      if (!m_window) return;
-
-      glfwSetCursorPos(m_window->getHandle(), static_cast<double>(pos.x), static_cast<double>(pos.y));
-   }
-
-   void Mouse::setWindow(Window* window) noexcept
-   {
-      if (m_window) // Reset last window if one
+      if (window)
       {
-         glfwSetCursorPosCallback(m_window->getHandle(), nullptr);
-         glfwSetCursorEnterCallback(m_window->getHandle(), nullptr);
+         glfwSetCursorPosCallback(window->getHandle(), &Mouse::CursorPositionInput);
+         glfwSetCursorEnterCallback(window->getHandle(), &Mouse::CursorEnterInput);
 
-         glfwSetMouseButtonCallback(m_window->getHandle(), nullptr);
-         glfwSetScrollCallback(m_window->getHandle(), nullptr);
+         glfwSetMouseButtonCallback(window->getHandle(), &Mouse::MouseButtonInput);
+         glfwSetScrollCallback(window->getHandle(), &Mouse::MouseWheelInput);
 
-         glfwSetDropCallback(m_window->getHandle(), nullptr);
+         glfwSetDropCallback(window->getHandle(), &Mouse::DropInput);
       }
+   }
 
-      if (void(m_window = window), m_window) // Set new window
+   void Mouse::DisconnectWindow(Window* window) noexcept
+   {
+      if (window)
       {
-         glfwSetCursorPosCallback(m_window->getHandle(), &Mouse::CursorPositionInput);
-         glfwSetCursorEnterCallback(m_window->getHandle(), &Mouse::CursorEnterInput);
+         glfwSetCursorPosCallback(window->getHandle(), nullptr);
+         glfwSetCursorEnterCallback(window->getHandle(), nullptr);
 
-         glfwSetMouseButtonCallback(m_window->getHandle(), &Mouse::MouseButtonInput);
-         glfwSetScrollCallback(m_window->getHandle(), &Mouse::MouseWheelInput);
+         glfwSetMouseButtonCallback(window->getHandle(), nullptr);
+         glfwSetScrollCallback(window->getHandle(), nullptr);
 
-         glfwSetDropCallback(m_window->getHandle(), &Mouse::DropInput);
+         glfwSetDropCallback(window->getHandle(), nullptr);
       }
    }
 

@@ -9,46 +9,41 @@
 
 namespace zg
 {
-   Keyboard::Keyboard(Window* window)
-      : m_window(window)
+   Window* Keyboard::s_window = nullptr;
+
+   void Keyboard::ConnectWindow(Window* window) noexcept
    {
-      if (m_window)
+      if (window)
       {
-         glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
-         glfwSetCharCallback(m_window->getHandle(), &Keyboard::TextInput);
+         glfwSetKeyCallback(window->getHandle(), &Keyboard::KeyInput);
+         glfwSetCharCallback(window->getHandle(), &Keyboard::TextInput);
       }
    }
 
-   void Keyboard::setWindow(Window* window) noexcept
+   void Keyboard::DisconnectWindow(Window* window) noexcept
    {
-      if (m_window) // Reset last window if one
+      if (window)
       {
-         glfwSetKeyCallback(m_window->getHandle(), nullptr);
-         glfwSetCharCallback(m_window->getHandle(), nullptr);
-      }
-
-      if (void(m_window = window), m_window) // Set new window
-      {
-         glfwSetKeyCallback(m_window->getHandle(), &Keyboard::KeyInput);
-         glfwSetCharCallback(m_window->getHandle(), &Keyboard::TextInput);
+         glfwSetKeyCallback(window->getHandle(), nullptr);
+         glfwSetCharCallback(window->getHandle(), nullptr);
       }
    }
 
-   uint32_t Keyboard::getModifiers() noexcept
+   uint32_t Keyboard::GetModifiers() noexcept
    {
       uint32_t mods = 0;
 
-      mods |= (isKeyPressed(Key::LeftShift)   || isKeyPressed(Key::RightShift))
+      mods |= (IsKeyPressed(Key::LeftShift)   || IsKeyPressed(Key::RightShift))
                   ? static_cast<uint32_t>(Modifiers::Shift)    : 0;
-      mods |= (isKeyPressed(Key::LeftControl) || isKeyPressed(Key::RightControl))
+      mods |= (IsKeyPressed(Key::LeftControl) || IsKeyPressed(Key::RightControl))
                   ? static_cast<uint32_t>(Modifiers::Ctrl)     : 0;
-      mods |= (isKeyPressed(Key::LeftAlt)     || isKeyPressed(Key::RightAlt))
+      mods |= (IsKeyPressed(Key::LeftAlt)     || IsKeyPressed(Key::RightAlt))
                   ? static_cast<uint32_t>(Modifiers::Alt)      : 0;
-      mods |= (isKeyPressed(Key::LeftSuper)   || isKeyPressed(Key::RightSuper))
+      mods |= (IsKeyPressed(Key::LeftSuper)   || IsKeyPressed(Key::RightSuper))
                   ? static_cast<uint32_t>(Modifiers::Super)    : 0;
-      mods |= (isKeyPressed(Key::CapsLock))
+      mods |= (IsKeyPressed(Key::CapsLock))
                   ? static_cast<uint32_t>(Modifiers::CapsLock) : 0;
-      mods |= (isKeyPressed(Key::NumLock))
+      mods |= (IsKeyPressed(Key::NumLock))
                   ? static_cast<uint32_t>(Modifiers::NumLock)  : 0;
 
       return mods;

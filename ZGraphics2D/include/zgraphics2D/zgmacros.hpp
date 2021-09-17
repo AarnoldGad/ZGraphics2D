@@ -5,9 +5,12 @@
 #include <zgraphics2D/zgplatform.hpp>
 
 #define ZG_VERSION_MAJOR 0
-#define ZG_VERSION_MINOR 21
-#define ZG_VERSION_PATCH 6
-#define ZG_VERSION_REV 30
+#define ZG_VERSION_MINOR 3
+#define ZG_VERSION_REV 0
+#define ZG_VERSION_SPEC "pre"
+#define ZG_VERSION_MONTH 9
+#define ZG_VERSION_DAY 17
+#define ZG_VERSION_YEAR 21
 
 // TODO Log stacktrace
 #define GFX_LOG_INFO(...)     ::zg::GraphicsEngine::UseGraphicsLogger().info().logLine(__VA_ARGS__)

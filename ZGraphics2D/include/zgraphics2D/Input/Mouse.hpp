@@ -47,17 +47,17 @@ namespace zg
          X5 = GLFW_MOUSE_BUTTON_8
       };
 
+      static void ConnectWindow(Window* window) noexcept;
+      static void DisconnectWindow(Window* window) noexcept;
+      static void SetActiveWindow(Window* window) noexcept;
+
       static std::string GetButtonName(Button button) noexcept;
 
-      bool isButtonPressed(Button button) const noexcept;
-      glm::ivec2 getPosition() const noexcept;
-      Window* getWindow() noexcept;
+      static bool IsButtonPressed(Button button) noexcept;
+      static glm::ivec2 GetPosition() noexcept;
+      static Window* GetWindow() noexcept;
 
-      void setPosition(glm::ivec2 pos) noexcept;
-      void setWindow(Window* window) noexcept;
-
-      explicit Mouse(Window& window);
-      Mouse();
+      static void SetPosition(glm::ivec2 pos) noexcept;
 
    private:
       static void CursorPositionInput(GLFWwindow* window, double x, double y);
@@ -69,7 +69,7 @@ namespace zg
       template<typename EventType, typename... Args>
       static void PushMouseEvent(GLFWwindow* window, Args&&... args);
 
-      Window* m_window;
+      static Window* s_window;
    };
 }
 

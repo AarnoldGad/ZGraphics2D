@@ -170,16 +170,16 @@ namespace zg
          NumLock = GLFW_MOD_NUM_LOCK
       };
 
+      static void ConnectWindow(Window* window) noexcept;
+      static void DisconnectWindow(Window* window) noexcept;
+      static void SetActiveWindow(Window* window) noexcept;
+
       static std::string GetKeyName(Key key) noexcept;
       static int GetKeyScancode(Key key) noexcept;
 
-      bool isKeyPressed(Key key) noexcept;
-      uint32_t getModifiers() noexcept;
-      Window* getWindow() noexcept;
-
-      void setWindow(Window* window) noexcept;
-
-      explicit Keyboard(Window* window = nullptr);
+      static bool IsKeyPressed(Key key) noexcept;
+      static uint32_t GetModifiers() noexcept;
+      static Window* GetWindow() noexcept;
 
    private:
       static void KeyInput(GLFWwindow* window, int key, int scancode, int type, int modifiers);
@@ -188,7 +188,7 @@ namespace zg
       template<typename EventType>
       static void PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers);
 
-      Window* m_window;
+      static Window* s_window;
    };
 }
 
