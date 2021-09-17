@@ -9,6 +9,6 @@ namespace zg
 
    std::string MouseEnteredEvent::toString() const
    {
-      return hasEntered() ? "MouseEnteredEvent" : "MouseLeavedEvent";
+      return hasEntered() ? "Mouse entered" : "Mouse leaved";
    }
 }

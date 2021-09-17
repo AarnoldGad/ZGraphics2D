@@ -9,6 +9,11 @@ namespace zg
 
    std::string MouseButtonReleasedEvent::toString() const
    {
-      return "MouseButtonReleasedEvent";
+      std::stringstream debugStr;
+
+      debugStr << "Mouse button " << static_cast<int>(m_button)
+               << " released at (" << m_pos.x << ", " << m_pos.y << ")" << std::endl;
+
+      return debugStr.str();
    }
 }

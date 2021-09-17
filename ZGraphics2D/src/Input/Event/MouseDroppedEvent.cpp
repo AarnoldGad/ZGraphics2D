@@ -13,6 +13,13 @@ namespace zg
 
    std::string MouseDroppedEvent::toString() const
    {
-      return "MouseDroppedEvent";
+      std::stringstream debugStr;
+
+      debugStr << "Mouse dropped on (" << m_pos.x << ", " << m_pos.y << ")" << std::endl;
+
+      std::for_each(m_paths.begin(), m_paths.end(),
+                    [&debugStr](std::filesystem::path const& file) { debugStr << "\t" << file.string() << std::endl; });
+
+      return debugStr.str();
    }
 }

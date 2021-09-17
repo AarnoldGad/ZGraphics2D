@@ -9,6 +9,10 @@ namespace zg
 
    std::string KeyRepeatedEvent::toString() const
    {
-      return "KeyRepeatedEvent";
+      std::stringstream debugStr;
+
+      debugStr << "Key " << static_cast<int>(m_key) << " repeated" << std::endl;
+
+      return debugStr.str();
    }
 }

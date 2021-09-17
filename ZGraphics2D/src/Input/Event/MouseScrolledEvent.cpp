@@ -9,6 +9,10 @@ namespace zg
 
    std::string MouseScrolledEvent::toString() const
    {
-      return "MouseScrolledEvent";
+      std::stringstream debugStr;
+
+      debugStr << "Mouse scrolled by (" << m_xoffset << ", " << m_yoffset << ")" << std::endl;
+
+      return debugStr.str();
    }
 }

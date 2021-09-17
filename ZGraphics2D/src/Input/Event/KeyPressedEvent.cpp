@@ -9,6 +9,10 @@ namespace zg
 
    std::string KeyPressedEvent::toString() const
    {
-      return "KeyPressedEvent";
+      std::stringstream debugStr;
+
+      debugStr << "Key " << static_cast<int>(m_key) << " pressed" << std::endl;
+
+      return debugStr.str();
    }
 }

@@ -9,6 +9,10 @@ namespace zg
 
    std::string MouseMovedEvent::toString() const
    {
-      return "MouseMovedEvent";
+      std::stringstream debugStr;
+
+      debugStr << "Mouse moved to (" << m_pos.x << ", " << m_pos.y << ")" << std::endl;
+
+      return debugStr.str();
    }
 }

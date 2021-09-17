@@ -9,6 +9,10 @@ namespace zg
 
    std::string KeyReleasedEvent::toString() const
    {
-      return "KeyReleasedEvent";
+      std::stringstream debugStr;
+
+      debugStr << "Key " << static_cast<int>(m_key) << " released" << std::endl;
+
+      return debugStr.str();
    }
 }
