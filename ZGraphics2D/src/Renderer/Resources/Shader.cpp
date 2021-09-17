@@ -1,8 +1,16 @@
-#include "zgraphics2D/Renderer/Shader.hpp"
+#include "zgraphics2D/Renderer/Resources/Shader.hpp"
 
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
 
+#include <glm/gtc/type_ptr.hpp>
+
 #include <zengine/Memory/New.hpp>
+
+#define CHECK_PROGRAM \
+   int currentProgram; \
+   glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram); \
+   if (static_cast<unsigned int>(currentProgram) != m_program) \
+   GFX_LOG_DEBUG("Currently bound program is different !"); \
 
 namespace zg
 {
@@ -87,6 +95,89 @@ namespace zg
 
          resetProgram();
       }
+   }
+
+   void Shader::setBoolean(std::string const& var, bool value)
+   {
+      setInteger(var, value);
+   }
+
+   void Shader::setInteger(std::string const& var, int value)
+   {
+      CHECK_PROGRAM;
+      glUniform1i(getUniformLocation(var), value);
+   }
+
+   void Shader::setFloat(std::string const& var, float value)
+   {
+      CHECK_PROGRAM;
+      glUniform1f(getUniformLocation(var), value);
+   }
+
+   void Shader::setVector2(std::string const& var, glm::vec2 value)
+   {
+      CHECK_PROGRAM;
+      glUniform2f(getUniformLocation(var), value.x, value.y);
+   }
+
+   void Shader::setVector3(std::string const& var, glm::vec3 value)
+   {
+      CHECK_PROGRAM;
+      glUniform3f(getUniformLocation(var), value.x, value.y, value.z);
+   }
+
+   void Shader::setVector4(std::string const& var, glm::vec4 value)
+   {
+      CHECK_PROGRAM;
+      glUniform4f(getUniformLocation(var), value.x, value.y, value.z, value.w);
+   }
+
+   void Shader::setMatrix2(std::string const& var, glm::mat2 value, bool transpose)
+   {
+      CHECK_PROGRAM;
+      glUniformMatrix2fv(getUniformLocation(var), 1, transpose ? GL_TRUE : GL_FALSE, glm::value_ptr(value));
+   }
+
+   void Shader::setMatrix3(std::string const& var, glm::mat3 value, bool transpose)
+   {
+      CHECK_PROGRAM;
+      glUniformMatrix3fv(getUniformLocation(var), 1, transpose ? GL_TRUE : GL_FALSE, glm::value_ptr(value));
+   }
+
+   void Shader::setMatrix4(std::string const& var, glm::mat4 value, bool transpose)
+   {
+      CHECK_PROGRAM;
+      glUniformMatrix4fv(getUniformLocation(var), 1, transpose ? GL_TRUE : GL_FALSE, glm::value_ptr(value));
+   }
+
+   void Shader::setIntegerArray(std::string const& var, int const* value, size_t count)
+   {
+      CHECK_PROGRAM;
+      glUniform1iv(getUniformLocation(var), count, value);
+   }
+
+   void Shader::setFloatArray(std::string const& var, float const* value, size_t count)
+   {
+      CHECK_PROGRAM;
+      glUniform1fv(getUniformLocation(var), count, value);
+   }
+
+   int Shader::getUniformLocation(std::string const& var) const noexcept
+   {
+      auto uniform = m_uniforms.find(var);
+      if (uniform == m_uniforms.end())
+      {
+         int location = glGetUniformLocation(m_program, var.c_str());
+
+         if (location == -1)
+            GFX_LOG_ERROR("Fail to retrieve uniform location for %s !", var);
+         else
+            m_uniforms.insert(std::make_pair(var, location));
+
+         return location;
+      }
+
+      return uniform->second;
    }
 
    void Shader::resetProgram() noexcept

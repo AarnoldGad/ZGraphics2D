@@ -18,7 +18,8 @@
 #include <zgraphics2D/Window/WindowSettings.hpp>
 
 // Renderer
-#include <zgraphics2D/Renderer/Shader.hpp>
+#include <zgraphics2D/Renderer/Resources/Shader.hpp>
+#include <zgraphics2D/Renderer/Resources/Texture.hpp>
 
 // Input
 #include <zgraphics2D/Input/Keyboard.hpp>

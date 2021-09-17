@@ -23,15 +23,17 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZE_SHADER_HPP
-#define ZE_SHADER_HPP
+#ifndef ZG_SHADER_HPP
+#define ZG_SHADER_HPP
 
 #include "zgraphics2D/zgmacros.hpp"
 
+#include <string>
 #include <map>
 
 namespace zg
 {
+   // TODO Shader name for debugging
    class ZG_API Shader
    {
    public:
@@ -48,12 +50,14 @@ namespace zg
       void setVector3(std::string const& var, glm::vec3 value);
       void setVector4(std::string const& var, glm::vec4 value);
 
-      void setMatrix2(std::string const& var, glm::mat2 value);
-      void setMatrix3(std::string const& var, glm::mat3 value);
-      void setMatrix4(std::string const& var, glm::mat4 value);
+      void setMatrix2(std::string const& var, glm::mat2 value, bool transpose = false);
+      void setMatrix3(std::string const& var, glm::mat3 value, bool transpose = false);
+      void setMatrix4(std::string const& var, glm::mat4 value, bool transpose = false);
 
       void setIntegerArray(std::string const& var, int const* value, size_t count);
       void setFloatArray(std::string const& var, float const* value, size_t count);
+
+      //TODO uniform buffer blocks
 
       unsigned int getHandle() const noexcept;
 
@@ -65,14 +69,15 @@ namespace zg
    private:
       unsigned int addShader(unsigned int type, char const* source) noexcept;
       void linkProgram() noexcept;
+      int getUniformLocation(std::string const& var) const noexcept;
       void resetProgram() noexcept;
 
    private:
       unsigned int m_program;
-      std::map<std::string, int> m_uniforms;
+      mutable std::map<std::string, int> m_uniforms;
    };
 }
 
 #include "Shader.inl"
 
-#endif /* ZE_SHADER_HPP */
+#endif /* ZG_SHADER_HPP */
