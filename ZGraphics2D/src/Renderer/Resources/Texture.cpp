@@ -1,8 +1,8 @@
+#include "zgpch.hpp"
+
 #include "zgraphics2D/Renderer/Resources/Texture.hpp"
 
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
-
-#include <zengine/Memory/New.hpp>
 
 namespace zg
 {

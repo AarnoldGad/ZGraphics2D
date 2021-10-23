@@ -1,3 +1,5 @@
+#include "zgpch.hpp"
+
 #include "zgraphics2D/Input/Mouse.hpp"
 
 #include "zgraphics2D/Input/Event/MouseMovedEvent.hpp"
@@ -6,8 +8,6 @@
 #include "zgraphics2D/Input/Event/MouseButtonReleasedEvent.hpp"
 #include "zgraphics2D/Input/Event/MouseScrolledEvent.hpp"
 #include "zgraphics2D/Input/Event/MouseDroppedEvent.hpp"
-
-#include <zengine/Memory/New.hpp>
 
 namespace zg
 {

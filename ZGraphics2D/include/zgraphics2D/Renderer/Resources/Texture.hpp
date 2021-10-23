@@ -26,7 +26,7 @@
 #ifndef ZG_TEXTURE_HPP
 #define ZG_TEXTURE_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Common/Image.hpp"
 

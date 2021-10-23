@@ -1,3 +1,5 @@
+#include "zgpch.hpp"
+
 #include "zgraphics2D/Window/Window.hpp"
 
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
@@ -10,8 +12,6 @@
 #include "zgraphics2D/Window/Event/WindowMaximisedEvent.hpp"
 #include "zgraphics2D/Window/Event/FrameBufferResisedEvent.hpp"
 #include "zgraphics2D/Window/Event/WindowScaledEvent.hpp"
-
-#include <zengine/Memory/New.hpp>
 
 namespace zg
 {

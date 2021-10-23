@@ -26,7 +26,7 @@
 #ifndef ZE_VERTEXARRAY_HPP
 #define ZE_VERTEXARRAY_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Renderer/Buffers/VertexLayout.hpp"
 #include "zgraphics2D/Renderer/Buffers/IndexBuffer.hpp"

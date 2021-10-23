@@ -26,7 +26,7 @@
 #ifndef ZG_GRAPHICSSETTINGS_HPP
 #define ZG_GRAPHICSSETTINGS_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Window/ContextSettings.hpp"
 #include "zgraphics2D/Window/FrameBufferSettings.hpp"

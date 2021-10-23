@@ -1,5 +1,3 @@
-#include <zengine/Memory/New.hpp>
-
 inline zg::Window* zg::KeyEvent::getWindow() noexcept
 {
    return m_window;
@@ -24,5 +22,3 @@ inline uint32_t zg::KeyEvent::getModifiers() const noexcept
 {
    return m_modifiers;
 }
-
-#include <zengine/Memory/NewOff.hpp>

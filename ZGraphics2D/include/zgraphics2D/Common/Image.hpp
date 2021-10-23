@@ -26,7 +26,7 @@
 #ifndef ZG_IMAGE_HPP
 #define ZG_IMAGE_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 namespace zg
 {

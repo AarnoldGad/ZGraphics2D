@@ -26,7 +26,7 @@
 #ifndef ZG_MOUSEBUTTONRELEASEDEVENT_HPP
 #define ZG_MOUSEBUTTONRELEASEDEVENT_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Input/Event/MouseButtonEvent.hpp"
 

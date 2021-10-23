@@ -26,7 +26,7 @@
 #ifndef ZG_SHADER_HPP
 #define ZG_SHADER_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include <string>
 #include <map>

@@ -1,6 +1,6 @@
-#include "zgraphics2D/Common/Image.hpp"
+#include "zgpch.hpp"
 
-#include <zengine/Memory/New.hpp>
+#include "zgraphics2D/Common/Image.hpp"
 
 namespace zg
 {

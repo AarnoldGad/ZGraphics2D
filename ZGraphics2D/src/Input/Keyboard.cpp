@@ -1,11 +1,11 @@
+#include "zgpch.hpp"
+
 #include "zgraphics2D/Input/Keyboard.hpp"
 
 #include "zgraphics2D/Window/Window.hpp"
 #include "zgraphics2D/Input/Event/KeyPressedEvent.hpp"
 #include "zgraphics2D/Input/Event/KeyReleasedEvent.hpp"
 #include "zgraphics2D/Input/Event/KeyRepeatedEvent.hpp"
-
-#include <zengine/Memory/New.hpp>
 
 namespace zg
 {

@@ -1,3 +1,5 @@
+#include "zgpch.hpp"
+
 #include "zgraphics2D/Window/Event/WindowFocusedEvent.hpp"
 
 namespace zg

@@ -34,7 +34,6 @@
 
 #endif // Platform detection
 
-// DLL/SO specifiers
 #if __GNUC__ >= 4 || defined(__clang__)// GNU GCC __attribute__
 
    #define ZG_API __attribute__ ((__visibility__("default")))

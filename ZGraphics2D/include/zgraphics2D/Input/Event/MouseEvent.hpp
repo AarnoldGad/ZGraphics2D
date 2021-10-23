@@ -26,7 +26,7 @@
 #ifndef ZG_MOUSEEVENT_HPP
 #define ZG_MOUSEEVENT_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Window/Window.hpp"
 #include "zgraphics2D/Input/Mouse.hpp"

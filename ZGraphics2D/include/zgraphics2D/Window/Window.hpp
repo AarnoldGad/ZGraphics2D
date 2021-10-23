@@ -26,7 +26,7 @@
 #ifndef ZG_WINDOW_HPP
 #define ZG_WINDOW_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Common/Colors.hpp"
 #include "zgraphics2D/Common/Image.hpp"

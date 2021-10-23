@@ -1,5 +1,3 @@
-#include "zengine/Memory/New.hpp"
-
 inline std::string zg::Window::getTitle() const noexcept
 {
    return m_title;
@@ -62,5 +60,3 @@ inline void zg::Window::PushWindowEvent(GLFWwindow* window, Args&&... args)
    Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
    ::ze::Core::UseEventBus().pushEvent<EventType>(windowPtr, std::forward<Args>(args)...);
 }
-
-#include "zengine/Memory/NewOff.hpp"

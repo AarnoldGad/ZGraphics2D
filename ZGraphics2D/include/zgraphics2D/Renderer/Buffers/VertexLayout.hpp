@@ -26,7 +26,7 @@
 #ifndef ZG_VERTEXLAYOUT_HPP
 #define ZG_VERTEXLAYOUT_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include <vector>
 

@@ -1,6 +1,6 @@
-#include "zgraphics2D/Renderer/Buffers/Buffer.hpp"
+#include "zgpch.hpp"
 
-#include <zengine/Memory/New.hpp>
+#include "zgraphics2D/Renderer/Buffers/Buffer.hpp"
 
 namespace zg
 {

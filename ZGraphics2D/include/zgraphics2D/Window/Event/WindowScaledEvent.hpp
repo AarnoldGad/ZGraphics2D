@@ -26,7 +26,7 @@
 #ifndef ZE_WINDOWSCALEDEVENT_HPP
 #define ZE_WINDOWSCALEDEVENT_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Window/Event/WindowEvent.hpp"
 

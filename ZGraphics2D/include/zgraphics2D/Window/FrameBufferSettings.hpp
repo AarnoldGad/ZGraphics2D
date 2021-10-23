@@ -26,7 +26,7 @@
 #ifndef ZG_FRAMEBUFFERSETTINGS_HPP
 #define ZG_FRAMEBUFFERSETTINGS_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 namespace zg
 {

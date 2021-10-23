@@ -1,10 +1,10 @@
+#include "zgpch.hpp"
+
 #include "zgraphics2D/Renderer/Resources/Shader.hpp"
 
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
 
 #include <glm/gtc/type_ptr.hpp>
-
-#include <zengine/Memory/New.hpp>
 
 #define CHECK_PROGRAM \
    int currentProgram; \

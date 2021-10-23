@@ -1,5 +1,3 @@
-#include <zengine/Memory/New.hpp>
-
 inline std::vector<std::filesystem::path> const& zg::MouseDroppedEvent::getPaths() const noexcept
 {
    return m_paths;
@@ -14,5 +12,3 @@ inline size_t zg::MouseDroppedEvent::getPathCount() const noexcept
 {
    return m_paths.size();
 }
-
-#include <zengine/Memory/NewOff.hpp>

@@ -1,5 +1,3 @@
-#include <zengine/Memory/New.hpp>
-
 inline std::string zg::Mouse::GetButtonName(Button button) noexcept
 {
    switch (button)
@@ -62,5 +60,3 @@ void zg::Mouse::PushMouseEvent(GLFWwindow* window, Args&&... args)
 
    ze::Core::UseEventBus().pushEvent<EventType>(windowPtr, pos, std::forward<Args>(args)...);
 }
-
-#include <zengine/Memory/NewOff.hpp>

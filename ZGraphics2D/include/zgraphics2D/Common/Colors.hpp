@@ -26,7 +26,7 @@
 #ifndef ZG_COLORS_HPP
 #define ZG_COLORS_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 namespace zg
 {

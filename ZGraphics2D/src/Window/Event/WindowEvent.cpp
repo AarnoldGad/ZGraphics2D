@@ -1,6 +1,6 @@
-#include "zgraphics2D/Window/Event/WindowEvent.hpp"
+#include "zgpch.hpp"
 
-#include <zengine/Memory/New.hpp>
+#include "zgraphics2D/Window/Event/WindowEvent.hpp"
 
 namespace zg
 {

@@ -1,6 +1,6 @@
-#include "zgraphics2D/Renderer/Buffers/VertexBuffer.hpp"
+#include "zgpch.hpp"
 
-#include <zengine/Memory/New.hpp>
+#include "zgraphics2D/Renderer/Buffers/VertexBuffer.hpp"
 
 namespace zg
 {

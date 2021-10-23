@@ -26,7 +26,7 @@
 #ifndef ZG_INDEXBUFFER_HPP
 #define ZG_INDEXBUFFER_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Renderer/Buffers/Buffer.hpp"
 

@@ -26,7 +26,7 @@
 #ifndef ZG_WINDOWEVENT_HPP
 #define ZG_WINDOWEVENT_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 namespace zg
 {

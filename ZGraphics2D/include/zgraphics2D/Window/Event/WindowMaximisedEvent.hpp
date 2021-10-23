@@ -26,7 +26,7 @@
 #ifndef ZG_WINDOWMAXIMISEDEVENT_HPP
 #define ZG_WINDOWMAXIMISEDEVENT_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Window/Event/WindowEvent.hpp"
 

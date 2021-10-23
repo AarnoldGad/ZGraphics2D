@@ -17,6 +17,7 @@ project "ZGraphics2D"
       "src/**.cpp",
       "include/**.hpp",
       "include/**.inl",
+      "include/zgpch.cpp",
       "deps/glad/src/glad.c",
       "deps/glm/glm/detail/glm.cpp",
       "deps/stb/src/stb_image.c"
@@ -38,6 +39,9 @@ project "ZGraphics2D"
       "ZEngineAPI"
    }
 
+   pchsource "include/zgpch.cpp"
+   pchheader "zgpch.hpp"
+
    filter "system:windows"
       systemversion "latest"
 
@@ -48,6 +52,8 @@ project "ZGraphics2D"
       }
 
    filter "system:macosx"
+      pchsource ""
+      pchheader ""
       links {
          "Cocoa.framework",
          "OpenGL.framework",

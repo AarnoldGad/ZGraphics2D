@@ -1,5 +1,3 @@
-#include <zengine/Memory/New.hpp>
-
 inline uint8_t const* zg::Image::getData() const noexcept
 {
    return m_data;
@@ -24,5 +22,3 @@ inline bool zg::Image::isLoaded() const noexcept
 {
    return m_data;
 }
-
-#include <zengine/Memory/NewOff.hpp>

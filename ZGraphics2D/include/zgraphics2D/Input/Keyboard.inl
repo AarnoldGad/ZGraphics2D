@@ -1,5 +1,3 @@
-#include <zengine/Memory/New.hpp>
-
 inline std::string zg::Keyboard::GetKeyName(Key key) noexcept
 {
    char const* name = glfwGetKeyName(static_cast<int>(key), GetKeyScancode(key));
@@ -34,5 +32,3 @@ inline void zg::Keyboard::PushKeyEvent(GLFWwindow* window, int key, int scancode
    Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
    ::ze::Core::UseEventBus().pushEvent<EventType>(windowPtr, static_cast<Key>(key), scancode, static_cast<uint32_t>(modifiers));
 }
-
-#include <zengine/Memory/NewOff.hpp>

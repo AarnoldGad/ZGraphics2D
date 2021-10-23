@@ -26,7 +26,7 @@
 #ifndef ZG_WINDOWCLOSEDEVENT_HPP
 #define ZG_WINDOWCLOSEDEVENT_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Window/Event/WindowEvent.hpp"
 

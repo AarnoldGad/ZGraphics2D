@@ -1,15 +1,15 @@
 #ifndef ZG_MACROS_HPP
 #define ZG_MACROS_HPP
 
-#include <zengine/zemacros.hpp>
-#include <zgraphics2D/zgplatform.hpp>
+#include <zengine/defines.hpp>
+#include <zgraphics2D/platform.hpp>
 
 #define ZG_VERSION_MAJOR 0
 #define ZG_VERSION_MINOR 3
 #define ZG_VERSION_REV 0
 #define ZG_VERSION_SPEC "pre"
-#define ZG_VERSION_MONTH 9
-#define ZG_VERSION_DAY 17
+#define ZG_VERSION_DAY 23
+#define ZG_VERSION_MONTH 10
 #define ZG_VERSION_YEAR 21
 
 // TODO Log stacktrace

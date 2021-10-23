@@ -1,5 +1,3 @@
-#include <zengine/Memory/New.hpp>
-
 template<typename DataType>
 inline void zg::VertexLayout::add([[maybe_unused]] unsigned int count, [[maybe_unused]] bool normalised) noexcept
 {
@@ -75,5 +73,3 @@ inline unsigned int zg::VertexLayout::getStride() const noexcept
 {
    return m_totalSize;
 }
-
-#include <zengine/Memory/NewOff.hpp>

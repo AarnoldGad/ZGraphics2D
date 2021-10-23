@@ -1,3 +1,5 @@
+#include "zgpch.hpp"
+
 #include "zgraphics2D/Window/Event/WindowResisedEvent.hpp"
 
 namespace zg

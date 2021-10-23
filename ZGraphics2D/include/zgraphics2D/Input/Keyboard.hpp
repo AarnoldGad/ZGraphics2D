@@ -26,7 +26,7 @@
 #ifndef ZG_KEYBOARD_HPP
 #define ZG_KEYBOARD_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Window/Window.hpp"
 

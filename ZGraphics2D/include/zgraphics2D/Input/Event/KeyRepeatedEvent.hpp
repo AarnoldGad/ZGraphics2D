@@ -26,7 +26,7 @@
 #ifndef ZG_KEYREPEATEDEVENT_HPP
 #define ZG_KEYREPEATEDEVENT_HPP
 
-#include "zgraphics2D/zgmacros.hpp"
+#include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Input/Event/KeyEvent.hpp"
 
