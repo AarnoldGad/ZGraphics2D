@@ -23,6 +23,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/quaternion.hpp>
 #include <stb_image/stb_image.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 #endif // ZG_MACROS_HPP

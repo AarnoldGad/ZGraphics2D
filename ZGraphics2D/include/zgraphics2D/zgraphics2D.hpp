@@ -25,6 +25,14 @@
 #include <zgraphics2D/Renderer/Buffers/VertexBuffer.hpp>
 #include <zgraphics2D/Renderer/Buffers/IndexBuffer.hpp>
 
+#include <zgraphics2D/Renderer/Renderable.hpp>
+#include <zgraphics2D/Renderer/Renderer.hpp>
+
+#include <zgraphics2D/Renderer/Vertex.hpp>
+#include <zgraphics2D/Renderer/Vertex2D.hpp>
+#include <zgraphics2D/Renderer/Transform.hpp>
+#include <zgraphics2D/Renderer/Sprite.hpp>
+
 // Input
 #include <zgraphics2D/Input/Keyboard.hpp>
 #include <zgraphics2D/Input/Mouse.hpp>
