@@ -1,7 +1,7 @@
 template<typename DataType>
 inline void zg::VertexLayout::add([[maybe_unused]] unsigned int count, [[maybe_unused]] bool normalised) noexcept
 {
-   ZE_ASSERT(false, "Unknown data type !");
+   static_assert(false);
 }
 
 template<>
