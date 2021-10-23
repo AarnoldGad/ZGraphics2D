@@ -1,7 +1,7 @@
 template<typename DataType>
 inline void zg::VertexLayout::add([[maybe_unused]] unsigned int count, [[maybe_unused]] bool normalised) noexcept
 {
-   static_assert(false);
+   ZE_ASSERT(false, "Unknown vertex layout type");
 }
 
 template<>
