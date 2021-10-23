@@ -39,7 +39,13 @@ namespace zg
          Dynamic,
       };
 
-      void setData(ptrdiff_t size, void const* data);
+      void resize(size_t size);
+      void setData(size_t size, void const* data);
+      void setSubData(ptrdiff_t offset, size_t size, void const* data);
+
+      template<typename BufferType>
+      BufferType* map();
+      void unmap();
 
       unsigned int getHandle() const noexcept;
 

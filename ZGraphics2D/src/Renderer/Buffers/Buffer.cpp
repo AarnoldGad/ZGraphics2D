@@ -10,10 +10,22 @@ namespace zg
       glGenBuffers(1, &m_buffer);
    }
 
-   void Buffer::setData(ptrdiff_t size, void const* data)
+   void Buffer::resize(size_t size)
+   {
+      bind();
+      glBufferData(m_bufferType, size, nullptr, m_usage == Usage::Static ? GL_STATIC_DRAW : GL_DYNAMIC_DRAW);
+   }
+
+   void Buffer::setData(size_t size, void const* data)
    {
       bind();
       glBufferData(m_bufferType, size, data, m_usage == Usage::Static ? GL_STATIC_DRAW : GL_DYNAMIC_DRAW);
+   }
+
+   void Buffer::setSubData(ptrdiff_t offset, size_t size, void const* data)
+   {
+      bind();
+      glBufferSubData(m_bufferType, offset, size, data);
    }
 
    void Buffer::bind() const noexcept
@@ -24,6 +36,12 @@ namespace zg
    void Buffer::unbind() const noexcept
    {
       glBindBuffer(m_bufferType, 0);
+   }
+
+   void Buffer::unmap()
+   {
+      bind();
+      glUnmapBuffer(m_bufferType);
    }
 
    Buffer::~Buffer()
