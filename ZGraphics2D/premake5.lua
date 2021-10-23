@@ -1,6 +1,8 @@
 project "ZGraphics2D"
+   kind "StaticLib"
    language "C++"
-   cppdialect "C++17"
+   cppdialect "C++20"
+   staticruntime "off"
 
    targetname("zgraphics2D")
 
@@ -8,8 +10,8 @@ project "ZGraphics2D"
       targetsuffix "-d"
    filter {}
 
-   targetdir("%{prj.location}/lib")
-   objdir("%{prj.location}/bin/%{cfg.buildcfg}")
+   targetdir("%{prj.location}/../lib")
+   objdir("%{prj.location}/obj/%{cfg.buildcfg}")
 
    files {
       "src/**.cpp",
@@ -32,40 +34,20 @@ project "ZGraphics2D"
    }
 
    links {
-      "glfw3"
+      "glfw3",
+      "ZEngineAPI"
    }
 
    filter "system:windows"
-      kind "StaticLib"
       systemversion "latest"
-      staticruntime "on"
 
    filter "system:linux"
-      kind "SharedLib"
-      sysincludedirs {
-         "/usr/include",
-         "/usr/local/include"
-      }
-      syslibdirs {
-         "/usr/lib",
-         "/usr/local/lib"
-      }
       links {
          "dl",
          "pthread"
       }
 
    filter "system:macosx"
-      kind "SharedLib"
-      buildoptions {
-         "-Wall", "-Wextra", "-Wold-style-cast", "-Woverloaded-virtual", "-Wfloat-equal", "-Wwrite-strings",
-         "-Wpointer-arith", "-Wcast-qual", "-Wcast-align", "-Wconversion", "-Wshadow", "-Wredundant-decls",
-         "-Wdouble-promotion", "-Winit-self", "-Wswitch-default", "-Wswitch-enum", "-Wundef", "-Winline",
-         "-fPIC", "-m64", "-fexceptions", "-pedantic"
-      }
-      linkoptions {
-         "-fPIC", "-shared", "-lc", "-m64"
-      }
       links {
          "Cocoa.framework",
          "OpenGL.framework",
@@ -82,17 +64,3 @@ project "ZGraphics2D"
       linkoptions {
          "-fPIC", "-shared", "-lc", "-m64"
       }
-
-   filter "configurations:Debug"
-      links {
-         "zengine-d"
-      }
-      runtime "Debug"
-      symbols "On"
-
-   filter "configurations:Release"
-      links {
-         "zengine"
-      }
-      runtime "Release"
-      optimize "On"

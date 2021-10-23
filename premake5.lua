@@ -3,12 +3,32 @@ workspace "ZucchiniGraphics"
    configurations { "Debug", "Release" }
 
    sysincludedirs {
-      "ZucchiniEngine/ZEngine/include"
+      "ZucchiniEngine/ZEngineAPI/include"
    }
 
    syslibdirs {
-      "ZucchiniEngine/ZEngine/lib"
+      "ZucchiniEngine/lib"
    }
+
+   filter "system:linux or macosx"
+      sysincludedirs {
+         "/usr/include",
+         "/usr/local/include"
+      }
+      syslibdirs {
+         "/usr/lib",
+         "/usr/local/lib"
+      }
+
+   filter "configurations:Debug"
+      defines "_DEBUG"
+      runtime "Debug"
+      symbols "on"
+
+   filter "configurations:Release"
+      defines "NDEBUG"
+      runtime "Release"
+      optimize "on"
 
 include "ZGraphics2D/deps/glfw"
 include "ZGraphics2D"
