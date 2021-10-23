@@ -7,15 +7,15 @@ inline void zg::VertexLayout::add([[maybe_unused]] unsigned int count, [[maybe_u
 }
 
 template<>
-inline void zg::VertexLayout::add<byte>(unsigned int count, bool normalised) noexcept
+inline void zg::VertexLayout::add<char>(unsigned int count, bool normalised) noexcept
 {
-   add(GL_BYTE, sizeof(byte), count, normalised);
+   add(GL_BYTE, sizeof(char), count, normalised);
 }
 
 template<>
-inline void zg::VertexLayout::add<unsigned byte>(unsigned int count, bool normalised) noexcept
+inline void zg::VertexLayout::add<unsigned char>(unsigned int count, bool normalised) noexcept
 {
-   add(GL_UNSIGNED_BYTE, sizeof(unsigned byte), count, normalised);
+   add(GL_UNSIGNED_BYTE, sizeof(unsigned char), count, normalised);
 }
 
 template<>
