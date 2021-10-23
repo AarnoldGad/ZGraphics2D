@@ -3,7 +3,7 @@ workspace "ZucchiniGraphics"
    configurations { "Debug", "Release" }
 
    sysincludedirs {
-      "ZucchiniEngine/ZEngineAPI/include"
+      "ZucchiniEngine/ZEngine/include"
    }
 
    syslibdirs {
@@ -30,5 +30,6 @@ workspace "ZucchiniGraphics"
       runtime "Release"
       optimize "on"
 
+include "ZucchiniEngine/ZEngine"
 include "ZGraphics2D/deps/glfw"
 include "ZGraphics2D"

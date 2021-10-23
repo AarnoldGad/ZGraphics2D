@@ -36,7 +36,7 @@ project "ZGraphics2D"
 
    links {
       "glfw3",
-      "ZEngineAPI"
+      "ZEngine"
    }
 
    pchsource "include/zgpch.cpp"
