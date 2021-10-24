@@ -1,5 +1,4 @@
 project "ZGraphics2D"
-   kind "StaticLib"
    language "C++"
    cppdialect "C++20"
    staticruntime "off"
@@ -43,15 +42,18 @@ project "ZGraphics2D"
    pchheader "zgpch.hpp"
 
    filter "system:windows"
+      kind "StaticLib"
       systemversion "latest"
 
    filter "system:linux"
+      kind "SharedLib"
       links {
          "dl",
          "pthread"
       }
 
    filter "system:macosx"
+      kind "SharedLib"
       pchsource ""
       pchheader ""
       links {

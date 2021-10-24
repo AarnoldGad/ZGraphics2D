@@ -1,5 +1,5 @@
-#ifndef ZG_MACROS_HPP
-#define ZG_MACROS_HPP
+#ifndef ZG_DEFINES_HPP
+#define ZG_DEFINES_HPP
 
 #include <zengine/defines.hpp>
 #include <zgraphics2D/platform.hpp>
@@ -29,4 +29,4 @@
 //#include <ft2build.h>
 //#include FT_FREETYPE_H
 
-#endif // ZG_MACROS_HPP
+#endif // ZG_DEFINES_HPP
