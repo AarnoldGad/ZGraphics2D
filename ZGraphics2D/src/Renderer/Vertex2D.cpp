@@ -1,3 +1,5 @@
+#include "zgpch.hpp"
+
 #include "zgraphics2D/Renderer/Vertex2D.hpp"
 
 namespace zg

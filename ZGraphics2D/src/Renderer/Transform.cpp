@@ -1,3 +1,5 @@
+#include "zgpch.hpp"
+
 #include "zgraphics2D/Renderer/Transform.hpp"
 
 namespace zg
