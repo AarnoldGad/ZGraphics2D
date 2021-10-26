@@ -25,6 +25,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/scalar_multiplication.hpp>
 #include <stb_image/stb_image.h>
 //#include <ft2build.h>
 //#include FT_FREETYPE_H

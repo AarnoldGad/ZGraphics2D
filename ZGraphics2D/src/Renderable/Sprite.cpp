@@ -1,6 +1,6 @@
 #include "zgpch.hpp"
 
-#include "zgraphics2D/Renderer/Sprite.hpp"
+#include "zgraphics2D/Renderable/Sprite.hpp"
 
 namespace zg
 {

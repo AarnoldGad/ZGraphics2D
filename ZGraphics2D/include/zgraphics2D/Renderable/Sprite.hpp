@@ -23,13 +23,13 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZE_SPRITE_HPP
-#define ZE_SPRITE_HPP
+#ifndef ZG_SPRITE_HPP
+#define ZG_SPRITE_HPP
 
 #include "zgraphics2D/defines.hpp"
 
-#include "zgraphics2D/Renderer/Renderable.hpp"
-#include "zgraphics2D/Renderer/Transform.hpp"
+#include "zgraphics2D/Renderable/Renderable.hpp"
+#include "zgraphics2D/Renderer/Transforms/Transform.hpp"
 #include "zgraphics2D/Renderer/Vertex2D.hpp"
 #include "zgraphics2D/Renderer/Resources/Texture.hpp"
 
@@ -58,4 +58,4 @@ namespace zg
 
 #include "Sprite.inl"
 
-#endif /* ZE_SPRITE_HPP */
+#endif /* ZG_SPRITE_HPP */

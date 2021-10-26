@@ -4,6 +4,11 @@
 
 namespace zg
 {
+   void Image::FlipOnLoad(bool flip)
+   {
+      stbi_set_flip_vertically_on_load(flip);
+   }
+
    Image::Image()
       : m_data(nullptr), m_format(Format::Unknown), m_size(0, 0) {}
 
@@ -61,8 +66,6 @@ namespace zg
    {
       if (m_data)
          unload();
-
-      stbi_set_flip_vertically_on_load(true);
 
       int width, height, numberOfChannels;
       uint8_t* data = stbi_load(file.string().c_str(), &width, &height, &numberOfChannels, static_cast<int>(desiredFormat));

@@ -42,6 +42,8 @@ namespace zg
          RGBA //<- 4 8-bit channels
       };
 
+      static void FlipOnLoad(bool flip);
+
       uint8_t const* getData() const noexcept;
       Format getFormat() const noexcept;
       glm::uvec2 getSize() const noexcept;

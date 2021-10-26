@@ -6,11 +6,15 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-#define CHECK_PROGRAM \
-   int currentProgram; \
-   glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram); \
-   if (static_cast<unsigned int>(currentProgram) != m_program) \
-   GFX_LOG_DEBUG("Currently bound program is different !"); \
+#if defined(_DEBUG)
+   #define CHECK_PROGRAM \
+      int currentProgram; \
+      glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram); \
+      if (static_cast<unsigned int>(currentProgram) != m_program) \
+         GFX_LOG_DEBUG("Currently bound program is different !");
+#else
+   #define CHECK_PROGRAM
+#endif
 
 namespace zg
 {
@@ -153,13 +157,13 @@ namespace zg
    void Shader::setIntegerArray(std::string const& var, int const* value, size_t count)
    {
       CHECK_PROGRAM;
-      glUniform1iv(getUniformLocation(var), count, value);
+      glUniform1iv(getUniformLocation(var), static_cast<GLsizei>(count), value);
    }
 
    void Shader::setFloatArray(std::string const& var, float const* value, size_t count)
    {
       CHECK_PROGRAM;
-      glUniform1fv(getUniformLocation(var), count, value);
+      glUniform1fv(getUniformLocation(var), static_cast<GLsizei>(count), value);
    }
 
    int Shader::getUniformLocation(std::string const& var) const noexcept
@@ -170,7 +174,7 @@ namespace zg
          int location = glGetUniformLocation(m_program, var.c_str());
 
          if (location == -1)
-            GFX_LOG_ERROR("Fail to retrieve uniform location for %s !", var);
+            GFX_LOG_ERROR("Fail to retrieve uniform location for %s !", var.c_str());
          else
             m_uniforms.insert(std::make_pair(var, location));
 
