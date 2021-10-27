@@ -4,9 +4,9 @@
 
 namespace zg
 {
-   Camera::Camera(ze::Angle fov, float ratio, glm::vec3 pos, glm::vec3 target, glm::vec3 up)
+   Camera::Camera(ze::Angle fov, float ratio, glm::vec3 pos, glm::vec3 front, glm::vec3 up)
       : m_view(), m_projection(), m_viewDirty(true), m_projectionDirty(true),
-        m_target(target), m_up(up), m_pos(pos), m_fov(fov), m_ratio(ratio)
+        m_front(front), m_up(up), m_pos(pos), m_fov(fov), m_ratio(ratio)
    {
    
    }
@@ -15,7 +15,7 @@ namespace zg
    {
       if (m_viewDirty)
       {
-         m_view = glm::lookAt(m_pos, m_target, m_up);
+         m_view = glm::lookAt(m_pos, m_pos + m_front, m_up);
 
          m_viewDirty = false;
       }
@@ -27,7 +27,7 @@ namespace zg
    {
       if (m_projectionDirty)
       {
-         m_projection = glm::perspective(m_fov.asRadians(), m_ratio, 0.f, 100.f);
+         m_projection = glm::perspective(m_fov.asRadians(), m_ratio, 0.1f, 100.f);
 
          m_projectionDirty = false;
       }
@@ -35,9 +35,9 @@ namespace zg
       return m_projection;
    }
 
-   void Camera::setTarget(glm::vec3 target) noexcept
+   void Camera::setFront(glm::vec3 front) noexcept
    {
-      m_target = target;
+      m_front = front;
       m_viewDirty = true;
    }
 

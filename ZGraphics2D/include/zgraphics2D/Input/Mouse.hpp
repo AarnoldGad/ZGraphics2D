@@ -58,6 +58,7 @@ namespace zg
       static Window* GetWindow() noexcept;
 
       static void SetPosition(glm::ivec2 pos) noexcept;
+      static void SetCursorVisible(bool visible) noexcept;
 
    private:
       static void CursorPositionInput(GLFWwindow* window, double x, double y);

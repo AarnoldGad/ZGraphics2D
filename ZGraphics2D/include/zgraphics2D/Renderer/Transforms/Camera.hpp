@@ -36,7 +36,7 @@ namespace zg
       glm::mat4 const& getView() const;
       glm::mat4 const& getProjection() const;
 
-      void setTarget(glm::vec3 target) noexcept;
+      void setFront(glm::vec3 front) noexcept;
       void setUp(glm::vec3 up) noexcept;
       void setFieldOfView(ze::Angle fov) noexcept;
       void setAspectRatio(float ratio) noexcept;
@@ -44,13 +44,13 @@ namespace zg
 
       void move(glm::vec3 offset) noexcept;
 
-      glm::vec3 getTarget() const noexcept;
+      glm::vec3 getFront() const noexcept;
       glm::vec3 getUp() const noexcept;
       ze::Angle getFieldOfView() const noexcept;
       float getAspectRatio() const noexcept;
       glm::vec3 getPosition() const noexcept;
 
-      Camera(ze::Angle fov, float ratio, glm::vec3 pos = {}, glm::vec3 target = {}, glm::vec3 up = { 0.f, 1.f, 0.f });
+      Camera(ze::Angle fov, float ratio, glm::vec3 pos = {}, glm::vec3 front = { 0.f, 0.f, -1.f }, glm::vec3 up = { 0.f, 1.f, 0.f });
 
    private:
       mutable glm::mat4 m_view;
@@ -59,7 +59,7 @@ namespace zg
       mutable bool m_projectionDirty;
 
       glm::vec3 m_pos;
-      glm::vec3 m_target;
+      glm::vec3 m_front;
       glm::vec3 m_up;
 
       ze::Angle m_fov;

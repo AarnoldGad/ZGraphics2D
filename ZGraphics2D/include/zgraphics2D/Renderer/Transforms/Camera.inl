@@ -1,6 +1,6 @@
-inline glm::vec3 zg::Camera::getTarget() const noexcept
+inline glm::vec3 zg::Camera::getFront() const noexcept
 {
-   return m_target;
+   return m_front;
 }
 
 inline glm::vec3 zg::Camera::getUp() const noexcept

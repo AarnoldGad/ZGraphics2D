@@ -20,6 +20,13 @@ namespace zg
       glfwSetCursorPos(s_window->getHandle(), static_cast<double>(pos.x), static_cast<double>(pos.y));
    }
 
+   void Mouse::SetCursorVisible(bool visible) noexcept
+   {
+      if (!s_window) return;
+
+      glfwSetInputMode(s_window->getHandle(), GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
+   }
+
    void Mouse::ConnectWindow(Window* window) noexcept
    {
       if (window)

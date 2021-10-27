@@ -92,6 +92,9 @@ namespace zg
       
       Keyboard::ConnectWindow(&m_window);
       Mouse::ConnectWindow(&m_window);
+
+      Keyboard::SetActiveWindow(&m_window);
+      Mouse::SetActiveWindow(&m_window);
    }
 
    void GraphicsEngine::tick([[maybe_unused]] ze::Time deltaTime)
