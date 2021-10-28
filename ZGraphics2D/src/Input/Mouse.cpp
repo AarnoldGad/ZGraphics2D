@@ -20,11 +20,19 @@ namespace zg
       glfwSetCursorPos(s_window->getHandle(), static_cast<double>(pos.x), static_cast<double>(pos.y));
    }
 
-   void Mouse::SetCursorVisible(bool visible) noexcept
+   void Mouse::SetCursorMode(CursorMode mode) noexcept
    {
       if (!s_window) return;
 
-      glfwSetInputMode(s_window->getHandle(), GLFW_CURSOR, visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN);
+      glfwSetInputMode(s_window->getHandle(), GLFW_CURSOR, static_cast<int>(mode));
+   }
+
+   void Mouse::SetRawMouseMotion(bool raw) noexcept
+   {
+      if (!s_window) return;
+
+      if (glfwRawMouseMotionSupported())
+         glfwSetInputMode(s_window->getHandle(), GLFW_RAW_MOUSE_MOTION, raw ? GLFW_TRUE : GLFW_FALSE);
    }
 
    void Mouse::ConnectWindow(Window* window) noexcept
@@ -75,6 +83,8 @@ namespace zg
             break;
          case GLFW_PRESS:
             PushMouseEvent<MouseButtonPressedEvent>(window, static_cast<Button>(button), static_cast<uint32_t>(mods));
+            break;
+         default:
             break;
       }
    }

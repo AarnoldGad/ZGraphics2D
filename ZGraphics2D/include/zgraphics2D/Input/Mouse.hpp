@@ -47,6 +47,13 @@ namespace zg
          X5 = GLFW_MOUSE_BUTTON_8
       };
 
+      enum class CursorMode : int
+      {
+         Normal = GLFW_CURSOR_NORMAL,
+         Hidden = GLFW_CURSOR_HIDDEN,
+         Disabled = GLFW_CURSOR_DISABLED
+      };
+
       static void ConnectWindow(Window* window) noexcept;
       static void DisconnectWindow(Window* window) noexcept;
       static void SetActiveWindow(Window* window) noexcept;
@@ -58,7 +65,8 @@ namespace zg
       static Window* GetWindow() noexcept;
 
       static void SetPosition(glm::ivec2 pos) noexcept;
-      static void SetCursorVisible(bool visible) noexcept;
+      static void SetCursorMode(CursorMode mode) noexcept;
+      static void SetRawMouseMotion(bool raw) noexcept;
 
    private:
       static void CursorPositionInput(GLFWwindow* window, double x, double y);
