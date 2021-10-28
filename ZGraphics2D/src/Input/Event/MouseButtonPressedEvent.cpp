@@ -12,7 +12,7 @@ namespace zg
       std::stringstream debugStr;
 
       debugStr << "Mouse button " << static_cast<int>(m_button)
-      << " pressed at (" << m_pos.x << ", " << m_pos.y << ")" << std::endl;
+      << " pressed at (" << m_pos.x << ", " << m_pos.y << ")";
 
       return debugStr.str();
    }

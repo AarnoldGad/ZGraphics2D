@@ -11,7 +11,7 @@ namespace zg
    {
       std::stringstream debugStr;
 
-      debugStr << "Mouse moved to (" << m_pos.x << ", " << m_pos.y << ")" << std::endl;
+      debugStr << "Mouse moved to (" << m_pos.x << ", " << m_pos.y << ")";
 
       return debugStr.str();
    }

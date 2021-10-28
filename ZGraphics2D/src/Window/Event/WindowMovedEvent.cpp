@@ -12,7 +12,7 @@ namespace zg
       std::stringstream debugStr;
       debugStr << "Window 0x" << std::hex << m_window << std::dec
                << " moved from (" << (m_pos.x - m_offset.x) << "," << (m_pos.y - m_offset.y)
-               << ") to (" << m_pos.x << "," << m_pos.y << ")" << std::endl;
+               << ") to (" << m_pos.x << "," << m_pos.y << ")";
       return debugStr.str();
    }
 }

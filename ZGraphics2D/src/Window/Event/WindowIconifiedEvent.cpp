@@ -12,7 +12,7 @@ namespace zg
       std::stringstream debugStr;
 
       debugStr << "Window 0x" << std::hex << m_window << std::dec
-      << (isIconified() ? " iconified" : " restored") << std::endl;
+      << (isIconified() ? " iconified" : " restored");
 
       return debugStr.str();
    }

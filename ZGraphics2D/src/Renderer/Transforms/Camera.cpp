@@ -6,7 +6,7 @@ namespace zg
 {
    Camera::Camera(ze::Angle fov, float ratio, glm::vec3 pos, glm::vec3 front, glm::vec3 up)
       : m_view(), m_projection(), m_viewDirty(true), m_projectionDirty(true),
-        m_front(front), m_up(up), m_pos(pos), m_fov(fov), m_ratio(ratio)
+              m_pos(pos), m_front(front), m_up(up), m_fov(fov), m_ratio(ratio)
    {
    
    }

@@ -10,7 +10,7 @@ namespace zg
    std::string WindowFocusedEvent::toString() const
    {
       std::stringstream debugStr;
-      debugStr << "Window 0x" << std::hex << m_window << std::dec << (isFocused() ? " focused" : " unfocused") << std::endl;
+      debugStr << "Window 0x" << std::hex << m_window << std::dec << (isFocused() ? " focused" : " unfocused");
       return debugStr.str();
    }
 }

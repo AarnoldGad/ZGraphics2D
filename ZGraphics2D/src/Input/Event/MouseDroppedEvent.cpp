@@ -15,10 +15,10 @@ namespace zg
    {
       std::stringstream debugStr;
 
-      debugStr << "Mouse dropped on (" << m_pos.x << ", " << m_pos.y << ")" << std::endl;
+      debugStr << "Mouse dropped on (" << m_pos.x << ", " << m_pos.y << ")";
 
       std::for_each(m_paths.begin(), m_paths.end(),
-                    [&debugStr](std::filesystem::path const& file) { debugStr << "\t" << file.string() << std::endl; });
+                    [&debugStr](std::filesystem::path const& file) { debugStr << "\n\t" << file.string(); });
 
       return debugStr.str();
    }

@@ -67,4 +67,4 @@ namespace zg
 
 #include "View.inl"
 
-#endif ZG_VIEW_HPP
+#endif // ZG_VIEW_HPP

@@ -11,7 +11,7 @@ namespace zg
    {
       std::stringstream debugStr;
 
-      debugStr << "Key " << static_cast<int>(m_key) << " released" << std::endl;
+      debugStr << "Key " << static_cast<int>(m_key) << " released";
 
       return debugStr.str();
    }

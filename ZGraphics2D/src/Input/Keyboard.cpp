@@ -62,6 +62,8 @@ namespace zg
          case GLFW_REPEAT:
             PushKeyEvent<KeyRepeatedEvent>(window, key, scancode, modifiers);
             break;
+         default:
+            break;
       }
    }
 

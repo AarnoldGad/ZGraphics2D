@@ -12,7 +12,7 @@ namespace zg
       std::stringstream debugStr;
 
       debugStr << "Window 0x" << std::hex << m_window << std::dec
-      << (isMaximised() ? " maximised" : " minimised") << std::endl;
+      << (isMaximised() ? " maximised" : " minimised");
 
       return debugStr.str();
    }

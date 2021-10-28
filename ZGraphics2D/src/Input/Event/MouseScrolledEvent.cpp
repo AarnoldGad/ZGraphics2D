@@ -11,7 +11,7 @@ namespace zg
    {
       std::stringstream debugStr;
 
-      debugStr << "Mouse scrolled by (" << m_xoffset << ", " << m_yoffset << ")" << std::endl;
+      debugStr << "Mouse scrolled by (" << m_xoffset << ", " << m_yoffset << ")";
 
       return debugStr.str();
    }
