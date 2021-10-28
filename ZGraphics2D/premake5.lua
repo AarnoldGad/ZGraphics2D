@@ -49,7 +49,8 @@ project "ZGraphics2D"
       kind "SharedLib"
       links {
          "dl",
-         "pthread"
+         "pthread",
+          "X11"
       }
 
    filter "system:macosx"
@@ -67,7 +68,7 @@ project "ZGraphics2D"
          "-Wall", "-Wextra", "-Wold-style-cast", "-Woverloaded-virtual", "-Wfloat-equal", "-Wwrite-strings",
          "-Wpointer-arith", "-Wcast-qual", "-Wcast-align", "-Wconversion", "-Wshadow", "-Wredundant-decls",
          "-Wdouble-promotion", "-Winit-self", "-Wswitch-default", "-Wswitch-enum", "-Wundef", "-Wlogical-op", "-Winline",
-         "-fPIC", "-m64", "-fexceptions", "-pedantic"
+         "-fPIC", "-m64", "-fexceptions"
       }
       linkoptions {
          "-fPIC", "-shared", "-lc", "-m64"
