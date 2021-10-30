@@ -13,10 +13,10 @@ project "glfw3"
       "glfw/src/init.c",
       "glfw/src/input.c",
       "glfw/src/monitor.c",
+      "glfw/src/platform.c",
       "glfw/src/vulkan.c",
       "glfw/src/window.c",
-      "glfw/src/platform.c",
-      "glfw/src/null_joystick.c",
+      "glfw/src/egl_context.c",
       "glfw/src/null_init.c",
       "glfw/src/null_monitor.c",
       "glfw/src/null_window.c",
@@ -35,7 +35,6 @@ project "glfw3"
          "glfw/src/win32_thread.c",
          "glfw/src/win32_window.c",
          "glfw/src/wgl_context.c",
-         "glfw/src/egl_context.c",
          "glfw/src/osmesa_context.c"
       }
       defines {
@@ -63,7 +62,6 @@ project "glfw3"
          "glfw/src/posix_thread.c",
          "glfw/src/posix_module.c",
          "glfw/src/glx_context.c",
-         "glfw/src/egl_context.c",
          "glfw/src/osmesa_context.c",
          "glfw/src/linux_joystick.c"
       }
@@ -81,8 +79,8 @@ project "glfw3"
          "glfw/src/cocoa_window.m",
          "glfw/src/cocoa_time.c",
          "glfw/src/posix_thread.c",
+         "glfw/src/posix_module.c",
          "glfw/src/nsgl_context.m",
-         "glfw/src/egl_context.c",
          "glfw/src/osmesa_context.c"
       }
       defines {
