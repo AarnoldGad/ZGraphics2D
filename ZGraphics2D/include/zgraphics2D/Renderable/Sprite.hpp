@@ -39,20 +39,24 @@ namespace zg
    {
    public:
       void setSize(glm::vec2 size) noexcept;
-      void setTexture(Texture const* texture) noexcept;
-
       glm::vec2 getSize() const noexcept;
-      Texture const* getTexture() const noexcept;
 
-      size_t getVertexCount() const noexcept override;
+      constexpr size_t getVertexCount() const noexcept override;
       Vertex const* getVertex(size_t index) const noexcept override;
+
+      constexpr size_t getElementCount() const noexcept override;
+      unsigned int* getElements() const noexcept override;
+
+      constexpr size_t getTextureCount() const noexcept override;
+      void setTexture(Texture const* texture) noexcept;
+      Texture const* getTexture(size_t index) const noexcept override;
       
       explicit Sprite(glm::vec2 size = {}, Texture const* texture = nullptr);
 
    private:
+      Texture const* m_texture;
       glm::vec2 m_size;
       Vertex2D m_vertices[4];
-      Texture const* m_texture;
    };
 }
 

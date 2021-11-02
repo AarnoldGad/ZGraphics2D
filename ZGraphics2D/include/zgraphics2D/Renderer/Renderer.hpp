@@ -28,12 +28,14 @@
 
 #include "zgraphics2D/defines.hpp"
 
+#include "zgraphics2D/Renderer/Resources/Shader.hpp"
+
 namespace zg
 {
    class ZG_API Renderer
    {
    public:
-      virtual void render() = 0;
+      virtual void render(Shader& shader) = 0;
    };
 }
 

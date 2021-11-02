@@ -29,6 +29,7 @@
 #include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Renderer/Vertex.hpp"
+#include "zgraphics2D/Renderer/Resources/Texture.hpp"
 
 namespace zg
 {
@@ -37,6 +38,12 @@ namespace zg
    public:
       virtual size_t getVertexCount() const noexcept = 0;
       virtual Vertex const* getVertex(size_t index) const noexcept = 0;
+
+      virtual size_t getElementCount() const noexcept = 0;
+      virtual unsigned int* getElements() const noexcept = 0;
+
+      virtual size_t getTextureCount() const noexcept = 0;
+      virtual Texture const* getTexture(size_t index) const noexcept = 0;
    };
 }
 

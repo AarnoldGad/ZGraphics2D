@@ -2,7 +2,7 @@
 #define ZG_DEFINES_HPP
 
 #include <zengine/defines.hpp>
-#include <zgraphics2D/platform.hpp>
+#include "platform.hpp"
 
 #define ZG_VERSION_MAJOR 0
 #define ZG_VERSION_MINOR 3
