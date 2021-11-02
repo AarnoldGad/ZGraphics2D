@@ -26,6 +26,7 @@
 #include <zgraphics2D/Renderer/Buffers/IndexBuffer.hpp>
 
 #include <zgraphics2D/Renderer/Renderer.hpp>
+#include <zgraphics2D/Renderer/DefaultRenderer.hpp>
 #include <zgraphics2D/Renderer/Vertex.hpp>
 #include <zgraphics2D/Renderer/Vertex2D.hpp>
 #include <zgraphics2D/Renderer/Transforms/Transform.hpp>
@@ -34,6 +35,7 @@
 
 #include <zgraphics2D/Renderable/Renderable.hpp>
 #include <zgraphics2D/Renderable/Sprite.hpp>
+#include <zgraphics2D/Renderable/Cube.hpp>
 
 // Input
 #include <zgraphics2D/Input/Keyboard.hpp>
