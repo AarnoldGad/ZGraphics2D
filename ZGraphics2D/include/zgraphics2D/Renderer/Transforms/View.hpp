@@ -28,13 +28,15 @@
 
 #include "zgraphics2D/defines.hpp"
 
+#include "zgraphics2D/Renderer/Transforms/ViewProjection.hpp"
+
 namespace zg
 {
-   class ZG_API View
+   class ZG_API View : public ViewProjection
    {
    public:
-      glm::mat4 const& getView() const;
-      glm::mat4 const& getProjection() const;
+      glm::mat4 const& getView() const override;
+      glm::mat4 const& getProjection() const override;
 
       void setSize(glm::vec2 size) noexcept;
       void setViewport(glm::vec4 viewport) noexcept;

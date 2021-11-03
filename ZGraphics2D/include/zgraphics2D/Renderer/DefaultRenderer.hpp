@@ -33,6 +33,7 @@
 #include "zgraphics2D/Renderer/Buffers/VertexArray.hpp"
 #include "zgraphics2D/Renderer/Buffers/VertexBuffer.hpp"
 #include "zgraphics2D/Renderer/Buffers/IndexBuffer.hpp"
+#include "zgraphics2D/Renderer/Transforms/ViewProjection.hpp"
 #include "zgraphics2D/Renderable/Renderable.hpp"
 
 #include <vector>
@@ -44,8 +45,7 @@ namespace zg
    {
    public:
       void setLayout(VertexLayout const& layout);
-      void setView(glm::mat4 view) noexcept;
-      void setProjection(glm::mat4 projection) noexcept;
+      void setViewProjection(ViewProjection const* viewProjection) noexcept;
 
       void submit(Renderable const& object, glm::mat4 transform = {});
       void render(Shader& shader) override;
@@ -57,8 +57,7 @@ namespace zg
       VertexBuffer m_vbo;
       IndexBuffer m_ebo;
 
-      glm::mat4 m_view;
-      glm::mat4 m_projection;
+      ViewProjection const* m_viewProjection;
       std::map<Renderable const*, glm::mat4> m_objects;
    };
 }

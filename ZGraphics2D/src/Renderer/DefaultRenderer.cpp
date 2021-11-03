@@ -10,14 +10,9 @@ namespace zg
       m_vao.setLayout(layout);
    }
 
-   void DefaultRenderer::setView(glm::mat4 view) noexcept
+   void DefaultRenderer::setViewProjection(ViewProjection const* viewProjection) noexcept
    {
-      m_view = view;
-   }
-
-   void DefaultRenderer::setProjection(glm::mat4 projection) noexcept
-   {
-      m_projection = projection;
+      m_viewProjection = viewProjection;
    }
 
    void DefaultRenderer::submit(Renderable const& object, glm::mat4 transform)
@@ -29,8 +24,8 @@ namespace zg
    {
       shader.use();
 
-      shader.setMatrix4("view", m_view);
-      shader.setMatrix4("projection", m_projection);
+      shader.setMatrix4("view", m_viewProjection->getView());
+      shader.setMatrix4("projection", m_viewProjection->getProjection());
 
       for (auto& object : m_objects)
       {
