@@ -10,42 +10,59 @@ namespace zg
       m_vao.setLayout(layout);
    }
 
-   void DefaultRenderer::submit(Renderable const& object)
+   void DefaultRenderer::setView(glm::mat4 view) noexcept
    {
-      m_objects.push_back(&object);
+      m_view = view;
+   }
+
+   void DefaultRenderer::setProjection(glm::mat4 projection) noexcept
+   {
+      m_projection = projection;
+   }
+
+   void DefaultRenderer::submit(Renderable const& object, glm::mat4 transform)
+   {
+      m_objects.emplace(&object, transform);
    }
 
    void DefaultRenderer::render(Shader& shader)
    {
-      for (Renderable const* object : m_objects)
+      shader.use();
+
+      shader.setMatrix4("view", m_view);
+      shader.setMatrix4("projection", m_projection);
+
+      for (auto& object : m_objects)
       {
-         for (size_t i = 0; i < object->getTextureCount(); ++i)
+         for (size_t i = 0; i < object.first->getTextureCount(); ++i)
          {
             glActiveTexture(GL_TEXTURE0 + i);
-            object->getTexture(i)->bind();
+            object.first->getTexture(i)->bind();
             shader.setInteger("tex" + std::to_string(i), (int) i);
          }
 
          m_vao.bind();
 
-         m_vbo.resize(object->getVertexCount()*5*sizeof(float));
+         m_vbo.resize(object.first->getVertexCount()*5*sizeof(float));
 
-         m_ebo.setData(sizeof(unsigned int) * object->getElementCount(), object->getElements());
+         m_ebo.setData(sizeof(unsigned int) * object.first->getElementCount(), object.first->getElements());
 
          {
             float* buffer = m_vbo.map<float>();
-            for (size_t i = 0; i < object->getVertexCount(); ++i)
+            for (size_t i = 0; i < object.first->getVertexCount(); ++i)
             {
-               buffer[i*5] = reinterpret_cast<glm::vec3 const*>(object->getVertex(i)->getLocationData(0))->x;
-               buffer[i*5 + 1] = reinterpret_cast<glm::vec3 const*>(object->getVertex(i)->getLocationData(0))->y;
-               buffer[i*5 + 2] = reinterpret_cast<glm::vec3 const*>(object->getVertex(i)->getLocationData(0))->z;
-               buffer[i*5 + 3] = reinterpret_cast<glm::vec2 const*>(object->getVertex(i)->getLocationData(1))->x;
-               buffer[i*5 + 4] = reinterpret_cast<glm::vec2 const*>(object->getVertex(i)->getLocationData(1))->y;
+               buffer[i*5] = reinterpret_cast<glm::vec3 const*>(object.first->getVertex(i)->getLocationData(0))->x;
+               buffer[i*5 + 1] = reinterpret_cast<glm::vec3 const*>(object.first->getVertex(i)->getLocationData(0))->y;
+               buffer[i*5 + 2] = reinterpret_cast<glm::vec3 const*>(object.first->getVertex(i)->getLocationData(0))->z;
+               buffer[i*5 + 3] = reinterpret_cast<glm::vec2 const*>(object.first->getVertex(i)->getLocationData(1))->x;
+               buffer[i*5 + 4] = reinterpret_cast<glm::vec2 const*>(object.first->getVertex(i)->getLocationData(1))->y;
             }
             m_vbo.unmap();
          }
 
-         glDrawElements(GL_TRIANGLES, object->getElementCount(), GL_UNSIGNED_INT, 0);
+         shader.setMatrix4("model", object.second);
+
+         glDrawElements(GL_TRIANGLES, object.first->getElementCount(), GL_UNSIGNED_INT, 0);
       }
 
       m_objects.clear();

@@ -43,10 +43,12 @@ namespace zg
    class ZG_API DefaultRenderer : public Renderer
    {
    public:
-      void render(Shader& shader) override;
-
       void setLayout(VertexLayout const& layout);
-      void submit(Renderable const& object);
+      void setView(glm::mat4 view) noexcept;
+      void setProjection(glm::mat4 projection) noexcept;
+
+      void submit(Renderable const& object, glm::mat4 transform = {});
+      void render(Shader& shader) override;
 
       DefaultRenderer() = default;
 
@@ -55,7 +57,9 @@ namespace zg
       VertexBuffer m_vbo;
       IndexBuffer m_ebo;
 
-      std::vector<Renderable const*> m_objects;
+      glm::mat4 m_view;
+      glm::mat4 m_projection;
+      std::map<Renderable const*, glm::mat4> m_objects;
    };
 }
 
