@@ -30,8 +30,10 @@
 #include <zgraphics2D/Renderer/Vertex.hpp>
 #include <zgraphics2D/Renderer/Vertex2D.hpp>
 #include <zgraphics2D/Renderer/Transforms/Transform.hpp>
+#include <zgraphics2D/Renderer/Transforms/ViewProjection.hpp>
 #include <zgraphics2D/Renderer/Transforms/View.hpp>
 #include <zgraphics2D/Renderer/Transforms/Camera.hpp>
+#include <zgraphics2D/Renderer/Transforms/FPSCamera.hpp>
 
 #include <zgraphics2D/Renderable/Renderable.hpp>
 #include <zgraphics2D/Renderable/Sprite.hpp>

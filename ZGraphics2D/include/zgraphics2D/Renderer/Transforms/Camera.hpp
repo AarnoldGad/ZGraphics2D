@@ -54,7 +54,7 @@ namespace zg
 
       Camera(ze::Angle fov, float ratio, glm::vec3 pos = {}, glm::vec3 front = { 0.f, 0.f, -1.f }, glm::vec3 up = { 0.f, 1.f, 0.f });
 
-   private:
+   protected:
       mutable glm::mat4 m_view;
       mutable glm::mat4 m_projection;
       mutable bool m_viewDirty;
