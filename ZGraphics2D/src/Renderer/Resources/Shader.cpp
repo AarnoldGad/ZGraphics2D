@@ -11,7 +11,7 @@
       int currentProgram; \
       glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram); \
       if (static_cast<unsigned int>(currentProgram) != m_program) \
-         GFX_LOG_DEBUG("Currently bound program is different !");
+         GFX_LOG_ERROR("Currently bound program is different !");
 #else
    #define CHECK_PROGRAM
 #endif

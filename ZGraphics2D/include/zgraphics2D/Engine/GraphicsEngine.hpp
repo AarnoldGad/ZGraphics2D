@@ -41,8 +41,6 @@ namespace zg
       static ze::Logger& UseGraphicsLogger() noexcept;
 
       Window& getWindow() noexcept;
-      Keyboard& getKeyboard() noexcept;
-      Mouse& getMouse() noexcept;
 
       void initialise() override;
 
@@ -70,8 +68,6 @@ namespace zg
       GraphicsSettings m_settings;
 
       Window m_window;
-      Keyboard m_keyboard;
-      Mouse m_mouse;
    };
 }
 
