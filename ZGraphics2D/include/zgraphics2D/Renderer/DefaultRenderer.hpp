@@ -1,6 +1,6 @@
 /**
  * DefaultRenderer.hpp
- * 2021
+ * 26 Oct 2021
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
