@@ -43,7 +43,7 @@ namespace zg
       static glm::ivec2 constexpr PositionCentered = { 0xFF000000, 0xFF000000 };
       static glm::ivec2 constexpr PositionUndefined = { 0xFE000000, 0xFE000000 };
 
-      void configure(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer);
+      static void Configure(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer);
       void make(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined, glm::vec4 color = Colors::Beige, uint32_t clearMask = GL_COLOR_BUFFER_BIT);
 
       std::string getTitle() const noexcept;
@@ -72,13 +72,14 @@ namespace zg
       void setPosition(glm::ivec2 pos);
       void setOpacity(float opacity);
       void setVisible(bool visible);
+      void setColor(float r, float g, float b, float a) noexcept;
       void setColor(glm::vec4 color) noexcept;
       void setClearMask(uint32_t mask) noexcept;
 
       GLFWwindow* getHandle() noexcept;
 
-      Window(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined, glm::vec4 color = Colors::Beige, uint32_t clearMask = GL_COLOR_BUFFER_BIT,
-             WindowSettings window = {}, ContextSettings context = {}, FrameBufferSettings framebuffer = {});
+      Window(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined,
+             glm::vec4 color = Colors::Beige, uint32_t clearMask = GL_COLOR_BUFFER_BIT);
       Window();
       ~Window();
 

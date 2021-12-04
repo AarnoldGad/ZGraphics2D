@@ -87,7 +87,7 @@ namespace zg
 
    void GraphicsEngine::openWindow()
    {
-      m_window.configure(m_settings.window, m_settings.context, m_settings.framebuffer);
+      Window::Configure(m_settings.window, m_settings.context, m_settings.framebuffer);
       m_window.make(m_settings.title, m_settings.size, m_settings.pos, m_settings.color, m_settings.clearMask);
       
       Keyboard::ConnectWindow(&m_window);

@@ -74,7 +74,7 @@ namespace zg
 
       m_size = { width, height };
       m_format = desiredFormat == Format::Unknown ? static_cast<Format>(numberOfChannels) : desiredFormat;
-      size_t dataSize = m_size.x * m_size.y * static_cast<unsigned>(m_format);
+      size_t dataSize = (unsigned) m_size.x * (unsigned) m_size.y * static_cast<unsigned>(m_format);
       m_data = new uint8_t[dataSize];
       std::copy(data, data + dataSize, m_data);
 

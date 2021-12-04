@@ -8,7 +8,7 @@ inline zg::Image::Format zg::Image::getFormat() const noexcept
    return m_format;
 }
 
-inline glm::uvec2 zg::Image::getSize() const noexcept
+inline glm::ivec2 zg::Image::getSize() const noexcept
 {
    return m_size;
 }

@@ -46,7 +46,7 @@ namespace zg
 
       uint8_t const* getData() const noexcept;
       Format getFormat() const noexcept;
-      glm::uvec2 getSize() const noexcept;
+      glm::ivec2 getSize() const noexcept;
 
       explicit operator bool() const noexcept;
 
@@ -67,7 +67,7 @@ namespace zg
    private:
       uint8_t* m_data;
       Format m_format;
-      glm::uvec2 m_size;
+      glm::ivec2 m_size;
    };
 }
 

@@ -18,15 +18,13 @@ namespace zg
    Window::Window()
       : m_handle(nullptr) {}
 
-   Window::Window(std::string const& title, glm::ivec2 size, glm::ivec2 pos, glm::vec4 color, uint32_t clearMask,
-                  WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer)
+   Window::Window(std::string const& title, glm::ivec2 size, glm::ivec2 pos, glm::vec4 color, uint32_t clearMask)
       : m_handle(nullptr)
    {
-      configure(window, context, framebuffer);
       make(title, size, pos, color, clearMask);
    }
 
-   void Window::configure(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer)
+   void Window::Configure(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer)
    {
       glfwWindowHint(GLFW_RESIZABLE, window.resisable ? GLFW_TRUE : GLFW_FALSE);
       glfwWindowHint(GLFW_VISIBLE, window.visible ? GLFW_TRUE : GLFW_FALSE);
@@ -200,6 +198,11 @@ namespace zg
    void Window::setVisible(bool visible)
    {
       visible ? show() : hide();
+   }
+
+   void Window::setColor(float r, float g, float b, float a) noexcept
+   {
+      setColor({ r, g, b, a });
    }
 
    void Window::setColor(glm::vec4 color) noexcept
