@@ -1,13 +1,13 @@
 #include "zgpch.hpp"
 
-#include "zgraphics2D/Renderer/Transforms/Transform.hpp"
+#include "zgraphics2D/Renderer/Transform.hpp"
 
 namespace zg
 {
    Transform::Transform()
       : m_transform(1.f), m_dirty(true), m_pos(0.f), m_origin(0.f), m_scale(1.f), m_rotation() {}
 
-   glm::mat4 const& Transform::getTransformation() const
+   glm::mat4 const& Transform::getTransformationMatrix() const
    {
       if (m_dirty)
       {
@@ -22,11 +22,6 @@ namespace zg
       }
 
       return m_transform;
-   }
-
-   float const* Transform::getTransformationPtr() const
-   {
-      return glm::value_ptr(getTransformation());
    }
 
    void Transform::setPosition(glm::vec3 pos) noexcept

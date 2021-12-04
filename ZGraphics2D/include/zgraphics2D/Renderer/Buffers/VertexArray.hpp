@@ -28,7 +28,7 @@
 
 #include "zgraphics2D/defines.hpp"
 
-#include "zgraphics2D/Renderer/Buffers/VertexLayout.hpp"
+#include "zgraphics2D/Renderer/VertexLayout.hpp"
 #include "zgraphics2D/Renderer/Buffers/IndexBuffer.hpp"
 
 namespace zg

@@ -33,8 +33,8 @@ namespace zg
    class ZG_API ViewProjection
    {
    public:
-      virtual glm::mat4 const& getView() const = 0;
-      virtual glm::mat4 const& getProjection() const = 0;
+      virtual glm::mat4 const& getViewMatrix() const = 0;
+      virtual glm::mat4 const& getProjectionMatrix() const = 0;
    };
 }
 

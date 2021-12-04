@@ -33,8 +33,7 @@ namespace zg
    class ZG_API Transform
    {
    public:
-      glm::mat4 const& getTransformation() const;
-      float const* getTransformationPtr() const;
+      glm::mat4 const& getTransformationMatrix() const;
 
       void setPosition(glm::vec3 pos) noexcept;
       void setOrigin(glm::vec3 origin) noexcept;

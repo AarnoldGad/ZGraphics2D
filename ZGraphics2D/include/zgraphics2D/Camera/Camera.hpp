@@ -28,15 +28,15 @@
 
 #include "zgraphics2D/defines.hpp"
 
-#include "zgraphics2D/Renderer/Transforms/ViewProjection.hpp"
+#include "zgraphics2D/Renderer/ViewProjection.hpp"
 
 namespace zg
 {
    class ZG_API Camera : public ViewProjection
    {
    public:
-      glm::mat4 const& getView() const override;
-      glm::mat4 const& getProjection() const override;
+      glm::mat4 const& getViewMatrix() const override;
+      glm::mat4 const& getProjectionMatrix() const override;
 
       void setFront(glm::vec3 front) noexcept;
       void setUp(glm::vec3 up) noexcept;

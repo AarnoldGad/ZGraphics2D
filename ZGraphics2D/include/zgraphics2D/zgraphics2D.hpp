@@ -18,8 +18,8 @@
 #include <zgraphics2D/Window/WindowSettings.hpp>
 
 // Renderer
-#include <zgraphics2D/Renderer/Resources/Shader.hpp>
-#include <zgraphics2D/Renderer/Resources/Texture.hpp>
+#include <zgraphics2D/Resources/Shader.hpp>
+#include <zgraphics2D/Resources/Texture.hpp>
 
 #include <zgraphics2D/Renderer/Buffers/VertexArray.hpp>
 #include <zgraphics2D/Renderer/Buffers/VertexBuffer.hpp>
@@ -29,11 +29,12 @@
 #include <zgraphics2D/Renderer/DefaultRenderer.hpp>
 #include <zgraphics2D/Renderer/Vertex.hpp>
 #include <zgraphics2D/Renderer/Vertex2D.hpp>
-#include <zgraphics2D/Renderer/Transforms/Transform.hpp>
-#include <zgraphics2D/Renderer/Transforms/ViewProjection.hpp>
-#include <zgraphics2D/Renderer/Transforms/View.hpp>
-#include <zgraphics2D/Renderer/Transforms/Camera.hpp>
-#include <zgraphics2D/Renderer/Transforms/FPSCamera.hpp>
+#include <zgraphics2D/Renderer/Transform.hpp>
+
+#include <zgraphics2D/Renderer/ViewProjection.hpp>
+#include <zgraphics2D/Camera/OrthographicCamera.hpp>
+#include <zgraphics2D/Camera/Camera.hpp>
+#include <zgraphics2D/Camera/FPSCamera.hpp>
 
 #include <zgraphics2D/Renderable/Renderable.hpp>
 #include <zgraphics2D/Renderable/Sprite.hpp>

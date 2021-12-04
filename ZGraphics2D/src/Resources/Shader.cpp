@@ -1,6 +1,6 @@
 #include "zgpch.hpp"
 
-#include "zgraphics2D/Renderer/Resources/Shader.hpp"
+#include "zgraphics2D/Resources/Shader.hpp"
 
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
 
@@ -103,7 +103,7 @@ namespace zg
 
    void Shader::setBoolean(std::string const& var, bool value)
    {
-      setInteger(var, value);
+      setInteger(var, value ? 1 : 0);
    }
 
    void Shader::setInteger(std::string const& var, int value)
@@ -173,10 +173,15 @@ namespace zg
       {
          int location = glGetUniformLocation(m_program, var.c_str());
 
-         if (location == -1)
-            GFX_LOG_ERROR("Fail to retrieve uniform location for %s !", var.c_str());
-         else
-            m_uniforms.insert(std::make_pair(var, location));
+         #if defined(_DEBUG)
+            if (location == -1)
+               GFX_LOG_ERROR("Fail to retrieve uniform location for %s !", var.c_str());
+            else
+               m_uniforms.insert(std::make_pair(var, location));
+         #else
+            if (location != -1)
+               m_uniforms.insert(std::make_pair(var, location));
+         #endif
 
          return location;
       }

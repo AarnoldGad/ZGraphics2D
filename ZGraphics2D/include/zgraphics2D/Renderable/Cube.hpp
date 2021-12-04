@@ -30,8 +30,8 @@
 
 #include "zgraphics2D/Renderable/Renderable.hpp"
 #include "zgraphics2D/Renderer/Vertex2D.hpp"
-#include "zgraphics2D/Renderer/Resources/Texture.hpp"
-#include "zgraphics2D/Renderer/Transforms/Transform.hpp"
+#include "zgraphics2D/Resources/Texture.hpp"
+#include "zgraphics2D/Renderer/Transform.hpp"
 
 namespace zg
 {

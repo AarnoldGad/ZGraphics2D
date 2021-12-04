@@ -1,6 +1,6 @@
 #include "zgpch.hpp"
 
-#include "zgraphics2D/Renderer/Transforms/Camera.hpp"
+#include "zgraphics2D/Camera/Camera.hpp"
 
 namespace zg
 {
@@ -11,7 +11,7 @@ namespace zg
    
    }
 
-   glm::mat4 const& Camera::getView() const
+   glm::mat4 const& Camera::getViewMatrix() const
    {
       if (m_viewDirty)
       {
@@ -23,7 +23,7 @@ namespace zg
       return m_view;
    }
 
-   glm::mat4 const& Camera::getProjection() const
+   glm::mat4 const& Camera::getProjectionMatrix() const
    {
       if (m_projectionDirty)
       {

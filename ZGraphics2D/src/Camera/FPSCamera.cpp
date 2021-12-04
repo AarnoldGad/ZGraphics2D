@@ -1,6 +1,6 @@
 #include "zgpch.hpp"
 
-#include "zgraphics2D/Renderer/Transforms/FPSCamera.hpp"
+#include "zgraphics2D/Camera/FPSCamera.hpp"
 
 namespace zg
 {

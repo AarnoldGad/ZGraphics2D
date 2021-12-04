@@ -1,6 +1,6 @@
 #include "zgpch.hpp"
 
-#include "zgraphics2D/Renderer/Resources/Texture.hpp"
+#include "zgraphics2D/Resources/Texture.hpp"
 
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
 
@@ -65,6 +65,7 @@ namespace zg
 
    Texture::~Texture()
    {
-      if (m_texture) glDeleteTextures(1, &m_texture);
+      if (m_texture)
+         glDeleteTextures(1, &m_texture);
    }
 }

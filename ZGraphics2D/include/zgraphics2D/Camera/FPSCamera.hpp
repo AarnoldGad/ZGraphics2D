@@ -28,7 +28,7 @@
 
 #include "zgraphics2D/defines.hpp"
 
-#include "zgraphics2D/Renderer/Transforms/Camera.hpp"
+#include "zgraphics2D/Camera/Camera.hpp"
 
 namespace zg
 {
