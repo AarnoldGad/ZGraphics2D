@@ -33,7 +33,7 @@ namespace zg
    class ZG_API Vertex
    {
    public:
-      virtual void const* getLocationData(unsigned int index) const noexcept = 0;
+      virtual void const* getData(unsigned int location) const noexcept = 0;
    };
 }
 

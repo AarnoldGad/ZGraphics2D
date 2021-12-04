@@ -24,8 +24,8 @@ namespace zg
    {
       shader.use();
 
-      shader.setMatrix4("view", m_viewProjection->getView());
-      shader.setMatrix4("projection", m_viewProjection->getProjection());
+      shader.setMatrix4("view", m_viewProjection->getViewMatrix());
+      shader.setMatrix4("projection", m_viewProjection->getProjectionMatrix());
 
       for (auto& object : m_objects)
       {
@@ -38,7 +38,7 @@ namespace zg
 
          m_vao.bind();
 
-         m_vbo.resize(object.first->getVertexCount()*5*sizeof(float));
+         m_vbo.resize(object.first->getVertexCount()*8*sizeof(float));
 
          m_ebo.setData(sizeof(unsigned int) * object.first->getElementCount(), object.first->getElements());
 
@@ -46,11 +46,16 @@ namespace zg
             float* buffer = m_vbo.map<float>();
             for (size_t i = 0; i < object.first->getVertexCount(); ++i)
             {
-               buffer[i*5] = reinterpret_cast<glm::vec3 const*>(object.first->getVertex(i)->getLocationData(0))->x;
-               buffer[i*5 + 1] = reinterpret_cast<glm::vec3 const*>(object.first->getVertex(i)->getLocationData(0))->y;
-               buffer[i*5 + 2] = reinterpret_cast<glm::vec3 const*>(object.first->getVertex(i)->getLocationData(0))->z;
-               buffer[i*5 + 3] = reinterpret_cast<glm::vec2 const*>(object.first->getVertex(i)->getLocationData(1))->x;
-               buffer[i*5 + 4] = reinterpret_cast<glm::vec2 const*>(object.first->getVertex(i)->getLocationData(1))->y;
+               buffer[i*8 + 0] = reinterpret_cast<glm::vec2 const*>(object.first->getVertex(i)->getData(0))->x;
+               buffer[i*8 + 1] = reinterpret_cast<glm::vec2 const*>(object.first->getVertex(i)->getData(0))->y;
+
+               buffer[i*8 + 2] = reinterpret_cast<glm::vec4 const*>(object.first->getVertex(i)->getData(1))->x;
+               buffer[i*8 + 3] = reinterpret_cast<glm::vec4 const*>(object.first->getVertex(i)->getData(1))->y;
+               buffer[i*8 + 4] = reinterpret_cast<glm::vec4 const*>(object.first->getVertex(i)->getData(1))->z;
+               buffer[i*8 + 5] = reinterpret_cast<glm::vec4 const*>(object.first->getVertex(i)->getData(1))->w;
+
+               buffer[i*8 + 6] = reinterpret_cast<glm::vec2 const*>(object.first->getVertex(i)->getData(2))->x;
+               buffer[i*8 + 7] = reinterpret_cast<glm::vec2 const*>(object.first->getVertex(i)->getData(2))->y;
             }
             m_vbo.unmap();
          }

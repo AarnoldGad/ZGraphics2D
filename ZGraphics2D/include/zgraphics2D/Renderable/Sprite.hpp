@@ -41,6 +41,12 @@ namespace zg
       void setSize(glm::vec2 size) noexcept;
       glm::vec2 getSize() const noexcept;
 
+      void setColor(glm::vec4 color) noexcept;
+      glm::vec4 getColor() const noexcept;
+
+      void setTextureRect(glm::vec4 rect) noexcept;
+      glm::vec4 getTextureRect() const noexcept;
+
       constexpr size_t getVertexCount() const noexcept override;
       Vertex const* getVertex(size_t index) const noexcept override;
 
@@ -51,11 +57,14 @@ namespace zg
       void setTexture(Texture const* texture) noexcept;
       Texture const* getTexture(size_t index) const noexcept override;
       
-      explicit Sprite(glm::vec2 size = {}, Texture const* texture = nullptr);
+      explicit Sprite(glm::vec2 size = {}, Texture const* texture = nullptr,
+                      glm::vec4 color = { 1.f, 1.f, 1.f, 1.f }, glm::vec4 textureRect = { 0.f, 0.f, 1.f, 1.f });
 
    private:
       Texture const* m_texture;
       glm::vec2 m_size;
+      glm::vec4 m_color;
+      glm::vec4 m_textureRect;
       Vertex2D m_vertices[4];
    };
 }

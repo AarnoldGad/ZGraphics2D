@@ -3,6 +3,16 @@ inline glm::vec2 zg::Sprite::getSize() const noexcept
    return m_size;
 }
 
+inline glm::vec4 zg::Sprite::getColor() const noexcept
+{
+   return m_color;
+}
+
+inline glm::vec4 zg::Sprite::getTextureRect() const noexcept
+{
+   return m_textureRect;
+}
+
 inline constexpr size_t zg::Sprite::getVertexCount() const noexcept
 {
    return sizeof(m_vertices) / sizeof(Vertex2D);
@@ -28,7 +38,7 @@ inline unsigned int* zg::Sprite::getElements() const noexcept
 
 inline constexpr size_t zg::Sprite::getTextureCount() const noexcept
 {
-   return 1;
+   return m_texture ? 1 : 0;
 }
 
 inline zg::Texture const* zg::Sprite::getTexture(size_t index) const noexcept

@@ -35,18 +35,21 @@ namespace zg
    class ZG_API Vertex2D : public Vertex
    {
    public:
-      void const* getLocationData(unsigned int index) const noexcept override;
+      void const* getData(unsigned int location) const noexcept override;
 
-      glm::vec3 getPosition() const noexcept;
+      glm::vec2 getPosition() const noexcept;
+      glm::vec4 getColor() const noexcept;
       glm::vec2 getTextureCoordinates() const noexcept;
 
-      void setPosition(glm::vec3 pos) noexcept;
+      void setPosition(glm::vec2 pos) noexcept;
+      void setColor(glm::vec4 color) noexcept;
       void setTextureCoordinates(glm::vec2 uv) noexcept;
 
-      explicit Vertex2D(glm::vec3 pos = {}, glm::vec2 uv = {});
+      explicit Vertex2D(glm::vec2 pos = {}, glm::vec4 color = { 1.f, 1.f, 1.f, 1.f }, glm::vec2 uv = {});
 
    private:
-      glm::vec3 m_pos;
+      glm::vec2 m_pos;
+      glm::vec4 m_color;
       glm::vec2 m_uv;
    };
 }
