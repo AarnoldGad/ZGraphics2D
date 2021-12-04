@@ -40,6 +40,12 @@
 #include <zgraphics2D/Renderable/Sprite.hpp>
 #include <zgraphics2D/Renderable/Cube.hpp>
 
+// Text
+#include <zgraphics2D/Text/Font.hpp>
+#include <zgraphics2D/Text/BitmapFont.hpp>
+#include <zgraphics2D/Text/Glyph.hpp>
+#include <zgraphics2D/Text/Encoding.hpp>
+
 // Input
 #include <zgraphics2D/Input/Keyboard.hpp>
 #include <zgraphics2D/Input/Mouse.hpp>
