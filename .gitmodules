@@ -4,6 +4,6 @@
 [submodule "ZGraphics2D/deps/glm"]
 	path = ZGraphics2D/deps/glm
 	url = https://github.com/g-truc/glm.git
-[submodule "ZGraphics2D/deps/glfw/glfw"]
-	path = ZGraphics2D/deps/glfw/glfw
+[submodule "ZGraphics2D/deps/glfw"]
+	path = ZGraphics2D/deps/glfw
 	url = https://github.com/glfw/glfw.git
