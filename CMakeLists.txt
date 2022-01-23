@@ -35,7 +35,11 @@ SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 CONFIGURE_FILE(config.hpp.in zgconfig.hpp @ONLY NEWLINE_STYLE LF)
 
-ADD_SUBDIRECTORY(ZucchiniEngine)
+# Target may have been built by other dependents
+IF(NOT TARGET zengine)
+   ADD_SUBDIRECTORY(ZucchiniEngine)
+ENDIF()
+
 ADD_SUBDIRECTORY(ZGraphics2D/deps/glfw)
 ADD_SUBDIRECTORY(ZGraphics2D)
 
