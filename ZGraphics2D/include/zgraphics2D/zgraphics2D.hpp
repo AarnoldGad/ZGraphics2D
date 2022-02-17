@@ -18,8 +18,8 @@
 #include <zgraphics2D/Window/WindowSettings.hpp>
 
 // Renderer
-#include <zgraphics2D/Resources/Shader.hpp>
-#include <zgraphics2D/Resources/Texture.hpp>
+#include <zgraphics2D/Renderer/Shader.hpp>
+#include <zgraphics2D/Renderer/Texture.hpp>
 
 #include <zgraphics2D/Renderer/Buffers/VertexArray.hpp>
 #include <zgraphics2D/Renderer/Buffers/VertexBuffer.hpp>

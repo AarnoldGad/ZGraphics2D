@@ -1,6 +1,6 @@
 #include "zgpch.hpp"
 
-#include "zgraphics2D/Resources/Shader.hpp"
+#include "zgraphics2D/Renderer/Shader.hpp"
 
 #include "zgraphics2D/Engine/GraphicsEngine.hpp"
 

@@ -28,7 +28,7 @@
 
 #include "zgraphics2D/defines.hpp"
 
-#include "zgraphics2D/Resources/Shader.hpp"
+#include "zgraphics2D/Renderer/Shader.hpp"
 
 namespace zg
 {

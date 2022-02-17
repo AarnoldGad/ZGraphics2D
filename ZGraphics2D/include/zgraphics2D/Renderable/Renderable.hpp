@@ -29,7 +29,7 @@
 #include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Renderer/Vertex.hpp"
-#include "zgraphics2D/Resources/Texture.hpp"
+#include "zgraphics2D/Renderer/Texture.hpp"
 
 namespace zg
 {

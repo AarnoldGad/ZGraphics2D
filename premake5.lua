@@ -31,5 +31,5 @@ workspace "ZucchiniGraphics"
       optimize "on"
 
 include "ZucchiniEngine/ZEngine"
-include "ZGraphics2D/deps/glfw"
+include "ZGraphics2D/deps"
 include "ZGraphics2D"

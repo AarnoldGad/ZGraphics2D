@@ -129,6 +129,13 @@ TARGET_SOURCES(zgraphics PRIVATE
                src/Renderer/Transform.cpp
                src/Renderer/Vertex2D.cpp
 
+               include/zgraphics2D/Renderer/Shader.hpp
+               include/zgraphics2D/Renderer/Shader.inl
+               include/zgraphics2D/Renderer/Texture.hpp
+               include/zgraphics2D/Renderer/Texture.inl
+               src/Renderer/Shader.cpp
+               src/Renderer/Texture.cpp
+
                include/zgraphics2D/Renderer/Buffers/Buffer.hpp
                include/zgraphics2D/Renderer/Buffers/Buffer.inl
                include/zgraphics2D/Renderer/Buffers/IndexBuffer.hpp
@@ -143,16 +150,6 @@ TARGET_SOURCES(zgraphics PRIVATE
                src/Renderer/Buffers/VertexBuffer.cpp
                src/Renderer/Buffers/VertexLayout.cpp
                src/Renderer/Buffers/VertexArray.cpp
-               )
-
-# src/Resources
-TARGET_SOURCES(zgraphics PRIVATE
-               include/zgraphics2D/Resources/Shader.hpp
-               include/zgraphics2D/Resources/Shader.inl
-               include/zgraphics2D/Resources/Texture.hpp
-               include/zgraphics2D/Resources/Texture.inl
-               src/Resources/Shader.cpp
-               src/Resources/Texture.cpp
                )
 
 # src/Text
