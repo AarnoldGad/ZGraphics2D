@@ -2,6 +2,8 @@
 
 #include "zgraphics2D/Common/Image.hpp"
 
+#include <zengine/Common/Console.hpp>
+
 namespace zg
 {
    void Image::FlipOnLoad(bool flip)
@@ -70,7 +72,7 @@ namespace zg
       int width, height, numberOfChannels;
       uint8_t* data = stbi_load(file.string().c_str(), &width, &height, &numberOfChannels, static_cast<int>(desiredFormat));
       if (!data)
-         return LOG_TRACE("Fail to load image at ", file.string(), " : ", stbi_failure_reason()), false;
+         return ze::Console::Trace("Fail to load image at {} : {}", file, stbi_failure_reason()), false;
 
       m_size = { width, height };
       m_format = desiredFormat == Format::Unknown ? static_cast<Format>(numberOfChannels) : desiredFormat;

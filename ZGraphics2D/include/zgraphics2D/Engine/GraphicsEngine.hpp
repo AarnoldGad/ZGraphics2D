@@ -29,6 +29,7 @@
 #include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Engine/GraphicsSettings.hpp"
+
 #include "zgraphics2D/Window/Window.hpp"
 #include "zgraphics2D/Input/Keyboard.hpp"
 #include "zgraphics2D/Input/Mouse.hpp"

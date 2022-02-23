@@ -9,8 +9,8 @@ namespace zg
 
    ze::Logger& GraphicsEngine::UseGraphicsLogger() noexcept
    {
-      static ze::DebugFileWriter writer("zgraphics.log");
-      static ze::Logger logger("ZGraphics", &writer);
+      static ze::FileWriter writer("zgraphics.log");
+      static ze::Logger logger("ZGraphics", { &writer, &ze::ConsoleWriter::Get() });
 
       return logger;
    }
@@ -45,10 +45,10 @@ namespace zg
       glfwSetErrorCallback(&GraphicsEngine::HandleGLFWError);
 
       GFX_LOG_INFO("------ * Initialising GLFW...");
-      GFX_LOG_DEBUG("------    * GLFW Compiled against %d.%d.%d", GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
+      GFX_LOG_DEBUG("------    * GLFW Compiled against {}.{}.{}", GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
       int major, minor, rev;
       glfwGetVersion(&major, &minor, &rev);
-      GFX_LOG_DEBUG("------    * GLFW Linked against %d.%d.%d", major, minor, rev);
+      GFX_LOG_DEBUG("------    * GLFW Linked against {}.{}.{}", major, minor, rev);
 
       if (!glfwInit())
       {
@@ -56,7 +56,7 @@ namespace zg
          ze::RaiseCritical(-1, "Fail to initialise GLFW !");
       }
 
-      GFX_LOG_INFO("------ * GLFW initialised in %d us.", loadTime.elapsed().asMicroseconds());
+      GFX_LOG_INFO("------ * GLFW initialised in {} us.", loadTime.elapsed().asMicroseconds());
 
       s_isGLFWInitialised = true;
    }
@@ -75,12 +75,12 @@ namespace zg
          ze::RaiseCritical(-1, "Fail to load OpenGL !");
       }
 
-      GFX_LOG_DEBUG("------    * OpenGL   %s", glGetString(GL_VERSION));
-      GFX_LOG_DEBUG("------    * Vendor   %s", glGetString(GL_VENDOR));
-      GFX_LOG_DEBUG("------    * Graphics %s", glGetString(GL_RENDERER));
-      GFX_LOG_DEBUG("------    * GLSL     %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
+      GFX_LOG_DEBUG("------    * OpenGL   {}", glGetString(GL_VERSION));
+      GFX_LOG_DEBUG("------    * Vendor   {}", glGetString(GL_VENDOR));
+      GFX_LOG_DEBUG("------    * Graphics {}", glGetString(GL_RENDERER));
+      GFX_LOG_DEBUG("------    * GLSL     {}", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
-      GFX_LOG_INFO("------ * OpenGL loaded in %d us.", loadTime.elapsed().asMicroseconds());
+      GFX_LOG_INFO("------ * OpenGL loaded in {} us.", loadTime.elapsed().asMicroseconds());
 
       s_isOpenGLLoaded = true;
    }
@@ -125,6 +125,6 @@ namespace zg
 
    void GraphicsEngine::HandleGLFWError(int code, char const* description)
    {
-      GFX_LOG_ERROR("A GLFW Error occured : (%d) %s", code, description);
+      GFX_LOG_ERROR("A GLFW Error occured : ({}) {}", code, description);
    }
 }

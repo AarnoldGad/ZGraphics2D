@@ -17,7 +17,7 @@ namespace zg
       uint8_t* data = stbi_load(file.string().c_str(), &width, &height, &channelCount, 0);
       if (!data)
       {
-         GFX_LOG_ERROR("Fail to load texture at %s : %s", file.string().c_str(), stbi_failure_reason());
+         GFX_LOG_ERROR("Fail to load texture at {} : {}", file, stbi_failure_reason());
          return;
       }
 

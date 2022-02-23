@@ -224,13 +224,15 @@ TARGET_INCLUDE_DIRECTORIES(zgraphics PUBLIC
                            "${PROJECT_SOURCE_DIR}/ZGraphics2D/include"
 
                            "${PROJECT_SOURCE_DIR}/ZGraphics2D/deps/glad/include"
-                           "${PROJECT_SOURCE_DIR}/ZGraphics2D/deps/glfw/include"
                            "${PROJECT_SOURCE_DIR}/ZGraphics2D/deps/glm"
-                           "${PROJECT_SOURCE_DIR}/ZGraphics2D/deps/stb/include"
                            
-                           ${FREETYPE_INCLUDE_DIR_freetype2}
-
                            "${PROJECT_BINARY_DIR}"
+                           )
+
+TARGET_INCLUDE_DIRECTORIES(zgraphics PRIVATE
+                           "${PROJECT_SOURCE_DIR}/ZGraphics2D/deps/glfw/include"
+                           "${PROJECT_SOURCE_DIR}/ZGraphics2D/deps/stb/include"
+                           ${FREETYPE_INCLUDE_DIR_freetype2}
                            )
 
 # System Include Dirs

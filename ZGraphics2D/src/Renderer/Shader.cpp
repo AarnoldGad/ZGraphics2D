@@ -38,6 +38,8 @@ namespace zg
       std::optional<std::string> vertexSource   = ze::FileUtils::GetFileContent(vertexFile);
       std::optional<std::string> fragmentSource = ze::FileUtils::GetFileContent(fragmentFile);
 
+      // TODO Improve empty shader management
+      // Tries to load shader code or log an error if no code is found
       loadSource(vertexSource   ? vertexSource->c_str()   : (GFX_LOG_ERROR("No vertex shader loaded !")  , ""),
                  fragmentSource ? fragmentSource->c_str() : (GFX_LOG_ERROR("No fragment shader loaded !"), ""));
    }
@@ -71,7 +73,7 @@ namespace zg
       {
          char log[512];
          glGetShaderInfoLog(shader, 512, nullptr, log);
-         GFX_LOG_ERROR("Fail to compile %s shader : %s",
+         GFX_LOG_ERROR("Fail to compile {} shader : {}",
                        (type == GL_VERTEX_SHADER ? "vertex" :
                        (type == GL_FRAGMENT_SHADER ? "fragment" : "unknown")),
                        log);
@@ -95,7 +97,7 @@ namespace zg
       {
          char log[512];
          glGetProgramInfoLog(m_program, 512, NULL, log);
-         GFX_LOG_ERROR("Fail to link shader program : %s", log);
+         GFX_LOG_ERROR("Fail to link shader program : {}", log);
 
          resetProgram();
       }
@@ -175,7 +177,7 @@ namespace zg
 
          #if defined(_DEBUG)
             if (location == -1)
-               GFX_LOG_ERROR("Fail to retrieve uniform location for %s !", var.c_str());
+               GFX_LOG_ERROR("Fail to retrieve uniform location for {} !", var.c_str());
             else
                m_uniforms.insert(std::make_pair(var, location));
          #else

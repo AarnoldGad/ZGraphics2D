@@ -12,14 +12,11 @@
 #define GFX_LOG_CRITICAL(...) ::zg::GraphicsEngine::UseGraphicsLogger().critical().logLine(__VA_ARGS__)
 
 #include <zengine/zengine.hpp>
+
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/scalar_multiplication.hpp>
-#include <stb_image/stb_image.h>
-//#include <ft2build.h>
-//#include FT_FREETYPE_H
 
 #endif // ZG_DEFINES_HPP
