@@ -44,69 +44,45 @@ namespace zg
       static glm::ivec2 constexpr PositionUndefined = { 0xFE000000, 0xFE000000 };
 
       static void Configure(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer);
-      void make(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined, glm::vec4 color = Colors::Beige, uint32_t clearMask = GL_COLOR_BUFFER_BIT);
+      static std::shared_ptr<Window> Make(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined);
 
-      std::string getTitle() const noexcept;
-      glm::ivec2 getSize() const noexcept;
-      glm::ivec2 getFramebufferSize() const noexcept;
-      Image const& getIcon() const noexcept;
-      glm::ivec2 getPosition() const noexcept;
-      float getOpacity() const noexcept;
-      bool isVisible() const noexcept;
-      bool shouldClose() const noexcept;
-      glm::vec4 getColor() const noexcept;
-      uint32_t getClearMask() const noexcept;
+      virtual void clear() = 0;
+      virtual void draw() = 0;
 
-      void clear();
-      void draw();
+      virtual void show() = 0;
+      virtual void hide() = 0;
+      virtual void close() = 0;
 
-      void show();
-      void hide();
-      void close();
+      virtual std::string const& getTitle() const noexcept = 0;
+      virtual glm::ivec2 getSize() const noexcept = 0;
+      virtual glm::ivec2 getFramebufferSize() const noexcept = 0;
+      // virtual Image const& getIcon() const noexcept = 0;
+      virtual glm::ivec2 getPosition() const noexcept = 0;
+      virtual float getOpacity() const noexcept = 0;
+      virtual bool isVisible() const noexcept = 0;
+      virtual bool shouldClose() const noexcept = 0;
+      virtual glm::vec4 getColor() const noexcept = 0;
+      virtual uint32_t getClearMask() const noexcept = 0;
 
-      void setTitle(std::string const& title);
-      void setSize(int width, int height);
-      void setSize(glm::ivec2 size);
-      void setIcon(Image const& icon);
-      void setPosition(int x, int y);
-      void setPosition(glm::ivec2 pos);
-      void setOpacity(float opacity);
-      void setVisible(bool visible);
-      void setColor(float r, float g, float b, float a) noexcept;
-      void setColor(glm::vec4 color) noexcept;
-      void setClearMask(uint32_t mask) noexcept;
+      virtual void setTitle(std::string const& title) = 0;
+      virtual void setSize(int width, int height) = 0;
+      virtual void setSize(glm::ivec2 size) = 0;
+      virtual void setIcon(Image const& icon) = 0;
+      virtual void setPosition(int x, int y) = 0;
+      virtual void setPosition(glm::ivec2 pos) = 0;
+      virtual void setOpacity(float opacity) = 0;
+      virtual void setVisible(bool visible) = 0;
+      virtual void setColor(float r, float g, float b, float a) noexcept = 0;
+      virtual void setColor(glm::vec4 color) noexcept = 0;
+      virtual void setClearMask(uint32_t mask) noexcept = 0;
 
-      GLFWwindow* getHandle() noexcept;
+      virtual void* getHandle() noexcept = 0;
 
-      Window(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined,
-             glm::vec4 color = Colors::Beige, uint32_t clearMask = GL_COLOR_BUFFER_BIT);
-      Window();
-      ~Window();
+      virtual ~Window() = default;
 
-   private:
-      static void Moved(GLFWwindow* window, int x, int y);
-      static void Resised(GLFWwindow* window, int width, int height);
-      static void Closed(GLFWwindow* window);
-      static void Refreshed(GLFWwindow* window);
-      static void Focused(GLFWwindow* window, int focused);
-      static void Iconified(GLFWwindow* window, int iconified);
-      static void Maximised(GLFWwindow* window, int maximised);
-      static void FramebufferResised(GLFWwindow* window, int width, int height);
-      static void Scaled(GLFWwindow* window, float xscale, float yscale);
-
-      template<typename EventType, typename... Args>
-      static void PushWindowEvent(GLFWwindow* window, Args&&... args);
-
-      GLFWwindow* m_handle;
-
-      std::string m_title;
-      glm::ivec2 m_size;
-      glm::ivec2 m_pos;
-      glm::vec4 m_color;
-      uint32_t m_clearMask;
+   protected:
+      virtual void open(std::string const& title, glm::ivec2 size, glm::ivec2 pos) = 0;
    };
 }
-
-#include "Window.inl"
 
 #endif // ZG_WINDOW_HPP

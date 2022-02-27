@@ -46,9 +46,11 @@
 #if __GNUC__ >= 4 || defined(__clang__)// GNU GCC __attribute__
 
    #define ZG_API __attribute__ ((__visibility__("default")))
+   #define ZG_DETAIL __attribute__ ((__visibility__("hidden")))
 
 #else // idk
 
    #define ZG_API
+   #define ZG_DETAIL
 
 #endif // DLL/SO specifiers
