@@ -1,6 +1,6 @@
 /**
- * Mouse.hpp
- * 22 Jun 2021
+ * GLFWKeyboard.hpp
+ * 26 Feb 2022
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,53 +23,44 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSE_HPP
-#define ZG_MOUSE_HPP
+#ifndef ZG_KEYBOARDIMPL_HPP
+#define ZG_KEYBOARDIMPL_HPP
 
 #include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Window/Window.hpp"
+#include "zgraphics2D/Input/Keyboard.hpp"
 
-namespace zg
+#include <GLFW/glfw3.h>
+
+namespace zg { namespace details
 {
-   class ZG_API Mouse
+   class ZG_DETAIL KeyboardImpl
    {
    public:
-      enum class Button : int
-      {
-         Left = 0,
-         Right,
-         Middle,
-         X1,
-         X2,
-         X3,
-         X4,
-         X5
-      };
-
-      enum class CursorMode : int
-      {
-         Normal = 0,
-         Hidden,
-         Disabled
-      };
-
       static void ConnectWindow(std::shared_ptr<Window> window);
       static void DisconnectWindow(std::shared_ptr<Window> window);
       static void SetActiveWindow(std::shared_ptr<Window> window);
 
-      static std::string GetButtonName(Button button);
+      static std::string GetKeyName(Keyboard::Key key);
+      static int GetKeyScancode(Keyboard::Key key);
 
-      static bool IsButtonPressed(Button button);
-      static glm::ivec2 GetPosition();
+      static bool IsKeyPressed(Keyboard::Key key);
+      static uint32_t GetModifiers();
 
-      static void SetPosition(glm::ivec2 pos);
-      static void SetCursorMode(CursorMode mode);
-      static void SetRawMouseMotion(bool raw);
-   
    private:
-      Mouse() = delete;
-   };
-}
+      KeyboardImpl() = delete;
 
-#endif // ZG_MOUSE_HPP
+      static void KeyInput(GLFWwindow* window, int key, int scancode, int type, int modifiers);
+      static void TextInput(GLFWwindow* window, uint32_t codepoint);
+
+      template<typename EventType>
+      static void PushKeyEvent(GLFWwindow* window, int key, int scancode, int modifiers);
+
+      static std::shared_ptr<Window> s_window;
+   };
+}}
+
+#include "GLFWKeyboard.inl"
+
+#endif // ZG_KEYBOARDIMPL_HPP

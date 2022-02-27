@@ -1,6 +1,6 @@
 /**
- * Mouse.hpp
- * 22 Jun 2021
+ * GLFWMouse.hpp
+ * 26 Feb 2022
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,53 +23,48 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_MOUSE_HPP
-#define ZG_MOUSE_HPP
+#ifndef ZG_MOUSEIMPL_HPP
+#define ZG_MOUSEIMPL_HPP
 
 #include "zgraphics2D/defines.hpp"
 
+#include "zgraphics2D/Input/Mouse.hpp"
 #include "zgraphics2D/Window/Window.hpp"
 
-namespace zg
+namespace zg { namespace details
 {
-   class ZG_API Mouse
+   class ZG_DETAIL MouseImpl
    {
    public:
-      enum class Button : int
-      {
-         Left = 0,
-         Right,
-         Middle,
-         X1,
-         X2,
-         X3,
-         X4,
-         X5
-      };
-
-      enum class CursorMode : int
-      {
-         Normal = 0,
-         Hidden,
-         Disabled
-      };
-
       static void ConnectWindow(std::shared_ptr<Window> window);
       static void DisconnectWindow(std::shared_ptr<Window> window);
       static void SetActiveWindow(std::shared_ptr<Window> window);
 
-      static std::string GetButtonName(Button button);
+      static std::string GetButtonName(Mouse::Button button);
 
-      static bool IsButtonPressed(Button button);
+      static bool IsButtonPressed(Mouse::Button button);
       static glm::ivec2 GetPosition();
 
       static void SetPosition(glm::ivec2 pos);
-      static void SetCursorMode(CursorMode mode);
+      static void SetCursorMode(Mouse::CursorMode mode);
       static void SetRawMouseMotion(bool raw);
-   
-   private:
-      Mouse() = delete;
-   };
-}
 
-#endif // ZG_MOUSE_HPP
+   private:
+      MouseImpl() = delete;
+
+      static void CursorPositionInput(GLFWwindow* window, double x, double y);
+      static void CursorEnterInput(GLFWwindow* window, int entered);
+      static void MouseButtonInput(GLFWwindow* window, int button, int type, int mods);
+      static void MouseWheelInput(GLFWwindow* window, double dx, double dy);
+      static void DropInput(GLFWwindow* window, int count, char const* paths[]);
+
+      template<typename EventType, typename... Args>
+      static void PushMouseEvent(GLFWwindow* window, Args&&... args);
+
+      static std::shared_ptr<Window> s_window;
+   };
+}}
+
+#include "GLFWMouse.inl"
+
+#endif // ZG_MOUSEIMPL_HPP

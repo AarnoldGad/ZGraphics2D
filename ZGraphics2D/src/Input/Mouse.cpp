@@ -2,100 +2,52 @@
 
 #include "zgraphics2D/Input/Mouse.hpp"
 
-#include "zgraphics2D/Input/Event/MouseMovedEvent.hpp"
-#include "zgraphics2D/Input/Event/MouseEnteredEvent.hpp"
-#include "zgraphics2D/Input/Event/MouseButtonPressedEvent.hpp"
-#include "zgraphics2D/Input/Event/MouseButtonReleasedEvent.hpp"
-#include "zgraphics2D/Input/Event/MouseScrolledEvent.hpp"
-#include "zgraphics2D/Input/Event/MouseDroppedEvent.hpp"
+#include "detail/Input/MouseImpl.hpp"
 
 namespace zg
 {
-   Window* Mouse::s_window = nullptr;
-
-   void Mouse::SetPosition(glm::ivec2 pos) noexcept
+   void Mouse::ConnectWindow(std::shared_ptr<Window> window)
    {
-      if (!s_window) return;
-
-      glfwSetCursorPos(s_window->getHandle(), static_cast<double>(pos.x), static_cast<double>(pos.y));
+      details::MouseImpl::ConnectWindow(window);
    }
 
-   void Mouse::SetCursorMode(CursorMode mode) noexcept
+   void Mouse::DisconnectWindow(std::shared_ptr<Window> window)
    {
-      if (!s_window) return;
-
-      glfwSetInputMode(s_window->getHandle(), GLFW_CURSOR, static_cast<int>(mode));
+      details::MouseImpl::DisconnectWindow(window);
    }
 
-   void Mouse::SetRawMouseMotion(bool raw) noexcept
+   void Mouse::SetActiveWindow(std::shared_ptr<Window> window)
    {
-      if (!s_window) return;
-
-      if (glfwRawMouseMotionSupported())
-         glfwSetInputMode(s_window->getHandle(), GLFW_RAW_MOUSE_MOTION, raw ? GLFW_TRUE : GLFW_FALSE);
+      details::MouseImpl::SetActiveWindow(window);
    }
 
-   void Mouse::ConnectWindow(Window* window) noexcept
+   std::string Mouse::GetButtonName(Button button)
    {
-      if (window)
-      {
-         glfwSetCursorPosCallback(window->getHandle(), &Mouse::CursorPositionInput);
-         glfwSetCursorEnterCallback(window->getHandle(), &Mouse::CursorEnterInput);
-
-         glfwSetMouseButtonCallback(window->getHandle(), &Mouse::MouseButtonInput);
-         glfwSetScrollCallback(window->getHandle(), &Mouse::MouseWheelInput);
-
-         glfwSetDropCallback(window->getHandle(), &Mouse::DropInput);
-      }
+      return details::MouseImpl::GetButtonName(button);
    }
 
-   void Mouse::DisconnectWindow(Window* window) noexcept
+   bool Mouse::IsButtonPressed(Button button)
    {
-      if (window)
-      {
-         glfwSetCursorPosCallback(window->getHandle(), nullptr);
-         glfwSetCursorEnterCallback(window->getHandle(), nullptr);
-
-         glfwSetMouseButtonCallback(window->getHandle(), nullptr);
-         glfwSetScrollCallback(window->getHandle(), nullptr);
-
-         glfwSetDropCallback(window->getHandle(), nullptr);
-      }
+      return details::MouseImpl::IsButtonPressed(button);
    }
 
-   void Mouse::CursorPositionInput(GLFWwindow* window, double x, double y)
+   glm::ivec2 Mouse::GetPosition()
    {
-      Window* windowPtr = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
-      ze::Core::UseEventBus().pushEvent<MouseMovedEvent>(windowPtr, glm::ivec2(glm::floor(x), glm::floor(y)));
+      return details::MouseImpl::GetPosition();
    }
 
-   void Mouse::CursorEnterInput(GLFWwindow* window, int entered)
+   void Mouse::SetPosition(glm::ivec2 pos)
    {
-      PushMouseEvent<MouseEnteredEvent>(window, static_cast<bool>(entered));
+      details::MouseImpl::SetPosition(pos);
    }
 
-   void Mouse::MouseButtonInput(GLFWwindow* window, int button, int type, int mods)
+   void Mouse::SetCursorMode(CursorMode mode)
    {
-      switch (type)
-      {
-         case GLFW_RELEASE:
-            PushMouseEvent<MouseButtonReleasedEvent>(window, static_cast<Button>(button), static_cast<uint32_t>(mods));
-            break;
-         case GLFW_PRESS:
-            PushMouseEvent<MouseButtonPressedEvent>(window, static_cast<Button>(button), static_cast<uint32_t>(mods));
-            break;
-         default:
-            break;
-      }
+      details::MouseImpl::SetCursorMode(mode);
    }
 
-   void Mouse::MouseWheelInput(GLFWwindow* window, double dx, double dy)
+   void Mouse::SetRawMouseMotion(bool raw)
    {
-      PushMouseEvent<MouseScrolledEvent>(window, dx, dy);
-   }
-
-   void Mouse::DropInput(GLFWwindow* window, int count, char const* paths[])
-   {
-      PushMouseEvent<MouseDroppedEvent>(window, count, paths);
+      details::MouseImpl::SetRawMouseMotion(raw);
    }
 }

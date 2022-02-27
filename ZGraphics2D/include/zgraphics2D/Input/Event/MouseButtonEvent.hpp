@@ -37,8 +37,8 @@ namespace zg
    public:
       enum class Action
       {
-         Pressed = GLFW_PRESS,
-         Released = GLFW_RELEASE
+         Released = 0,
+         Pressed
       };
 
       Mouse::Button getButton() const noexcept;

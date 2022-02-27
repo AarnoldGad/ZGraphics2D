@@ -3,72 +3,42 @@
 #include "zgraphics2D/Input/Keyboard.hpp"
 
 #include "zgraphics2D/Window/Window.hpp"
-#include "zgraphics2D/Input/Event/KeyPressedEvent.hpp"
-#include "zgraphics2D/Input/Event/KeyReleasedEvent.hpp"
-#include "zgraphics2D/Input/Event/KeyRepeatedEvent.hpp"
+#include "detail/Input/KeyboardImpl.hpp"
 
 namespace zg
 {
-   Window* Keyboard::s_window = nullptr;
-
-   void Keyboard::ConnectWindow(Window* window) noexcept
+   void Keyboard::ConnectWindow(std::shared_ptr<Window> window)
    {
-      if (window)
-      {
-         glfwSetKeyCallback(window->getHandle(), &Keyboard::KeyInput);
-         glfwSetCharCallback(window->getHandle(), &Keyboard::TextInput);
-      }
+      details::KeyboardImpl::ConnectWindow(window);
    }
 
-   void Keyboard::DisconnectWindow(Window* window) noexcept
+   void Keyboard::DisconnectWindow(std::shared_ptr<Window> window)
    {
-      if (window)
-      {
-         glfwSetKeyCallback(window->getHandle(), nullptr);
-         glfwSetCharCallback(window->getHandle(), nullptr);
-      }
+      details::KeyboardImpl::DisconnectWindow(window);
    }
 
-   uint32_t Keyboard::GetModifiers() noexcept
+   void Keyboard::SetActiveWindow(std::shared_ptr<Window> window)
    {
-      uint32_t mods = 0;
-
-      mods |= (IsKeyPressed(Key::LeftShift)   || IsKeyPressed(Key::RightShift))
-                  ? static_cast<uint32_t>(Modifiers::Shift)    : 0;
-      mods |= (IsKeyPressed(Key::LeftControl) || IsKeyPressed(Key::RightControl))
-                  ? static_cast<uint32_t>(Modifiers::Ctrl)     : 0;
-      mods |= (IsKeyPressed(Key::LeftAlt)     || IsKeyPressed(Key::RightAlt))
-                  ? static_cast<uint32_t>(Modifiers::Alt)      : 0;
-      mods |= (IsKeyPressed(Key::LeftSuper)   || IsKeyPressed(Key::RightSuper))
-                  ? static_cast<uint32_t>(Modifiers::Super)    : 0;
-      mods |= (IsKeyPressed(Key::CapsLock))
-                  ? static_cast<uint32_t>(Modifiers::CapsLock) : 0;
-      mods |= (IsKeyPressed(Key::NumLock))
-                  ? static_cast<uint32_t>(Modifiers::NumLock)  : 0;
-
-      return mods;
+      details::KeyboardImpl::SetActiveWindow(window);
    }
 
-   void Keyboard::KeyInput(GLFWwindow* window, int key, int scancode, int type, int modifiers)
+   std::string Keyboard::GetKeyName(Key key)
    {
-      switch (type)
-      {
-         case GLFW_RELEASE:
-            PushKeyEvent<KeyReleasedEvent>(window, key, scancode, modifiers);
-            break;
-         case GLFW_PRESS:
-            PushKeyEvent<KeyPressedEvent>(window, key, scancode, modifiers);
-            break;
-         case GLFW_REPEAT:
-            PushKeyEvent<KeyRepeatedEvent>(window, key, scancode, modifiers);
-            break;
-         default:
-            break;
-      }
+      return details::KeyboardImpl::GetKeyName(key);
    }
 
-   void Keyboard::TextInput(GLFWwindow* window, uint32_t codepoint)
+   int Keyboard::GetKeyScancode(Key key)
    {
-      // TODO
+      return details::KeyboardImpl::GetKeyScancode(key);
+   }
+
+   bool Keyboard::IsKeyPressed(Key key)
+   {
+      return details::KeyboardImpl::IsKeyPressed(key);
+   }
+
+   uint32_t Keyboard::GetModifiers()
+   {
+      return details::KeyboardImpl::GetModifiers();
    }
 }

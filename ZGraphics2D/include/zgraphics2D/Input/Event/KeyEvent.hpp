@@ -38,9 +38,9 @@ namespace zg
    public:
       enum class Action
       {
-         Released = GLFW_RELEASE,
-         Pressed = GLFW_PRESS,
-         Repeated = GLFW_REPEAT
+         Released = 0,
+         Pressed,
+         Repeated
       };
 
       Window* getWindow() noexcept;
