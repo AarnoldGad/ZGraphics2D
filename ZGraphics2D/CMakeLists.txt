@@ -54,19 +54,19 @@ TARGET_SOURCES(zgraphics PRIVATE
 
 # src/Engine
 TARGET_SOURCES(zgraphics PRIVATE
+               include/zgraphics2D/Engine/Context.hpp
                include/zgraphics2D/Engine/GraphicsEngine.hpp
                include/zgraphics2D/Engine/GraphicsEngine.inl
                include/zgraphics2D/Engine/GraphicsSettings.hpp
                src/Engine/GraphicsEngine.cpp
+               src/Engine/Context.cpp
                )
 
 # src/Input
 TARGET_SOURCES(zgraphics PRIVATE
                include/zgraphics2D/Input/Joystick.hpp
                include/zgraphics2D/Input/Keyboard.hpp
-               include/zgraphics2D/Input/Keyboard.inl
                include/zgraphics2D/Input/Mouse.hpp
-               include/zgraphics2D/Input/Mouse.inl
                src/Input/Joystick.cpp
                src/Input/Keyboard.cpp
                src/Input/Mouse.cpp
@@ -169,7 +169,6 @@ TARGET_SOURCES(zgraphics PRIVATE
 # src/Window
 TARGET_SOURCES(zgraphics PRIVATE
                include/zgraphics2D/Window/Window.hpp
-               include/zgraphics2D/Window/Window.inl
                include/zgraphics2D/Window/WindowSettings.hpp
                include/zgraphics2D/Window/ContextSettings.hpp
                include/zgraphics2D/Window/FrameBufferSettings.hpp
@@ -206,6 +205,20 @@ TARGET_SOURCES(zgraphics PRIVATE
                src/Window/Event/WindowRefreshedEvent.cpp
                )
 
+# Implementation Details
+TARGET_SOURCES(zgraphics PRIVATE
+               impl/detail/Context/ContextImpl.hpp
+               impl/detail/Context/ContextImpl.cpp
+
+               impl/detail/Input/KeyboardImpl.hpp
+               impl/detail/Input/KeyboardImpl.cpp
+               impl/detail/Input/MouseImpl.hpp
+               impl/detail/Input/MouseImpl.cpp
+
+               impl/detail/Window/WindowImpl.hpp
+               impl/detail/Window/WindowImpl.cpp
+               )
+
 # Dependencies
 TARGET_SOURCES(zgraphics PRIVATE
                deps/glad/src/glad.c
@@ -230,6 +243,8 @@ TARGET_INCLUDE_DIRECTORIES(zgraphics PUBLIC
                            )
 
 TARGET_INCLUDE_DIRECTORIES(zgraphics PRIVATE
+                           "${PROJECT_SOURCE_DIR}/ZGraphics2D/impl"
+
                            "${PROJECT_SOURCE_DIR}/ZGraphics2D/deps/glfw/include"
                            "${PROJECT_SOURCE_DIR}/ZGraphics2D/deps/stb/include"
                            ${FREETYPE_INCLUDE_DIR_freetype2}

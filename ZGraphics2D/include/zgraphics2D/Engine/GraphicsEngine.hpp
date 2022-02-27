@@ -41,7 +41,7 @@ namespace zg
    public:
       static ze::Logger& UseGraphicsLogger() noexcept;
 
-      Window& getWindow() noexcept;
+      std::shared_ptr<Window> getWindow() noexcept;
 
       void initialise() override;
 
@@ -53,25 +53,18 @@ namespace zg
       ~GraphicsEngine();
 
       ze::Signal<void ()> renderingSignal;
-      
+ 
    private:
-      static void InitGLFW();
-      static void LoadOpenGL();
       void openWindow();
-
-      static void HandleGLFWError(int code, char const* description);
-
-   private:
-      static bool s_isGLFWInitialised;
-      static bool s_isOpenGLLoaded;
 
       bool m_isInitialised;
       GraphicsSettings m_settings;
 
-      Window m_window;
+      std::shared_ptr<Window> m_window;
    };
 }
 
 #include "GraphicsEngine.inl"
 
 #endif // ZG_GRAPHICSENGINE_HPP
+
