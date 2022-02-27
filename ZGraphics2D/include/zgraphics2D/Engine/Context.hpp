@@ -1,6 +1,6 @@
 /**
- * ContextSettings.hpp
- * 30 Jun 2021
+ * Context.hpp
+ * 26 Feb 2022
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,39 +23,20 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_CONTEXTSETTINGS_HPP
-#define ZG_CONTEXTSETTINGS_HPP
+#ifndef ZG_CONTEXT_HPP
+#define ZG_CONTEXT_HPP
 
 #include "zgraphics2D/defines.hpp"
 
 namespace zg
 {
-   struct ContextSettings
+   class ZG_API Context
    {
-      enum class ClientAPI : int
-      {
-         None = 0,
-         OpenGL,
-         OpenGLES
-      };
-
-      enum class Profile : int
-      {
-         Any = 0,
-         Compatibility,
-         Core
-      };
-
-      ClientAPI client = ClientAPI::OpenGL;
-      int versionMajor = 1;
-      int versionMinor = 0;
-      bool forwardCompatibility = false;
-      bool debugContext = false;
-      Profile openglProfile = Profile::Any;
-
-      int samples = 0;
-      bool stereo = false;
+   public:
+      static void Initialise();
+      static void LoadAPI();
+      static void Terminate();
    };
 }
 
-#endif // ZG_CONTEXTSETTINGS_HPP
+#endif // ZG_CONTEXT_HPP

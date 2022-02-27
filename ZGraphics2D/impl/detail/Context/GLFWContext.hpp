@@ -1,6 +1,6 @@
 /**
- * ContextSettings.hpp
- * 30 Jun 2021
+ * GLFWContext.hpp
+ * 26 Feb 2022
  * Gaétan "The Aarnold" Jalin
  *
  * Copyright (C) 2020-2021 Gaétan Jalin
@@ -23,39 +23,33 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZG_CONTEXTSETTINGS_HPP
-#define ZG_CONTEXTSETTINGS_HPP
+#ifndef ZG_CONTEXTIMPL_HPP
+#define ZG_CONTEXTIMPL_HPP
 
 #include "zgraphics2D/defines.hpp"
 
-namespace zg
+#include "zgraphics2D/Window/WindowSettings.hpp"
+#include "zgraphics2D/Window/ContextSettings.hpp"
+#include "zgraphics2D/Window/FrameBufferSettings.hpp"
+
+namespace zg { namespace details
 {
-   struct ContextSettings
+   class ZG_DETAIL ContextImpl
    {
-      enum class ClientAPI : int
-      {
-         None = 0,
-         OpenGL,
-         OpenGLES
-      };
+   public:
+      static void Initialise();
+      static void LoadAPI();
+      static void Terminate();
 
-      enum class Profile : int
-      {
-         Any = 0,
-         Compatibility,
-         Core
-      };
+   private:
+      ContextImpl() = delete;
 
-      ClientAPI client = ClientAPI::OpenGL;
-      int versionMajor = 1;
-      int versionMinor = 0;
-      bool forwardCompatibility = false;
-      bool debugContext = false;
-      Profile openglProfile = Profile::Any;
+      static void HandleGLFWError(int code, char const* description);
 
-      int samples = 0;
-      bool stereo = false;
+      static bool s_isLibInitialised;
+      static bool s_isAPILoaded;
    };
-}
+}}
 
-#endif // ZG_CONTEXTSETTINGS_HPP
+#endif // ZG_CONTEXTIMPL_HPP
+
