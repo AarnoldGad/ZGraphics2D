@@ -38,7 +38,6 @@
 
 #include <zgraphics2D/Renderable/Renderable.hpp>
 #include <zgraphics2D/Renderable/Sprite.hpp>
-#include <zgraphics2D/Renderable/Cube.hpp>
 
 // Text
 #include <zgraphics2D/Text/Font.hpp>

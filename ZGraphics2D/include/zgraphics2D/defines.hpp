@@ -25,3 +25,4 @@
 #include <glm/gtx/scalar_multiplication.hpp>
 
 #endif // ZG_DEFINES_HPP
+
