@@ -33,7 +33,7 @@ namespace zg
    class ZG_API Image
    {
    public:
-      enum class Format : unsigned
+      enum class Format : uint32_t
       {
          Unknown = 0,
          Grey, //<- 1 8-bit channel

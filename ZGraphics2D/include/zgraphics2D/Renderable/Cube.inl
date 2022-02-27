@@ -1,4 +1,4 @@
-inline constexpr size_t zg::Cube::getVertexCount() const noexcept
+inline size_t zg::Cube::getVertexCount() const noexcept
 {
    return sizeof(m_vertices) / sizeof(Vertex2D);
 }
@@ -9,7 +9,7 @@ inline zg::Vertex const* zg::Cube::getVertex(size_t index) const noexcept
    return &m_vertices[index];
 }
 
-inline constexpr size_t zg::Cube::getElementCount() const noexcept
+inline size_t zg::Cube::getElementCount() const noexcept
 {
    return 36;
 }
@@ -44,7 +44,7 @@ inline glm::vec3 zg::Cube::getSize() const noexcept
    return m_size;
 }
 
-inline constexpr size_t zg::Cube::getTextureCount() const noexcept
+inline size_t zg::Cube::getTextureCount() const noexcept
 {
    return 1;
 }

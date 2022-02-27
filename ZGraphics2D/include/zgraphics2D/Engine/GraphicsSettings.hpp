@@ -38,11 +38,11 @@ namespace zg
 {
    struct GraphicsSettings
    {
-      std::string title = "ZEngine";
+      std::string title = "Zucchini Sprout";
       glm::ivec2 size = { 800, 600 };
       glm::ivec2 pos = Window::PositionUndefined;
       glm::vec4 color = Colors::Beige;
-      uint32_t clearMask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
+      uint32_t clearMask = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT;
 
       ContextSettings context = {};
       FrameBufferSettings framebuffer = {};

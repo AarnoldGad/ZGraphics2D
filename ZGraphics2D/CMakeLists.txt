@@ -1,9 +1,9 @@
 ADD_LIBRARY(zgraphics)
 
 IF(WIN32)
-	SET(BUILD_SHARED_LIBS OFF)
+   SET(BUILD_SHARED_LIBS OFF)
 ELSE()
-	SET(BUILD_SHARED_LIBS ON)
+   SET(BUILD_SHARED_LIBS ON)
 ENDIF()
 
 # Properties
@@ -12,7 +12,7 @@ SET_TARGET_PROPERTIES(zgraphics PROPERTIES
                       VERSION ${ZGraphics2D_VERSION_MAJOR}.${ZGraphics2D_VERSION_MINOR}.${ZGraphics2D_VERSION_PATCH}
                       SOVERSION ${ZGraphics2D_VERSION_MAJOR}
                       POSITION_INDEPENDENT_CODE ON
-                      CXX_STANDARD 20
+                      CXX_STANDARD 17
                       CXX_STANDARD_REQUIRED ON
                       CXX_EXTENSIONS OFF
                       FOLDER "ZGraphics2D"

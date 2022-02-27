@@ -47,13 +47,13 @@ namespace zg
       void setTextureRect(glm::vec4 rect) noexcept;
       glm::vec4 getTextureRect() const noexcept;
 
-      constexpr size_t getVertexCount() const noexcept override;
+      size_t getVertexCount() const noexcept override;
       Vertex const* getVertex(size_t index) const noexcept override;
 
-      constexpr size_t getElementCount() const noexcept override;
+      size_t getElementCount() const noexcept override;
       unsigned int* getElements() const noexcept override;
 
-      constexpr size_t getTextureCount() const noexcept override;
+      size_t getTextureCount() const noexcept override;
       void setTexture(Texture const* texture) noexcept;
       Texture const* getTexture(size_t index) const noexcept override;
       
