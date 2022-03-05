@@ -41,26 +41,18 @@ namespace zg
       m_window = Window::Make(m_settings.title, m_settings.size, m_settings.pos);
 
       m_window->setColor(m_settings.color);
-      m_window->setClearMask(m_settings.clearMask);
-
-      Keyboard::ConnectWindow(m_window);
-      Mouse::ConnectWindow(m_window);
-
-      Keyboard::SetActiveWindow(m_window);
-      Mouse::SetActiveWindow(m_window);
    }
 
    void GraphicsEngine::tick([[maybe_unused]] ze::Time deltaTime)
    {
+      Context::SetActiveContext(m_window.get());
       m_window->clear();
 
       renderingSignal.emit();
 
       m_window->draw();
 
-      Keyboard::SetActiveWindow(m_window);
-      Mouse::SetActiveWindow(m_window);
-      glfwPollEvents();
+      Context::PollEvents();
    }
 
    void GraphicsEngine::terminate()
@@ -74,5 +66,4 @@ namespace zg
    {
 
    }
-
 }

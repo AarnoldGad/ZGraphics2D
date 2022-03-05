@@ -217,6 +217,7 @@ TARGET_SOURCES(zgraphics PRIVATE
 
                impl/detail/Window/WindowImpl.hpp
                impl/detail/Window/WindowImpl.cpp
+               impl/detail/Window/WindowImpl.inl
                )
 
 # Dependencies

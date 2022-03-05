@@ -1,4 +1,4 @@
-inline std::shared_ptr<zg::Window> zg::GraphicsEngine::getWindow() noexcept
+inline zg::Window* zg::GraphicsEngine::getWindow() noexcept
 {
-   return m_window;
+   return m_window.get();
 }

@@ -20,5 +20,15 @@ namespace zg
    {
       details::ContextImpl::Terminate();
    }
+
+   void Context::SetActiveContext(Window* window)
+   {
+      details::ContextImpl::SetActiveContext(window);
+   }
+
+   void Context::PollEvents()
+   {
+      details::ContextImpl::PollEvents();
+   }
 }
 

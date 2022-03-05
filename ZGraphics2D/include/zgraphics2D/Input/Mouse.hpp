@@ -28,8 +28,6 @@
 
 #include "zgraphics2D/defines.hpp"
 
-#include "zgraphics2D/Window/Window.hpp"
-
 namespace zg
 {
    class ZG_API Mouse
@@ -54,10 +52,6 @@ namespace zg
          Disabled
       };
 
-      static void ConnectWindow(std::shared_ptr<Window> window);
-      static void DisconnectWindow(std::shared_ptr<Window> window);
-      static void SetActiveWindow(std::shared_ptr<Window> window);
-
       static std::string GetButtonName(Button button);
 
       static bool IsButtonPressed(Button button);
@@ -66,7 +60,7 @@ namespace zg
       static void SetPosition(glm::ivec2 pos);
       static void SetCursorMode(CursorMode mode);
       static void SetRawMouseMotion(bool raw);
-   
+
    private:
       Mouse() = delete;
    };

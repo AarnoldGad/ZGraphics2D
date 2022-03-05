@@ -37,6 +37,11 @@
 
 namespace zg
 {
+   namespace details
+   {
+      class WindowImpl;
+   }
+
    class ZG_API Window
    {
    public:
@@ -44,44 +49,46 @@ namespace zg
       static glm::ivec2 constexpr PositionUndefined = { 0xFE000000, 0xFE000000 };
 
       static void Configure(WindowSettings window, ContextSettings context, FrameBufferSettings framebuffer);
-      static std::shared_ptr<Window> Make(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined);
+      
+      [[nodiscard]]
+      static std::unique_ptr<Window> Make(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined);
 
-      virtual void clear() = 0;
-      virtual void draw() = 0;
+      void clear();
+      void draw();
 
-      virtual void show() = 0;
-      virtual void hide() = 0;
-      virtual void close() = 0;
+      void show();
+      void hide();
+      void close();
 
-      virtual std::string const& getTitle() const noexcept = 0;
-      virtual glm::ivec2 getSize() const noexcept = 0;
-      virtual glm::ivec2 getFramebufferSize() const noexcept = 0;
-      // virtual Image const& getIcon() const noexcept = 0;
-      virtual glm::ivec2 getPosition() const noexcept = 0;
-      virtual float getOpacity() const noexcept = 0;
-      virtual bool isVisible() const noexcept = 0;
-      virtual bool shouldClose() const noexcept = 0;
-      virtual glm::vec4 getColor() const noexcept = 0;
-      virtual uint32_t getClearMask() const noexcept = 0;
+      std::string const& getTitle() const;
+      glm::ivec2 getSize() const;
+      glm::ivec2 getFramebufferSize() const;
+      // Image const& getIcon() const;
+      glm::ivec2 getPosition() const;
+      float getOpacity() const;
+      bool isVisible() const;
+      bool shouldClose() const;
+      glm::vec4 getColor() const;
 
-      virtual void setTitle(std::string const& title) = 0;
-      virtual void setSize(int width, int height) = 0;
-      virtual void setSize(glm::ivec2 size) = 0;
-      virtual void setIcon(Image const& icon) = 0;
-      virtual void setPosition(int x, int y) = 0;
-      virtual void setPosition(glm::ivec2 pos) = 0;
-      virtual void setOpacity(float opacity) = 0;
-      virtual void setVisible(bool visible) = 0;
-      virtual void setColor(float r, float g, float b, float a) noexcept = 0;
-      virtual void setColor(glm::vec4 color) noexcept = 0;
-      virtual void setClearMask(uint32_t mask) noexcept = 0;
+      void setTitle(std::string const& title);
+      void setSize(int width, int height);
+      void setSize(glm::ivec2 size);
+      void setIcon(Image const& icon);
+      void setPosition(int x, int y);
+      void setPosition(glm::ivec2 pos);
+      void setOpacity(float opacity);
+      void setVisible(bool visible);
+      void setColor(float r, float g, float b, float a);
+      void setColor(glm::vec4 color);
 
-      virtual void* getHandle() noexcept = 0;
+      void* getHandle() noexcept;
 
-      virtual ~Window() = default;
+      Window(std::string const& title, glm::ivec2 size, glm::ivec2 pos = PositionUndefined);
+      Window();
+      ~Window();
 
    protected:
-      virtual void open(std::string const& title, glm::ivec2 size, glm::ivec2 pos) = 0;
+      std::unique_ptr<details::WindowImpl> m_impl;
    };
 }
 

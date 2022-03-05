@@ -28,8 +28,6 @@
 
 #include "zgraphics2D/defines.hpp"
 
-#include "zgraphics2D/Window/Window.hpp"
-
 namespace zg
 {
    class ZG_API Keyboard
@@ -93,9 +91,6 @@ namespace zg
          CapsLock = FLAG(4),
          NumLock  = FLAG(5)
       };
-      static void ConnectWindow(std::shared_ptr<Window> window);
-      static void DisconnectWindow(std::shared_ptr<Window> window);
-      static void SetActiveWindow(std::shared_ptr<Window> window);
 
       static std::string GetKeyName(Key key);
       static int GetKeyScancode(Key key);

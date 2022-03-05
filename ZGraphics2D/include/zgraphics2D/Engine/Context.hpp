@@ -28,6 +28,8 @@
 
 #include "zgraphics2D/defines.hpp"
 
+#include "zgraphics2D/Window/Window.hpp"
+
 namespace zg
 {
    class ZG_API Context
@@ -36,6 +38,9 @@ namespace zg
       static void Initialise();
       static void LoadAPI();
       static void Terminate();
+
+      static void SetActiveContext(Window* window);
+      static void PollEvents();
    };
 }
 

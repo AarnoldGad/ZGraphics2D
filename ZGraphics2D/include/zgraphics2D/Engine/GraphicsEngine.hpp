@@ -31,8 +31,6 @@
 #include "zgraphics2D/Engine/GraphicsSettings.hpp"
 
 #include "zgraphics2D/Window/Window.hpp"
-#include "zgraphics2D/Input/Keyboard.hpp"
-#include "zgraphics2D/Input/Mouse.hpp"
 
 namespace zg
 {
@@ -41,7 +39,7 @@ namespace zg
    public:
       static ze::Logger& UseGraphicsLogger() noexcept;
 
-      std::shared_ptr<Window> getWindow() noexcept;
+      Window* getWindow() noexcept;
 
       void initialise() override;
 
@@ -60,7 +58,7 @@ namespace zg
       bool m_isInitialised;
       GraphicsSettings m_settings;
 
-      std::shared_ptr<Window> m_window;
+      std::unique_ptr<Window> m_window;
    };
 }
 

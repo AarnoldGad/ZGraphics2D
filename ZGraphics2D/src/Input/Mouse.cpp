@@ -6,21 +6,6 @@
 
 namespace zg
 {
-   void Mouse::ConnectWindow(std::shared_ptr<Window> window)
-   {
-      details::MouseImpl::ConnectWindow(window);
-   }
-
-   void Mouse::DisconnectWindow(std::shared_ptr<Window> window)
-   {
-      details::MouseImpl::DisconnectWindow(window);
-   }
-
-   void Mouse::SetActiveWindow(std::shared_ptr<Window> window)
-   {
-      details::MouseImpl::SetActiveWindow(window);
-   }
-
    std::string Mouse::GetButtonName(Button button)
    {
       return details::MouseImpl::GetButtonName(button);

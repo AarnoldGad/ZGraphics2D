@@ -5,10 +5,6 @@
 #include "zgconfig.hpp"
 #include "platform.hpp"
 
-#define ZG_CONTEXT_LIB_GLFW
-// TODO Abstract API (so it can be changed by Vulkan or DirectX)
-//#define ZG_CONTEXT_API_OPENGL
-
 #define GFX_LOG_INFO(...)     ::zg::GraphicsEngine::UseGraphicsLogger().info().logLine(__VA_ARGS__)
 #define GFX_LOG_DEBUG(...)    ::zg::GraphicsEngine::UseGraphicsLogger().debug().logLine(__VA_ARGS__)
 #define GFX_LOG_WARN(...)     ::zg::GraphicsEngine::UseGraphicsLogger().warn().logLine(__VA_ARGS__)
