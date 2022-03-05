@@ -36,7 +36,7 @@ namespace zg
    class ZG_API Font
    {
    public:
-      virtual Glyph const& getGlyph(unsigned int index) const = 0;
+      virtual Glyph const& getGlyph(uint32_t index) const = 0;
 
       Encoding getEncoding() const noexcept;
       void setEncoding(Encoding encoding) noexcept;

@@ -37,7 +37,7 @@ namespace zg
    class ZG_API BitmapFont : public Font
    {
    public:
-      Glyph const& getGlyph(unsigned int index) const override;
+      Glyph const& getGlyph(uint32_t index) const override;
       Texture const* getAtlas() const noexcept;
 
       void load(std::filesystem::path const& path, glm::ivec2 glyphCount,

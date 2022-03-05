@@ -104,19 +104,14 @@ TARGET_SOURCES(zgraphics PRIVATE
                src/Input/Event/MouseEnteredEvent.cpp
                )
 
-# src/Renderable
-TARGET_SOURCES(zgraphics PRIVATE
-               include/zgraphics2D/Renderable/Cube.hpp
-               include/zgraphics2D/Renderable/Cube.inl
-               include/zgraphics2D/Renderable/Renderable.hpp
-               include/zgraphics2D/Renderable/Sprite.hpp
-               include/zgraphics2D/Renderable/Sprite.inl
-               src/Renderable/Sprite.cpp
-               src/Renderable/Cube.cpp
-               )
-
 # src/Renderer
 TARGET_SOURCES(zgraphics PRIVATE
+               include/zgraphics2D/Renderer/Mesh.hpp
+               include/zgraphics2D/Renderer/TexturedMesh.hpp
+               include/zgraphics2D/Renderer/Sprite.hpp
+               include/zgraphics2D/Renderer/Sprite.inl
+               src/Renderer/Sprite.cpp
+
                include/zgraphics2D/Renderer/Renderer.hpp
                include/zgraphics2D/Renderer/DefaultRenderer.hpp
                include/zgraphics2D/Renderer/Transform.hpp
