@@ -10,7 +10,7 @@ namespace zg
    std::string WindowClosedEvent::toString() const
    {
       std::stringstream debugStr;
-      debugStr << "Window 0x" << std::hex << m_window << std::dec << " closed";
+      debugStr << "Window " << std::hex << m_window << std::dec << " closed";
       return debugStr.str();
    }
 }

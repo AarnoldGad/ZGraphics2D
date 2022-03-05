@@ -11,7 +11,7 @@ namespace zg
    {
       std::stringstream debugStr;
 
-      debugStr << "Window 0x" << std::hex << m_window << std::dec
+      debugStr << "Window " << std::hex << m_window << std::dec
       << " scaled by (" << getScale().x << ", " << getScale().y << ")";
 
       return debugStr.str();

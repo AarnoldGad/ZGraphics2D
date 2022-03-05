@@ -10,7 +10,7 @@ namespace zg
    std::string WindowRefreshedEvent::toString() const
    {
       std::stringstream debugStr;
-      debugStr << "Window 0x" << std::hex << m_window << std::dec << " refreshed";
+      debugStr << "Window " << std::hex << m_window << std::dec << " refreshed";
       return debugStr.str();
    }
 }

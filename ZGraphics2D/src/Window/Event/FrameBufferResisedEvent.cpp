@@ -11,7 +11,7 @@ namespace zg
    {
       std::stringstream debugStr;
 
-      debugStr << "Window 0x" << std::hex << m_window << std::dec
+      debugStr << "Window " << std::hex << m_window << std::dec
       << " framebuffer resised to (" << getSize().x << ", " << getSize().y << ")";
 
       return debugStr.str();
