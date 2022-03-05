@@ -23,28 +23,23 @@
  *
  *    3. This notice may not be removed or altered from any source distribution.
  **/
-#ifndef ZE_RENDERABLE_HPP
-#define ZE_RENDERABLE_HPP
+#ifndef ZG_TEXTUREDMESH_HPP
+#define ZG_TEXTUREDMESH_HPP
 
 #include "zgraphics2D/defines.hpp"
 
-#include "zgraphics2D/Renderer/Vertex.hpp"
+#include "zgraphics2D/Renderer/Mesh.hpp"
 #include "zgraphics2D/Renderer/Texture.hpp"
 
 namespace zg
 {
-   class ZG_API Renderable
+   class ZG_API TexturedMesh : public Mesh
    {
    public:
-      virtual size_t getVertexCount() const noexcept = 0;
-      virtual Vertex const* getVertex(size_t index) const noexcept = 0;
-
-      virtual size_t getElementCount() const noexcept = 0;
-      virtual unsigned int* getElements() const noexcept = 0;
-
       virtual size_t getTextureCount() const noexcept = 0;
       virtual Texture const* getTexture(size_t index) const noexcept = 0;
    };
 }
 
-#endif /* ZE_RENDERABLE_HPP */
+#endif // ZG_TEXTUREDMESH_HPP
+

@@ -15,7 +15,7 @@ namespace zg
       m_viewProjection = viewProjection;
    }
 
-   void DefaultRenderer::submit(Renderable const& object, glm::mat4 transform)
+   void DefaultRenderer::submit(TexturedMesh const& object, glm::mat4 transform)
    {
       m_objects.emplace(&object, transform);
    }

@@ -34,7 +34,7 @@
 #include "zgraphics2D/Renderer/Buffers/VertexBuffer.hpp"
 #include "zgraphics2D/Renderer/Buffers/IndexBuffer.hpp"
 #include "zgraphics2D/Renderer/ViewProjection.hpp"
-#include "zgraphics2D/Renderable/Renderable.hpp"
+#include "zgraphics2D/Renderer/TexturedMesh.hpp"
 
 #include <vector>
 
@@ -47,7 +47,7 @@ namespace zg
       void setLayout(VertexLayout const& layout);
       void setViewProjection(ViewProjection const* viewProjection) noexcept;
 
-      void submit(Renderable const& object, glm::mat4 transform = {});
+      void submit(TexturedMesh const& object, glm::mat4 transform = {});
       void render(Shader& shader) override;
 
       DefaultRenderer() = default;
@@ -58,7 +58,7 @@ namespace zg
       IndexBuffer m_ebo;
 
       ViewProjection const* m_viewProjection;
-      std::map<Renderable const*, glm::mat4> m_objects;
+      std::map<TexturedMesh const*, glm::mat4> m_objects;
    };
 }
 

@@ -28,14 +28,15 @@
 
 #include "zgraphics2D/defines.hpp"
 
-#include "zgraphics2D/Renderable/Renderable.hpp"
+#include "zgraphics2D/Renderer/TexturedMesh.hpp"
 #include "zgraphics2D/Renderer/Transform.hpp"
 #include "zgraphics2D/Renderer/Vertex2D.hpp"
 #include "zgraphics2D/Renderer/Texture.hpp"
+#include "zgraphics2D/Common/Colors.hpp"
 
 namespace zg
 {
-   class ZG_API Sprite : public Renderable, public Transform
+   class ZG_API Sprite : public TexturedMesh, public Transform
    {
    public:
       void setSize(glm::vec2 size) noexcept;
@@ -58,7 +59,7 @@ namespace zg
       Texture const* getTexture(size_t index) const noexcept override;
       
       explicit Sprite(glm::vec2 size = {}, Texture const* texture = nullptr,
-                      glm::vec4 color = { 1.f, 1.f, 1.f, 1.f }, glm::vec4 textureRect = { 0.f, 0.f, 1.f, 1.f });
+                      glm::vec4 color = Colors::White, glm::vec4 textureRect = { 0.f, 0.f, 1.f, 1.f });
 
    private:
       Texture const* m_texture;

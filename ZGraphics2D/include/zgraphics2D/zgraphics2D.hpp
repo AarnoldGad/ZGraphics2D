@@ -36,8 +36,9 @@
 #include <zgraphics2D/Camera/Camera.hpp>
 #include <zgraphics2D/Camera/FPSCamera.hpp>
 
-#include <zgraphics2D/Renderable/Renderable.hpp>
-#include <zgraphics2D/Renderable/Sprite.hpp>
+#include <zgraphics2D/Renderer/Mesh.hpp>
+#include <zgraphics2D/Renderer/TexturedMesh.hpp>
+#include <zgraphics2D/Renderer/Sprite.hpp>
 
 // Text
 #include <zgraphics2D/Text/Font.hpp>
