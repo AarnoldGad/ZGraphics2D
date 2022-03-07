@@ -1,12 +1,11 @@
 inline unsigned int zg::Buffer::getHandle() const noexcept
 {
-   return m_buffer;
+   return m_handle;
 }
 
-template<typename BufferType>
-inline BufferType* zg::Buffer::map()
+template<typename DataType>
+inline DataType* zg::Buffer::map()
 {
-   bind();
-   return reinterpret_cast<BufferType*>(glMapBuffer(m_bufferType, GL_WRITE_ONLY));
+   return static_cast<DataType*>(map());
 }
 

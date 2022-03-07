@@ -1,4 +1,4 @@
-inline zg::IndexBuffer::Type zg::IndexBuffer::getElementType() const noexcept
+inline zg::IndexBuffer::DataType zg::IndexBuffer::getElementType() const noexcept
 {
-   return m_type;
+   return m_dataType;
 }

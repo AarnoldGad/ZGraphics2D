@@ -33,18 +33,24 @@ namespace zg
    class ZG_API Buffer
    {
    public:
-      enum class Usage : unsigned int
+      enum class Usage
       {
          Static = 0,
          Dynamic,
+      };
+
+      enum class Type
+      {
+         Vertex = 0,
+         Element
       };
 
       void resize(size_t size);
       void setData(size_t size, void const* data);
       void setSubData(ptrdiff_t offset, size_t size, void const* data);
 
-      template<typename BufferType>
-      BufferType* map();
+      template<typename DataType>
+      DataType* map();
       void unmap();
 
       unsigned int getHandle() const noexcept;
@@ -52,14 +58,15 @@ namespace zg
       void bind() const noexcept;
       void unbind() const noexcept;
 
-      // TODO remove/replace GLenum
-      explicit Buffer(GLenum bufferType, Usage usage);
+      explicit Buffer(Type bufferType, Usage usage = Usage::Static);
       ~Buffer();
 
    protected:
-      unsigned int m_buffer;
-      GLenum m_bufferType;
-      Usage m_usage;
+      void* map();
+
+      unsigned int m_handle;
+      Type const m_type;
+      Usage const m_usage;
    };
 }
 

@@ -35,19 +35,19 @@ namespace zg
    class ZG_API IndexBuffer : public Buffer
    {
    public:
-      enum class Type
+      enum class DataType
       {
-         UnsignedByte,
-         UnsignedShort,
-         UnsignedInt
+         UByte,
+         UShort,
+         UInt
       };
 
-      Type getElementType() const noexcept;
+      DataType getElementType() const noexcept;
 
-      explicit IndexBuffer(Type type = Type::UnsignedInt);
+      explicit IndexBuffer(DataType type = DataType::UInt);
 
    private:
-      Type m_type;
+      DataType m_dataType;
    };
 }
 
