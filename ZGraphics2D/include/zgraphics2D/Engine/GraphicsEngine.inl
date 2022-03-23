@@ -1,4 +1,4 @@
-inline zg::Window* zg::GraphicsEngine::getWindow() noexcept
+inline zg::Window& zg::GraphicsEngine::getWindow() noexcept
 {
-   return m_window.get();
+   return *m_window.get();
 }

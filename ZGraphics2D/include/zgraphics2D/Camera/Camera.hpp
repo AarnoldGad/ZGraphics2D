@@ -52,7 +52,7 @@ namespace zg
       float getAspectRatio() const noexcept;
       glm::vec3 getPosition() const noexcept;
 
-      Camera(ze::Angle fov, float ratio, glm::vec3 pos = {}, glm::vec3 front = { 0.f, 0.f, -1.f }, glm::vec3 up = { 0.f, 1.f, 0.f });
+      explicit Camera(ze::Angle fov, float ratio = 1.f, glm::vec3 pos = {}, glm::vec3 front = { 0.f, 0.f, -1.f }, glm::vec3 up = { 0.f, 1.f, 0.f });
 
    protected:
       mutable glm::mat4 m_view;

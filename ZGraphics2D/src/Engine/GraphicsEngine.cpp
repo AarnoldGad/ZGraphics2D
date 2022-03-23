@@ -14,8 +14,14 @@ namespace zg
       return logger;
    }
 
-   GraphicsEngine::GraphicsEngine(GraphicsSettings settings)
-      : m_isInitialised(false), m_settings(settings) {}
+   GraphicsEngine::GraphicsEngine(GraphicsSettings const& settings)
+      : m_isInitialised(false), m_settings(settings), m_window(nullptr) {}
+
+   void GraphicsEngine::setSettings(zg::GraphicsSettings const& settings) noexcept
+   {
+      if (m_isInitialised) return (void) GFX_LOG_ERROR("Unable to change engine settings while running");
+      m_settings = settings;
+   }
 
    void GraphicsEngine::initialise()
    {
@@ -57,6 +63,7 @@ namespace zg
 
    void GraphicsEngine::terminate()
    {
+      m_window.reset(nullptr);
       Context::Terminate();
 
       m_isInitialised = false;

@@ -46,7 +46,7 @@ namespace zg
 
       void turn(glm::vec2 offset);
 
-      FPSCamera(ze::Angle fov, float ratio, float sensitivity = 1.f, glm::vec3 pos = {}, glm::vec3 front = { 0.f, 0.f, -1.f }, glm::vec3 up = { 0.f, 1.f, 0.f });
+      FPSCamera(ze::Angle fov, float ratio = 1.f, float sensitivity = 1.f, glm::vec3 pos = {}, glm::vec3 front = { 0.f, 0.f, -1.f }, glm::vec3 up = { 0.f, 1.f, 0.f });
 
    private:
       float m_sensitivity;

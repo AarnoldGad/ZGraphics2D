@@ -39,7 +39,8 @@ namespace zg
    public:
       static ze::Logger& UseGraphicsLogger() noexcept;
 
-      Window* getWindow() noexcept;
+      Window& getWindow() noexcept;
+      void setSettings(zg::GraphicsSettings const& settings) noexcept;
 
       void initialise() override;
 
@@ -47,7 +48,7 @@ namespace zg
 
       void terminate() override;
 
-      explicit GraphicsEngine(GraphicsSettings settings = {});
+      explicit GraphicsEngine(GraphicsSettings const& settings = {});
       ~GraphicsEngine();
 
       ze::Signal<void ()> renderingSignal;
