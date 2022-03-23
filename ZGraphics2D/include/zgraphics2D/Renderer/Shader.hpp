@@ -78,6 +78,31 @@ namespace zg
    };
 }
 
+template<>
+class ze::ResourceLoader<zg::Shader>
+{
+public:
+   void loadSource(char const* vertex, char const* fragment)
+   {
+      m_shader->loadSource(vertex, fragment);
+   }
+
+   void loadFile(std::filesystem::path const& vertex, std::filesystem::path const& fragment)
+   {
+      auto searchVertex = ze::FileUtils::Search(ze::ResourceManager<zg::Shader>::GetSearchPaths(), vertex);
+      auto searchFragment = ze::FileUtils::Search(ze::ResourceManager<zg::Shader>::GetSearchPaths(), fragment);
+
+      if (searchVertex && searchFragment)
+         m_shader->loadFile(searchVertex.value(), searchFragment.value());
+   }
+
+   ResourceLoader(zg::Shader* shader)
+      : m_shader(shader) {}
+
+private:
+   zg::Shader* m_shader;
+};
+
 #include "Shader.inl"
 
 #endif /* ZG_SHADER_HPP */
