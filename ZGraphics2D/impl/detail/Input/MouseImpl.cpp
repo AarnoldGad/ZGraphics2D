@@ -4,6 +4,22 @@
 
 namespace zg { namespace details
 {
+   namespace
+   {
+      static int ModeToGLFWMode(Mouse::CursorMode mode)
+      {
+         switch (mode)
+         {
+            case Mouse::CursorMode::Disabled: return GLFW_CURSOR_DISABLED;
+            case Mouse::CursorMode::Hidden:   return GLFW_CURSOR_HIDDEN;
+            case Mouse::CursorMode::Normal:   return GLFW_CURSOR_NORMAL;
+         }
+
+         ZE_ASSERT(false, "Unknown cursor mode !");
+         return 0;
+      }
+   }
+
    Window* MouseImpl::s_window = nullptr;
 
    void MouseImpl::SetFocusedWindow(Window* window)
@@ -64,7 +80,7 @@ namespace zg { namespace details
    {
       if (!s_window) return;
 
-      glfwSetInputMode(static_cast<GLFWwindow*>(s_window->getHandle()), GLFW_CURSOR, static_cast<int>(mode));
+      glfwSetInputMode(static_cast<GLFWwindow*>(s_window->getHandle()), GLFW_CURSOR, ModeToGLFWMode(mode));
    }
 
    void MouseImpl::SetRawMouseMotion(bool raw)
