@@ -81,6 +81,6 @@ namespace zg { namespace details
 
    void ContextImpl::HandleGLFWError(int code, char const* description)
    {
-      GFX_LOG_ERROR("A GLFW Error occured : ({}) {}", code, description);
+      GFX_LOG_ERROR("A GLFW Error occured : ({}) {}", code, description).stacktrace();
    }
 }}
