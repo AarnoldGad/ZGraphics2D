@@ -18,6 +18,22 @@
 
 namespace zg
 {
+   namespace
+   {
+      static GLenum TypeToGLShader(Shader::Type type) noexcept
+      {
+         switch (type)
+         {
+            case Shader::Type::Vertex:
+               return GL_VERTEX_SHADER;
+            case Shader::Type::Fragment:
+               return GL_FRAGMENT_SHADER;
+            default:
+               return -1;
+         }
+      }
+   }
+
    Shader::Shader()
       : m_program(0) {}
 
@@ -33,40 +49,59 @@ namespace zg
       loadSource(vertex, fragment);
    }
 
-   void Shader::loadFile(std::filesystem::path const& vertexFile, std::filesystem::path const& fragmentFile)
+   Status Shader::loadFile(std::filesystem::path const& vertexFile, std::filesystem::path const& fragmentFile)
    {
       std::optional<std::string> vertexSource   = ze::FileUtils::GetFileContent(vertexFile);
       std::optional<std::string> fragmentSource = ze::FileUtils::GetFileContent(fragmentFile);
 
-      // TODO Improve empty shader management
-      // Tries to load shader code or log an error if no code is found
-      loadSource(vertexSource   ? vertexSource->c_str()   : (GFX_LOG_ERROR("No vertex shader loaded !")  , ""),
-                 fragmentSource ? fragmentSource->c_str() : (GFX_LOG_ERROR("No fragment shader loaded !"), ""));
+      if (vertexSource && fragmentSource)
+         return loadSource(vertexSource.value().c_str(), fragmentSource.value().c_str());
+
+      return Status::Error;
    }
 
-   void Shader::loadSource(char const* vertexSource, char const* fragmentSource)
+   Status Shader::loadSource(char const* vertexSource, char const* fragmentSource)
    {
       resetProgram();
 
-      unsigned int vertexShader = addShader(GL_VERTEX_SHADER, vertexSource);
-      unsigned int fragmentShader = addShader(GL_FRAGMENT_SHADER, fragmentSource);
+      using ShaderHandle = std::optional<unsigned int>;
+      ShaderHandle vertexShader = addShader(Type::Vertex, vertexSource);
+      ShaderHandle fragmentShader = addShader(Type::Fragment, fragmentSource);
 
-      if (!vertexShader || !fragmentShader) return;
+      if (!vertexShader || !fragmentShader) return Status::Error;
 
-      linkProgram();
+      Status status = linkProgram();
 
-      glDeleteShader(vertexShader);
-      glDeleteShader(fragmentShader);
+      glDeleteShader(vertexShader.value());
+      glDeleteShader(fragmentShader.value());
+
+      return status;
    }
 
-   unsigned int Shader::addShader(unsigned int type, char const* source) noexcept
+   std::optional<unsigned int> Shader::addShader(Type type, char const* source) noexcept
    {
-      unsigned int shader = glCreateShader(type);
+      unsigned int shader = glCreateShader(TypeToGLShader(type));
 
       //TODO OpenGL error handling
       glShaderSource(shader, 1, &source, nullptr);
       glCompileShader(shader);
 
+      if (checkCompileStatus(shader, type) == Status::Error)
+         return std::nullopt;
+
+      glAttachShader(m_program, shader);
+
+      return shader;
+   }
+
+   Status Shader::linkProgram() noexcept
+   {
+      glLinkProgram(m_program);
+      return checkLinkStatus();
+   }
+
+   Status Shader::checkCompileStatus(unsigned int shader, Type type)
+   {
       int success;
       glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
       if (!success)
@@ -74,23 +109,19 @@ namespace zg
          char log[512];
          glGetShaderInfoLog(shader, 512, nullptr, log);
          GFX_LOG_ERROR("Fail to compile {} shader : {}",
-                       (type == GL_VERTEX_SHADER ? "vertex" :
-                       (type == GL_FRAGMENT_SHADER ? "fragment" : "unknown")),
+                       (type == Type::Vertex ? "vertex" : (type == Type::Fragment ? "fragment" : "unknown")),
                        log);
 
          glDeleteShader(shader);
-         return 0;
+
+         return Status::Error;
       }
 
-      glAttachShader(m_program, shader);
-
-      return shader;
+      return Status::OK;
    }
 
-   void Shader::linkProgram() noexcept
+   Status Shader::checkLinkStatus()
    {
-      glLinkProgram(m_program);
-
       int success;
       glGetProgramiv(m_program, GL_LINK_STATUS, &success);
       if (!success)
@@ -100,7 +131,11 @@ namespace zg
          GFX_LOG_ERROR("Fail to link shader program : {}", log);
 
          resetProgram();
+
+         return Status::Error;
       }
+
+      return Status::OK;
    }
 
    void Shader::setBoolean(std::string const& var, bool value)

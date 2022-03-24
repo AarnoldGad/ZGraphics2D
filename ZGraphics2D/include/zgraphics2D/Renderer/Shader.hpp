@@ -33,14 +33,19 @@
 
 namespace zg
 {
-   // TODO Shader name for debugging
    class ZG_API Shader
    {
    public:
+      enum class Type
+      {
+         Vertex = 0,
+         Fragment
+      };
+
       void use();
 
-      void loadSource(char const* vertexSource, char const* fragmentSource);
-      void loadFile(std::filesystem::path const& vertexFile, std::filesystem::path const& fragmentFile);
+      Status loadSource(char const* vertexSource, char const* fragmentSource);
+      Status loadFile(std::filesystem::path const& vertexFile, std::filesystem::path const& fragmentFile);
 
       void setBoolean(std::string const& var, bool value);
       void setInteger(std::string const& var, int value);
@@ -67,10 +72,13 @@ namespace zg
       ~Shader();
 
    private:
-      unsigned int addShader(unsigned int type, char const* source) noexcept;
-      void linkProgram() noexcept;
+      std::optional<unsigned int> addShader(Type type, char const* source) noexcept;
+      Status linkProgram() noexcept;
       int getUniformLocation(std::string const& var) const noexcept;
       void resetProgram() noexcept;
+
+      Status checkCompileStatus(unsigned int shaderHandle, Type type);
+      Status checkLinkStatus();
 
    private:
       unsigned int m_program;
@@ -82,22 +90,10 @@ template<>
 class ze::ResourceLoader<zg::Shader>
 {
 public:
-   void loadSource(char const* vertex, char const* fragment)
-   {
-      m_shader->loadSource(vertex, fragment);
-   }
+   Status loadSource(char const* vertex, char const* fragment);
+   Status loadFile(std::filesystem::path const& vertex, std::filesystem::path const& fragment);
 
-   void loadFile(std::filesystem::path const& vertex, std::filesystem::path const& fragment)
-   {
-      auto searchVertex = ze::FileUtils::Search(ze::ResourceManager<zg::Shader>::GetSearchPaths(), vertex);
-      auto searchFragment = ze::FileUtils::Search(ze::ResourceManager<zg::Shader>::GetSearchPaths(), fragment);
-
-      if (searchVertex && searchFragment)
-         m_shader->loadFile(searchVertex.value(), searchFragment.value());
-   }
-
-   ResourceLoader(zg::Shader* shader)
-      : m_shader(shader) {}
+   explicit ResourceLoader(zg::Shader* shader);
 
 private:
    zg::Shader* m_shader;
