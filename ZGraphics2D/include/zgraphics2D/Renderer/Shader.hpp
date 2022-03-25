@@ -28,6 +28,8 @@
 
 #include "zgraphics2D/defines.hpp"
 
+#include "zgraphics2D/Engine/GraphicsEngine.hpp"
+
 #include <string>
 #include <map>
 

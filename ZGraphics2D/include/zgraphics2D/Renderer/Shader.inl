@@ -24,9 +24,9 @@ inline Status ze::ResourceLoader<zg::Shader>::loadFile(std::filesystem::path con
       return m_shader->loadFile(vertexFile.value(), fragmentFile.value());
 
    if (!vertexFile)
-      ZE_LOG_ERROR("File not found : {}", vertex);
+      GFX_LOG_ERROR("File not found : {}", vertex);
    if (!fragmentFile)
-      ZE_LOG_ERROR("File not found : {}", fragment);
+      GFX_LOG_ERROR("File not found : {}", fragment);
 
    return Status::Error;
 }

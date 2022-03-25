@@ -28,6 +28,7 @@
 
 #include "zgraphics2D/defines.hpp"
 
+#include "zgraphics2D/Engine/GraphicsEngine.hpp"
 #include "zgraphics2D/Common/Image.hpp"
 
 namespace zg
@@ -37,9 +38,9 @@ namespace zg
    public:
       static Texture const Null;
 
-      void loadFile(std::filesystem::path const& file);
-      void loadImage(Image const& image);
-      void loadData(uint8_t const* data, glm::ivec2 size, Image::Format format);
+      Status loadFile(std::filesystem::path const& file);
+      Status loadImage(Image const& image);
+      Status loadData(uint8_t const* data, glm::ivec2 size, Image::Format format);
 
       unsigned int getHandle() const noexcept;
       glm::ivec2 getSize() const noexcept;
@@ -55,6 +56,20 @@ namespace zg
       glm::ivec2 m_size;
    };
 }
+
+template<>
+struct ze::ResourceLoader<zg::Texture>
+{
+public:
+   Status loadFile(std::filesystem::path const& file);
+   Status loadImage(zg::Image const& image);
+   Status loadData(uint8_t const* data, glm::ivec2 size, zg::Image::Format format);
+
+   explicit ResourceLoader(zg::Texture* texture);
+
+private:
+   zg::Texture* m_texture;
+};
 
 #include "Texture.inl"
 

@@ -11,35 +11,38 @@ namespace zg
    Texture::Texture()
       : m_texture(0), m_size{} {}
 
-   void Texture::loadFile(std::filesystem::path const& file)
+   Status Texture::loadFile(std::filesystem::path const& file)
    {
       int width, height, channelCount;
       uint8_t* data = stbi_load(file.string().c_str(), &width, &height, &channelCount, 0);
       if (!data)
       {
          GFX_LOG_ERROR("Fail to load texture at {} : {}", file, stbi_failure_reason());
-         return;
+         return Status::Error;
       }
 
-      loadData(data, { width, height }, static_cast<Image::Format>(channelCount));
+      Status status = loadData(data, { width, height }, static_cast<Image::Format>(channelCount));
       stbi_image_free(data);
+      return status;
    }
 
-   void Texture::loadImage(Image const& image)
+   Status Texture::loadImage(Image const& image)
    {
-      if (!image) return;
+      if (!image) return Status::Error;
 
-      loadData(image.getData(), image.getSize(), image.getFormat());
+      return loadData(image.getData(), image.getSize(), image.getFormat());
    }
 
-   void Texture::loadData(uint8_t const* data, glm::ivec2 size, Image::Format format)
+   Status Texture::loadData(uint8_t const* data, glm::ivec2 size, Image::Format format)
    {
+      if (!data) return Status::Error;
       if (!m_texture) glGenTextures(1, &m_texture);
 
+      // TODO OpenGL Error handling
       bind();
       int glFormat = (format == Image::Format::Grey      ? GL_RED :
-                           (format == Image::Format::GreyAlpha ? GL_RG  :
-                           (format == Image::Format::RGB       ? GL_RGB : GL_RGBA)));
+                     (format == Image::Format::GreyAlpha ? GL_RG  :
+                     (format == Image::Format::RGB       ? GL_RGB : GL_RGBA)));
       glTexImage2D(GL_TEXTURE_2D, 0, glFormat, size.x, size.y, 0, glFormat, GL_UNSIGNED_BYTE, data);
 
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -51,6 +54,8 @@ namespace zg
 
       m_size = size;
       Bind(Texture::Null);
+
+      return Status::OK;
    }
 
    void Texture::Bind(Texture const& texture) noexcept
