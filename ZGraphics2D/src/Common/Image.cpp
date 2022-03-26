@@ -17,7 +17,7 @@ namespace zg
    Image::Image(std::filesystem::path const& file, Format desiredFormat)
       : m_data(nullptr), m_format(Format::Unknown), m_size(0, 0)
    {
-      load(file, desiredFormat);
+      loadFile(file, desiredFormat);
    }
 
    Image::Image(Image const& other)
@@ -64,7 +64,7 @@ namespace zg
       return *this;
    }
 
-   bool Image::load(std::filesystem::path const& file, Format desiredFormat)
+   Status Image::loadFile(std::filesystem::path const& file, Format desiredFormat)
    {
       if (m_data)
          unload();
@@ -72,7 +72,10 @@ namespace zg
       int width, height, numberOfChannels;
       uint8_t* data = stbi_load(file.string().c_str(), &width, &height, &numberOfChannels, static_cast<int>(desiredFormat));
       if (!data)
-         return ze::Console::Trace("Fail to load image at {} : {}", file, stbi_failure_reason()), false;
+      {
+         ze::Console::Trace("Fail to load image at {} : {}", file, stbi_failure_reason());
+         return Status::Error;
+      }
 
       m_size = { width, height };
       m_format = desiredFormat == Format::Unknown ? static_cast<Format>(numberOfChannels) : desiredFormat;
@@ -82,7 +85,7 @@ namespace zg
 
       stbi_image_free(data);
 
-      return true;
+      return Status::OK;
    }
 
    void Image::unload() noexcept

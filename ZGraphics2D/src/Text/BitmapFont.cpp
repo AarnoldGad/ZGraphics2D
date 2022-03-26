@@ -10,7 +10,7 @@ namespace zg
       setEncoding(encoding);
 
       Image bitmap;
-      bitmap.load(file, Image::Format::Grey);
+      bitmap.loadFile(file, Image::Format::Grey);
       m_atlas.loadImage(bitmap);
 
       glm::ivec2 glyphSize = bitmap.getSize() / glyphCount;

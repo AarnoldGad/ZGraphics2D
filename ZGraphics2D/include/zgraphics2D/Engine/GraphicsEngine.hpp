@@ -29,7 +29,6 @@
 #include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Engine/GraphicsSettings.hpp"
-
 #include "zgraphics2D/Window/Window.hpp"
 
 namespace zg

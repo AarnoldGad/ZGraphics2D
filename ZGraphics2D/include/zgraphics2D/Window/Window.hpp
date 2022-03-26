@@ -29,7 +29,6 @@
 #include "zgraphics2D/defines.hpp"
 
 #include "zgraphics2D/Common/Colors.hpp"
-#include "zgraphics2D/Common/Image.hpp"
 #include "zgraphics2D/Window/ContextSettings.hpp"
 #include "zgraphics2D/Window/FrameBufferSettings.hpp"
 #include "zgraphics2D/Window/WindowSettings.hpp"
@@ -37,6 +36,8 @@
 
 namespace zg
 {
+   class Image;
+
    namespace details
    {
       class WindowImpl;

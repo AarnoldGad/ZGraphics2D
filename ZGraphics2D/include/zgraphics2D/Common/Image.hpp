@@ -28,6 +28,9 @@
 
 #include "zgraphics2D/defines.hpp"
 
+#include "zgraphics2D/Engine/GraphicsEngine.hpp"
+
+// TODO Use smart pointers
 namespace zg
 {
    class ZG_API Image
@@ -50,7 +53,7 @@ namespace zg
 
       explicit operator bool() const noexcept;
 
-      bool load(std::filesystem::path const& file, Format desiredFormat = Format::Unknown);
+      Status loadFile(std::filesystem::path const& file, Format desiredFormat = Format::Unknown);
       bool isLoaded() const noexcept;
       void unload() noexcept;
 
@@ -70,6 +73,18 @@ namespace zg
       glm::ivec2 m_size;
    };
 }
+
+template<>
+class ze::ResourceLoader<zg::Image>
+{
+public:
+   Status loadFile(std::filesystem::path const& file, zg::Image::Format format);
+   
+   explicit ResourceLoader(zg::Image* image);
+
+private:
+   zg::Image* m_image;
+};
 
 #include "Image.inl"
 
