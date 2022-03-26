@@ -5,12 +5,18 @@
 namespace zg
 {
    VertexLayout::VertexLayout()
-      : m_totalSize{} {}
+      : m_stride{} {}
 
-   void zg::VertexLayout::add(unsigned int type, unsigned int size, unsigned int count, bool normalised) noexcept
+   void VertexLayout::add(VertexAttribute::Type type, std::string const& name, bool normalised)
    {
-      m_locations.push_back({ static_cast<unsigned int>(m_locations.size()),
-                              size * count, type, count, m_totalSize, normalised });
-      m_totalSize += size * count;
+      add(VertexAttribute(type, name, normalised));
+   }
+
+   void VertexLayout::add(VertexAttribute&& attribute)
+   {
+      attribute.offset = m_stride;
+      attribute.index = m_attributes.size();
+      m_stride += attribute.byteSize;
+      m_attributes.push_back(std::move(attribute));
    }
 }

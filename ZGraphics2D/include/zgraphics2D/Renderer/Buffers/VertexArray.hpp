@@ -36,11 +36,10 @@ namespace zg
    class ZG_API VertexArray
    {
    public:
-      void bind();
-
       void setLayout(VertexLayout const& layout);
       VertexLayout const& getLayout() const noexcept;
 
+      void bind();
       void unbind();
 
       VertexArray();

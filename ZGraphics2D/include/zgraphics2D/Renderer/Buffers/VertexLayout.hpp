@@ -32,33 +32,59 @@
 
 namespace zg
 {
+   struct VertexAttribute
+   {
+      enum class Type
+      {
+         Float = 0,
+         Vec2,
+         Vec3,
+         Vec4,
+         Int,
+         IVec2,
+         IVec3,
+         IVec4,
+         Mat3,
+         Mat4,
+         Bool
+      };
+
+      static size_t GetTypeSize(Type type) noexcept;
+
+      VertexAttribute(Type type, std::string const& name, bool normalised = false)
+         : index{}, type(type), name(name), byteSize(GetTypeSize(type)), offset{}, normalised(normalised) {}
+
+      size_t index;
+      Type type;
+      std::string name;
+      size_t byteSize;
+      size_t offset;
+      bool normalised;
+   };
+
    class ZG_API VertexLayout
    {
    public:
-      struct Location
-      {
-         unsigned int index;
-         unsigned int size;
-         unsigned int type;
-         unsigned int count;
-         unsigned int offset;
-         bool normalised;
-      };
+      using Attributes = std::vector<VertexAttribute>;
+      using ConstIterator = std::vector<VertexAttribute>::const_iterator;
 
-      template<typename DataType>
-      void add(unsigned int count, bool normalised = false) noexcept;
-      std::vector<Location> const& getLayout() const noexcept;
-      unsigned int getStride() const noexcept;
+      void add(VertexAttribute::Type type, std::string const& name, bool normalised = false);
+      void add(VertexAttribute&& attribute);
+
+      size_t getStride() const noexcept;
+
+      Attributes const& getAttributes() const noexcept;
+      VertexAttribute const& getAttribute(size_t index) const;
+      VertexAttribute const& operator[](size_t index) const;
+
+      ConstIterator begin() const noexcept;
+      ConstIterator end() const noexcept;
 
       VertexLayout();
 
    private:
-      void add(unsigned int type, unsigned int size, unsigned int count, bool normalised) noexcept;
-
-   private:
-
-      std::vector<Location> m_locations;
-      mutable unsigned int m_totalSize;
+      Attributes m_attributes;
+      size_t m_stride;
    };
 }
 
