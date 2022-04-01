@@ -92,13 +92,10 @@ template<>
 class ze::ResourceLoader<zg::Shader>
 {
 public:
-   Status loadSource(char const* vertex, char const* fragment);
-   Status loadFile(std::filesystem::path const& vertex, std::filesystem::path const& fragment);
-
-   explicit ResourceLoader(zg::Shader* shader);
-
-private:
-   zg::Shader* m_shader;
+   // TODO Overload to call loadSource in a non-ambiguous way
+   static zg::Shader* Load(std::filesystem::path const& vertex, std::filesystem::path const& fragment);
+   static void Reload(zg::Shader* shader, std::filesystem::path const& vertex, std::filesystem::path const& fragment);
+   static void Unload(zg::Shader* shader);
 };
 
 #include "Shader.inl"

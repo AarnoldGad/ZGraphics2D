@@ -61,14 +61,13 @@ template<>
 struct ze::ResourceLoader<zg::Texture>
 {
 public:
-   Status loadFile(std::filesystem::path const& file);
-   Status loadImage(zg::Image const& image);
-   Status loadData(uint8_t const* data, glm::ivec2 size, zg::Image::Format format);
-
-   explicit ResourceLoader(zg::Texture* texture);
-
-private:
-   zg::Texture* m_texture;
+   static zg::Texture* Load(std::filesystem::path const& file);
+   static zg::Texture* Load(zg::Image const& image);
+   static zg::Texture* Load(uint8_t const* data, glm::ivec2 size, zg::Image::Format format);
+   static void Reload(zg::Texture* texture, std::filesystem::path const& file);
+   static void Reload(zg::Texture* texture, zg::Image const& image);
+   static void Reload(zg::Texture* texture, uint8_t const* data, glm::ivec2 size, zg::Image::Format format);
+   static void Unload(zg::Texture* texture);
 };
 
 #include "Texture.inl"

@@ -23,20 +23,27 @@ inline bool zg::Image::isLoaded() const noexcept
    return m_data;
 }
 
-inline ze::ResourceLoader<zg::Image>::ResourceLoader(zg::Image* image)
-   : m_image(image) {}
-
-inline Status ze::ResourceLoader<zg::Image>::loadFile(std::filesystem::path const& file, zg::Image::Format format)
+inline zg::Image* ze::ResourceLoader<zg::Image>::Load(std::filesystem::path const& file, zg::Image::Format format)
 {
-   auto const& searchPaths = ze::ResourceManager<zg::Image>::GetSearchPaths();
+   auto foundFile = ze::ResourceManager<zg::Image>::FindFile(file);
+
+   if (!foundFile) return (void) GFX_LOG_ERROR("File not found : {}", file), nullptr;
    
-   using FilePath = std::optional<std::filesystem::path>;
-   FilePath foundFile = ze::FileUtils::Search(searchPaths, file);
+   return new zg::Image(foundFile.value(), format);
+}
 
-   if (!foundFile)
-      return m_image->loadFile(foundFile.value(), format);
+inline void ze::ResourceLoader<zg::Image>::Reload(zg::Image* image, std::filesystem::path const& file,
+                                                        zg::Image::Format format)
+{
+   auto foundFile = ze::ResourceManager<zg::Image>::FindFile(file);
+   
+   if (!foundFile) return (void) GFX_LOG_ERROR("File not found : {}", file);
 
-   GFX_LOG_ERROR("File not found : {}", file);
-   return Status::Error;
+   image->loadFile(foundFile.value(), format);
+}
+
+inline void ze::ResourceLoader<zg::Image>::Unload(zg::Image* image)
+{
+   image->unload();
 }
 

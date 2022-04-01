@@ -78,12 +78,11 @@ template<>
 class ze::ResourceLoader<zg::Image>
 {
 public:
-   Status loadFile(std::filesystem::path const& file, zg::Image::Format format);
-   
-   explicit ResourceLoader(zg::Image* image);
-
-private:
-   zg::Image* m_image;
+   static zg::Image* Load(std::filesystem::path const& file,
+                          zg::Image::Format format = zg::Image::Format::Unknown);
+   static void Reload(zg::Image* image, std::filesystem::path const& file,
+                            zg::Image::Format format = zg::Image::Format::Unknown);
+   static void Unload(zg::Image* image);
 };
 
 #include "Image.inl"
